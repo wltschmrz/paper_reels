@@ -1,0 +1,45 @@
+{
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "paper_id": "2602.04770",
+  "variant": "fixed-data-animation-v1",
+  "budget_usd": 1,
+  "calls": [
+    {
+      "stage": "storyboard",
+      "reserved_usd": 0.243814,
+      "uncertain": false,
+      "input_tokens": 38006,
+      "output_tokens": 3359,
+      "estimated_usd": 0.109602,
+      "seconds": 24.23,
+      "complete": true
+    },
+    {
+      "stage": "fact_review",
+      "reserved_usd": 0.206152,
+      "uncertain": false,
+      "input_tokens": 38518,
+      "output_tokens": 551,
+      "estimated_usd": 0.082546,
+      "seconds": 4.86,
+      "complete": true
+    }
+  ],
+  "stages": {
+    "ingest": 0.0,
+    "tts": 27.7,
+    "render_compose": 14.02,
+    "speech_check": 5.85
+  },
+  "status": "linked_after_review",
+  "source_version": "2602.04770v2",
+  "duration_sec": 67.002993,
+  "estimated_usd": 0.19214799999999999,
+  "limitations": [
+    "Fixed authored renderer; no LLM-generated Python or Manim.",
+    "Self-review is not independent scientific verification."
+  ],
+  "total_measured_sec": 76.66,
+  "timing_definition": "Sum of measured stages and API calls, excludes manual corrections, development, failed PDF downloads and idle gaps. Claude reuses cached PDF."
+}

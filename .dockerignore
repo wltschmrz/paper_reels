@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+.venv
+.cache
+test-results
+.env*
+backend/.env
+backend/data
+backend/models

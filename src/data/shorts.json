@@ -1,0 +1,269 @@
+[
+  {
+    "id": "flowmap-reference",
+    "paperId": "2610.20674",
+    "creator": "you",
+    "title": "한 번에 생성하는 모델, 왜 학습은 불안정할까?",
+    "hookLines": [
+      "한 번에 생성,",
+      "그런데 학습은",
+      "왜 불안정할까?"
+    ],
+    "kicker": "FLOW MAP THEORY",
+    "accent": "#ffe11a",
+    "style": "Geometric intuition · Korean",
+    "duration": 83.6,
+    "videoUrl": "videos/flowmap_reel.mp4",
+    "thumbnailUrl": "thumbnails/flowmap-reel.jpg",
+    "demo": false
+  },
+  {
+    "id": "demo-01",
+    "paperId": "2505.13447",
+    "creator": "mint_tensor_42",
+    "title": "이미지 생성, 딱 한 번이면 된다고?",
+    "hookLines": [
+      "이미지 생성,",
+      "딱 한 번이면",
+      "된다고?"
+    ],
+    "kicker": "ONE STEP?!",
+    "accent": "#c6ff00",
+    "style": "Visual intuition",
+    "duration": 60,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-01.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-02",
+    "paperId": "2505.13447",
+    "creator": "latent_fox_17",
+    "title": "이 곡선 하나로 MeanFlow가 이해됩니다",
+    "hookLines": [
+      "이 곡선 하나로",
+      "MeanFlow가",
+      "이해됩니다"
+    ],
+    "kicker": "MATH, VISUALIZED",
+    "accent": "#ffff00",
+    "style": "Mathematical",
+    "duration": 75,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-02.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-03",
+    "paperId": "2505.13447",
+    "creator": "paper_otter_08",
+    "title": "한 번에 생성? 그럼 뭘 포기했을까",
+    "hookLines": [
+      "한 번에 생성?",
+      "그럼 뭘",
+      "포기했을까"
+    ],
+    "kicker": "WAIT A SECOND",
+    "accent": "#ff4777",
+    "style": "Critical Review",
+    "duration": 45,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-03.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-04",
+    "paperId": "2512.02012",
+    "creator": "gradient_moon_63",
+    "title": "MeanFlow는 여기서 한 번 더 바뀝니다",
+    "hookLines": [
+      "MeanFlow는",
+      "여기서 한 번 더",
+      "바뀝니다"
+    ],
+    "kicker": "PLOT TWIST",
+    "accent": "#b994ff",
+    "style": "Quick summary",
+    "duration": 60,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-04.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-05",
+    "paperId": "2512.02012",
+    "creator": "latent_fox_17",
+    "title": "가이던스가 그림을 바꾸는 진짜 이유",
+    "hookLines": [
+      "가이던스가",
+      "그림을 바꾸는",
+      "진짜 이유"
+    ],
+    "kicker": "FOLLOW THE VECTOR",
+    "accent": "#ffff00",
+    "style": "Mathematical",
+    "duration": 60,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-05.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-06",
+    "paperId": "2602.04770",
+    "creator": "pixel_sparrow_29",
+    "title": "추론 대신 학습할 때 움직인다면?",
+    "hookLines": [
+      "추론 대신",
+      "학습할 때",
+      "움직인다면?"
+    ],
+    "kicker": "DRIFTING MODELS",
+    "accent": "#58c4dd",
+    "style": "Visual intuition",
+    "duration": 75,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-06.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-07",
+    "paperId": "2602.04770",
+    "creator": "noisy_panda_51",
+    "title": "노이즈에서 이미지까지, 중간은 어디로?",
+    "hookLines": [
+      "노이즈에서",
+      "이미지까지,",
+      "중간은 어디로?"
+    ],
+    "kicker": "SKIP THE STEPS?",
+    "accent": "#ff4777",
+    "style": "Beginner-friendly",
+    "duration": 45,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-07.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-08",
+    "paperId": "2602.04770",
+    "creator": "paper_otter_08",
+    "title": "Drifting, 좋은 결과만 보면 놓치는 것",
+    "hookLines": [
+      "Drifting,",
+      "좋은 결과만",
+      "보면 놓치는 것"
+    ],
+    "kicker": "THE BIG QUESTION",
+    "accent": "#b994ff",
+    "style": "Critical Review",
+    "duration": 60,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-08.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-09",
+    "paperId": "2511.23342",
+    "creator": "vector_cactus_34",
+    "title": "생성 경로를 쭉 펴버리면 어떻게 될까?",
+    "hookLines": [
+      "생성 경로를",
+      "쭉 펴버리면",
+      "어떻게 될까?"
+    ],
+    "kicker": "STRAIGHT TO IT",
+    "accent": "#c6ff00",
+    "style": "Visual intuition",
+    "duration": 60,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-09.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-10",
+    "paperId": "2508.07102",
+    "creator": "matrix_moth_76",
+    "title": "평균 속도, 그다음 차원은 어떤 모습일까",
+    "hookLines": [
+      "평균 속도,",
+      "그다음 차원은",
+      "어떤 모습일까"
+    ],
+    "kicker": "BEYOND FIRST ORDER",
+    "accent": "#ffff00",
+    "style": "Mathematical",
+    "duration": 75,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-10.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-11",
+    "paperId": "2603.12366",
+    "creator": "gradient_moon_63",
+    "title": "점들을 옮겨서 분포를 만든다?",
+    "hookLines": [
+      "점들을 옮겨서",
+      "분포를 만든다?"
+    ],
+    "kicker": "CONNECT THE DOTS",
+    "accent": "#ff4777",
+    "style": "Quick summary",
+    "duration": 45,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-11.svg",
+    "demo": true
+  },
+  {
+    "id": "demo-12",
+    "paperId": "2210.02747",
+    "creator": "pixel_sparrow_29",
+    "title": "노이즈가 그림이 되는 순간을 보세요",
+    "hookLines": [
+      "노이즈가",
+      "그림이 되는",
+      "순간을 보세요"
+    ],
+    "kicker": "FLOW MATCHING",
+    "accent": "#b994ff",
+    "style": "Beginner-friendly",
+    "duration": 60,
+    "videoUrl": null,
+    "thumbnailUrl": "thumbnails/demo-12.svg",
+    "demo": true
+  },
+  {
+    "id": "drifting-openai-baseline",
+    "paperId": "2602.04770",
+    "creator": "you_openai",
+    "title": "추론은 한 번, 학습은 어떻게? · GPT‑5.4 mini",
+    "hookLines": [
+      "점들을 밀고 당기면",
+      "한 번에 생성된다고?"
+    ],
+    "kicker": "GPT‑5.4 MINI",
+    "accent": "#64dfdf",
+    "style": "GPT‑5.4 mini · 고정 애니메이션 baseline",
+    "duration": 51.636,
+    "videoUrl": "videos/drifting-openai-baseline.mp4",
+    "thumbnailUrl": "thumbnails/drifting-openai-baseline.jpg",
+    "demo": false
+  },
+  {
+    "id": "drifting-anthropic-baseline",
+    "paperId": "2602.04770",
+    "creator": "you_anthropic",
+    "title": "추론은 한 번, 학습은 어떻게? · Claude Sonnet 5.5",
+    "hookLines": [
+      "점들을 밀고 당기면",
+      "한 번에 생성된다고?"
+    ],
+    "kicker": "CLAUDE SONNET 5.5",
+    "accent": "#ffe175",
+    "style": "Claude Sonnet 5.5 · 고정 애니메이션 baseline",
+    "duration": 67.003,
+    "videoUrl": "videos/drifting-anthropic-baseline.mp4",
+    "thumbnailUrl": "thumbnails/drifting-anthropic-baseline.jpg",
+    "demo": false
+  }
+]

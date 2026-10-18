@@ -1,0 +1,9 @@
+- title_card: big title line with emphasized words, optional subtitle. Good for hooks.
+- cards: 1 to 3 rounded cards with a title and one or two lines each (render_kit.card). Good for listing ideas, summaries, outro.
+- flow_plot: time on the horizontal axis (0 to 1), position on the vertical axis, with source and target densities at the edges and trajectories between them (render_kit.flow_frame, density). Good for diffusion, flow matching, ODE paths, transport.
+- function_plot: Axes with one or more curves y = f(x) computed from fact params, with legend (render_kit.legend). Good for losses, errors, schedules.
+- param_sweep: a function_plot whose curve morphs while a parameter changes (ValueTracker with always_redraw), with the parameter value shown. Good for "what happens as p grows".
+- equation_build: an equation that appears and transforms step by step (TransformMatchingTex), with colored terms and labels under terms. Good for objectives and update rules.
+- bar_chart: bars with values and labels from a results table (render_kit.BarChart), optional status row, highlight and arrow between bars. Good for ablations and comparisons.
+- diagram: boxes and arrows (RoundedRectangle, Arrow, CurvedArrow). Good for architectures and data flow.
+- custom: anything else; describe precisely.

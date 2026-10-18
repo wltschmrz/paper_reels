@@ -1,0 +1,7 @@
+{
+ "_note": "Fill with current per-million-token prices from each provider's pricing page. Copy to pricing.json. Unpriced models are recorded with est_cost_usd = 0.",
+ "anthropic": {
+  "claude-opus-5-5": {"input_per_mtok": 0, "output_per_mtok": 0},
+  "claude-sonnet-5-5": {"input_per_mtok": 0, "output_per_mtok": 0}
+ }
+}

@@ -1,0 +1,56 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.4-mini",
+  "paper_id": "2602.04770",
+  "variant": "fixed-data-animation-v1",
+  "budget_usd": 1,
+  "calls": [
+    {
+      "stage": "storyboard",
+      "reserved_usd": 0.09593025,
+      "uncertain": false,
+      "input_tokens": 26173,
+      "output_tokens": 4507,
+      "estimated_usd": 0.03991125,
+      "seconds": 21.09,
+      "complete": true
+    },
+    {
+      "stage": "storyboard_repair",
+      "reserved_usd": 0.097809,
+      "uncertain": false,
+      "input_tokens": 26849,
+      "output_tokens": 4180,
+      "estimated_usd": 0.03894675,
+      "seconds": 18.67,
+      "complete": true
+    },
+    {
+      "stage": "fact_review",
+      "reserved_usd": 0.0785745,
+      "uncertain": false,
+      "input_tokens": 26446,
+      "output_tokens": 530,
+      "estimated_usd": 0.0222195,
+      "seconds": 4.58,
+      "complete": true
+    }
+  ],
+  "stages": {
+    "ingest": 17.24,
+    "tts": 22.84,
+    "render_compose": 10.91,
+    "speech_check": 4.99
+  },
+  "status": "linked_after_review",
+  "source_version": "2602.04770v2",
+  "manual_source_corrections": "Four quote/page references corrected from verified PDF passages after two GPT drafts failed exact-match checks; narration unchanged.",
+  "duration_sec": 51.636009,
+  "estimated_usd": 0.1010775,
+  "limitations": [
+    "Fixed authored renderer; no LLM-generated Python or Manim.",
+    "Self-review is not independent scientific verification."
+  ],
+  "total_measured_sec": 100.32,
+  "timing_definition": "Sum of measured stages and API calls, excludes manual corrections, development, failed PDF downloads and idle gaps. Claude reuses cached PDF."
+}

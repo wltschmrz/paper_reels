@@ -1,0 +1,53 @@
+{
+  "title": "노이즈가 분포로 기운다",
+  "scenes": [
+    {
+      "heading": "안개",
+      "narration": "초기 금색 샘플은 노이즈에서 출발합니다. 목표는 청록색 실제 분포와 같은 모양으로 훈련 중 옮기는 일입니다.",
+      "visual": "noise",
+      "section": "problem",
+      "page": 3,
+      "quote": "The training process progressively evolves qi to match pdata."
+    },
+    {
+      "heading": "당김",
+      "narration": "훈련에서는 데이터 쪽이 끌어당기고, 생성 샘플 쪽도 함께 반응합니다. 이 당김이 분포를 실제에 맞춥니다.",
+      "visual": "attract",
+      "section": "method",
+      "page": 3,
+      "quote": "Intuitively, this field can be viewed as attracting by the data distribution p and repulsing by the sample distribution q."
+    },
+    {
+      "heading": "밀침",
+      "narration": "동시에 같은 배치의 생성 샘플끼리는 서로 밀립니다. 겹침을 줄여 한쪽 모드로 붕괴하지 않게 돕습니다.",
+      "visual": "repel",
+      "section": "method",
+      "page": 6,
+      "quote": "The anti-symmetric case (our ablation default) works well, while other cases fail catastrophically."
+    },
+    {
+      "heading": "평형",
+      "narration": "당김과 밀림이 맞서면 드리프트가 줄어듭니다. 두 분포가 맞는 지점에서 훈련은 평형을 향해 가고, 샘플은 멈춥니다.",
+      "visual": "balance",
+      "section": "result",
+      "page": 6,
+      "quote": "Intuitively, for a sample x, we want attraction from p to be canceled by repulsion from q when p and q match."
+    },
+    {
+      "heading": "한 번",
+      "narration": "추론에서는 반복 이동이 없습니다. 노이즈를 생성기에 한 번 넣고, 한 번의 통과로 샘플을 바로 꺼내는 단일 패스입니다.",
+      "visual": "one_step",
+      "section": "result",
+      "page": 2,
+      "quote": "Drifting Models naturally perform single-step (“1-NFE”) generation and achieve strong empirical performance."
+    },
+    {
+      "heading": "한계",
+      "narration": "다만 이 방식은 특징 추출기에 크게 기대며, 모든 설정이 이론적으로 보장되진 않습니다. 적용 범위도 남아 있습니다.",
+      "visual": "limits",
+      "section": "limitation",
+      "page": 7,
+      "quote": "On the other hand, we report that we were unable to make our method work on ImageNet without a feature encoder."
+    }
+  ]
+}

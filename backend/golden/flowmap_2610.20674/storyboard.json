@@ -1,0 +1,394 @@
+{
+ "paper_id": "arxiv:2610.20674",
+ "preset_id": "golden_geometric_ko",
+ "language": "ko",
+ "title": "On the Stability and Convergence of Flow Map Training",
+ "hook_title": "트릭 두 개, 왜 통했나",
+ "render": {
+  "subtitles": true,
+  "term_header": true,
+  "source_line": true,
+  "theme": "dark"
+ },
+ "scenes": [
+  {
+   "scene_id": "S1",
+   "section": "hook",
+   "header": {
+    "definition": "플로우 맵 = 노이즈를 데이터로 한 번에 옮기는 생성 모델",
+    "source": "출처: arXiv 2610.20674 초록·서론"
+   },
+   "visual": {
+    "type": "cards",
+    "description": "'계산 수백 번 → 1번' 타이틀, 노이즈에서 그림으로 가는 작은 점들의 호와 한 번의 노란 화살표, 트릭 두 개 카드에 물음표",
+    "fact_refs": [
+     "bg.sampling_cost",
+     "prob.tricks_unexplained"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s1a",
+     "subtitle": "생성 AI는 그림 한 장에\n수백 번 계산합니다.",
+     "tts_text": "생성 AI는 그림 한 장에 수백 번 계산합니다.",
+     "claims": [
+      "bg.sampling_cost"
+     ]
+    },
+    {
+     "line_id": "s1b",
+     "subtitle": "플로우 맵은 이걸\n단 한 번에 끝내죠.",
+     "tts_text": "플로우 맵은 이걸 단 한 번에 끝내죠.",
+     "claims": [
+      "def.flowmap"
+     ]
+    },
+    {
+     "line_id": "s1c",
+     "subtitle": "그런데 여기 쓰이는 트릭 두 개가\n왜 통하는지, 아무도 몰랐습니다.",
+     "tts_text": "그런데 여기 쓰이는 트릭 두 개가, 왜 통하는지, 아무도 몰랐습니다.",
+     "claims": [
+      "prob.tricks_unexplained"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S2",
+   "section": "background",
+   "header": {
+    "definition": "흐름 = 노이즈 점이 시간에 따라 데이터 쪽으로 움직이는 길",
+    "source": "출처: 논문 §2, Eq. (1)·(3) · 예시는 부록 C.1의 가우시안 설정"
+   },
+   "visual": {
+    "type": "flow_plot",
+    "description": "가로축 시간, 세로축 위치. N(0,1)에서 N(1,0.6²)로 가는 실제 궤적, 작은 Euler 화살표, Φ(x_s,s,t) 점프",
+    "fact_refs": [
+     "def.flowmap",
+     "setup.gauss_toy"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s2a",
+     "subtitle": "생성은 노이즈를 데이터로\n흘려보내는 과정입니다.",
+     "tts_text": "생성은 노이즈를 데이터로 흘려보내는 과정입니다.",
+     "claims": [
+      "def.flowmap"
+     ]
+    },
+    {
+     "line_id": "s2b",
+     "subtitle": "보통은 작은 화살표를\n수백 번 따라가야 하지만,",
+     "tts_text": "보통은 작은 화살표를 수백 번 따라가야 하지만,",
+     "claims": [
+      "bg.sampling_cost"
+     ]
+    },
+    {
+     "line_id": "s2c",
+     "subtitle": "플로우 맵은 출발점과 두 시각만 주면\n도착점으로 바로 점프합니다.",
+     "tts_text": "플로우 맵은 출발점과 두 시각만 주면, 도착점으로 바로 점프합니다.",
+     "claims": [
+      "def.flowmap"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S3",
+   "section": "method",
+   "header": {
+    "definition": "stop gradient = 값은 쓰되, 그쪽으로는 학습 신호(기울기)를 보내지 않는 연산",
+    "source": "출처: 논문 §2, Eq. (5) MeanFlow 손실"
+   },
+   "visual": {
+    "type": "equation_build",
+    "description": "손실식을 ? → u_tgt → sg(u_tgt) 순서로 변형, u_tgt 정의 안의 u로 화살표, 기울기 화살표 하나를 끊음, 자기 채점 순환",
+    "fact_refs": [
+     "method.meanflow_loss",
+     "def.stopgrad"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s3a",
+     "subtitle": "문제는, 정답 도착점을\n모른다는 것.",
+     "tts_text": "문제는, 정답 도착점을 모른다는 것.",
+     "claims": [
+      "method.meanflow_loss"
+     ]
+    },
+    {
+     "line_id": "s3b",
+     "subtitle": "그래서 모델이 자기 예측으로\n정답지를 만들고,",
+     "tts_text": "그래서 모델이 자기 예측으로 정답지를 만들고,",
+     "claims": [
+      "method.meanflow_loss"
+     ]
+    },
+    {
+     "line_id": "s3c",
+     "subtitle": "그쪽으로는 기울기를 끊습니다.\n이게 stop gradient.",
+     "tts_text": "그쪽으로는 기울기를 끊습니다. 이게 스톱 그래디언트.",
+     "claims": [
+      "def.stopgrad"
+     ]
+    },
+    {
+     "line_id": "s3d",
+     "subtitle": "자기 답을 자기가 채점하는 셈이라\n수렴한다는 보장이 없었죠.",
+     "tts_text": "자기 답을 자기가 채점하는 셈이라, 수렴한다는 보장이 없었죠.",
+     "claims": [
+      "prob.no_guarantee"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S4",
+   "section": "theory",
+   "header": {
+    "definition": "학습 시간 τ = 걸음을 무한히 잘게 쪼갠 학습이 얼마나 진행됐는지",
+    "source": "출처: Theorem 1·2, Fig. 1(오른쪽) 재구성 · 초기 모델은 부록 C.1 설정, ρ = 1"
+   },
+   "visual": {
+    "type": "flow_plot",
+    "description": "Theorem 1 닫힌 해를 그대로 계산: 진짜 흐름 구간(흰색)과 처음 모델 점프(빨간 점선), τ가 커지며 전환점 이동, 이후 Lagrangian은 반대 방향",
+    "fact_refs": [
+     "thm1.mf_closed_form",
+     "thm1.lag_closed_form",
+     "thm2.rate",
+     "setup.gauss_toy"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s4a",
+     "subtitle": "이 논문은 증명합니다.\n걸음을 무한히 잘게 쪼개 학습하면,",
+     "tts_text": "이 논문은 증명합니다. 걸음을 무한히 잘게 쪼개 학습하면,",
+     "claims": [
+      "thm1.convergence"
+     ]
+    },
+    {
+     "line_id": "s4b",
+     "subtitle": "반드시 진짜 플로우 맵에\n수렴한다.",
+     "tts_text": "반드시 진짜 플로우 맵에 수렴한다.",
+     "claims": [
+      "thm1.convergence"
+     ]
+    },
+    {
+     "line_id": "s4c",
+     "subtitle": "MeanFlow는 앞에서부터\n진짜 경로로 바뀌고,",
+     "tts_text": "민플로우는 앞에서부터 진짜 경로로 바뀌고,",
+     "claims": [
+      "thm1.mf_closed_form"
+     ]
+    },
+    {
+     "line_id": "s4d",
+     "subtitle": "오차는 지수적으로\n줄어듭니다.",
+     "tts_text": "오차는 지수적으로 줄어듭니다.",
+     "claims": [
+      "thm2.rate"
+     ]
+    },
+    {
+     "line_id": "s4e",
+     "subtitle": "Lagrangian 방식은 반대로,\n뒤쪽부터 바뀌죠.",
+     "tts_text": "라그랑지안 방식은 반대로, 뒤쪽부터 바뀌죠.",
+     "claims": [
+      "thm1.lag_closed_form"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S5",
+   "section": "problem",
+   "header": {
+    "definition": "유한한 걸음 = 학습률 η만큼씩 끊어서 업데이트하는 실제 학습 (경사하강법)",
+    "source": "출처: Proposition 1, 부록 B.4의 반례 (ρ = 1, η = 0.1)"
+   },
+   "visual": {
+    "type": "function_plot",
+    "description": "오차 ε(t−s)^m 곡선 두 개(m=2, m=24)를 걸음마다 0.7배, −1.5배로 갱신",
+    "fact_refs": [
+     "prop1.counterexample"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s5a",
+     "subtitle": "하지만 실제 학습은\n유한한 걸음으로 갑니다.",
+     "tts_text": "하지만 실제 학습은 유한한 걸음으로 갑니다.",
+     "claims": [
+      "prop1.divergence"
+     ]
+    },
+    {
+     "line_id": "s5b",
+     "subtitle": "정답지 안에 미분이 있어서,\n가파른 오차일수록 크게 튀어요.",
+     "tts_text": "정답지 안에 미분이 있어서, 가파른 오차일수록 크게 튀어요.",
+     "claims": [
+      "prop1.counterexample"
+     ]
+    },
+    {
+     "line_id": "s5c",
+     "subtitle": "완만한 오차는 줄지만,\n가파른 오차는 뒤집히며 폭발합니다.",
+     "tts_text": "완만한 오차는 줄지만, 가파른 오차는 뒤집히며 폭발합니다.",
+     "claims": [
+      "prop1.counterexample"
+     ]
+    },
+    {
+     "line_id": "s5d",
+     "subtitle": "학습률을 아무리 줄여도,\n더 가파른 오차는 언제나 존재합니다.",
+     "tts_text": "학습률을 아무리 줄여도, 더 가파른 오차는 언제나 존재합니다.",
+     "claims": [
+      "prop1.divergence",
+      "prop1.counterexample"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S6",
+   "section": "method",
+   "header": {
+    "definition": "adaptive normalization = 잔차가 클수록 한 걸음을 자동으로 줄이는 가중치",
+    "source": "출처: Eq. (20), Theorem 4 · 그래프는 c = 0.25로 그린 개형"
+   },
+   "visual": {
+    "type": "param_sweep",
+    "description": "한 걸음 크기 r/(r²+c)^p 곡선을 p=0→1로 변화, p=0.5에서 상한선 등장",
+    "fact_refs": [
+     "method.normalized_update",
+     "thm4.bounded",
+     "thm4.neighborhood"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s6a",
+     "subtitle": "해법은, 오차가 클수록\n걸음을 줄이는 것.",
+     "tts_text": "해법은, 오차가 클수록 걸음을 줄이는 것.",
+     "claims": [
+      "method.normalized_update"
+     ]
+    },
+    {
+     "line_id": "s6b",
+     "subtitle": "업데이트를\n오차 크기의 p제곱으로 나누면,",
+     "tts_text": "업데이트를 오차 크기의 피 제곱으로 나누면,",
+     "claims": [
+      "method.normalized_update"
+     ]
+    },
+    {
+     "line_id": "s6c",
+     "subtitle": "p가 0.5 이상일 때\n한 걸음에 상한이 생기고,",
+     "tts_text": "피가 영 점 오 이상일 때, 한 걸음에 상한이 생기고,",
+     "claims": [
+      "thm4.bounded"
+     ]
+    },
+    {
+     "line_id": "s6d",
+     "subtitle": "p가 1이면 정답 근처로\n수렴이 보장됩니다.",
+     "tts_text": "피가 일이면, 정답 근처로 수렴이 보장됩니다.",
+     "claims": [
+      "thm4.neighborhood"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S7",
+   "section": "result",
+   "header": {
+    "definition": "FID = 생성 이미지와 실제 이미지 분포 사이의 거리 (낮을수록 진짜 같음)",
+    "source": "출처: Table 1 · 3회 학습 평균, 200K 스텝"
+   },
+   "visual": {
+    "type": "bar_chart",
+    "description": "CIFAR-10 NFE 1 FID 막대 7개(p=0~1.5), 상한 여부 행, 10.62→5.46 화살표, 1.25·1.5 상승 괄호",
+    "fact_refs": [
+     "res.cifar.nfe1.p0.00",
+     "res.cifar.nfe1.p0.75",
+     "res.cifar.nfe1.p1.50",
+     "res.ffhq.nfe1.p1.50"
+    ]
+   },
+   "lines": [
+    {
+     "line_id": "s7a",
+     "subtitle": "실제 이미지 실험에서\n품질 점수 FID는,",
+     "tts_text": "실제 이미지 실험에서, 품질 점수 에프아이디는,",
+     "claims": [
+      "res.cifar.nfe1.p0.00"
+     ]
+    },
+    {
+     "line_id": "s7b",
+     "subtitle": "p가 0일 때 10.62, 0.75일 때 5.46.\n거의 절반입니다.",
+     "tts_text": "피가 영일 때 십 점 육이, 영 점 칠오일 때 오 점 사육. 거의 절반입니다.",
+     "claims": [
+      "res.cifar.nfe1.p0.00",
+      "res.cifar.nfe1.p0.75"
+     ]
+    },
+    {
+     "line_id": "s7c",
+     "subtitle": "단, 너무 세게 나누면\n다시 나빠집니다.",
+     "tts_text": "단, 너무 세게 나누면 다시 나빠집니다.",
+     "claims": [
+      "res.cifar.nfe1.p1.25",
+      "res.cifar.nfe1.p1.50",
+      "res.ffhq.nfe1.p1.50"
+     ]
+    }
+   ]
+  },
+  {
+   "scene_id": "S8",
+   "section": "outro",
+   "header": {
+    "definition": "한 줄 요약",
+    "source": "출처: 논문 §6 결론"
+   },
+   "visual": {
+    "type": "cards",
+    "description": "요약 카드 두 장 후 arXiv 카드",
+    "fact_refs": []
+   },
+   "lines": [
+    {
+     "line_id": "s8a",
+     "subtitle": "stop gradient는\n맞는 길이었고,",
+     "tts_text": "스톱 그래디언트는 맞는 길이었고,",
+     "claims": [
+      "thm1.convergence"
+     ]
+    },
+    {
+     "line_id": "s8b",
+     "subtitle": "정규화는 넘어지지 않게\n잡아주는 손잡이였습니다.",
+     "tts_text": "정규화는 넘어지지 않게 잡아주는 손잡이였습니다.",
+     "claims": [
+      "thm4.bounded"
+     ]
+    },
+    {
+     "line_id": "s8c",
+     "subtitle": "원문은 arXiv에서.",
+     "tts_text": "원문은 아카이브에서.",
+     "claims": []
+    }
+   ]
+  }
+ ]
+}

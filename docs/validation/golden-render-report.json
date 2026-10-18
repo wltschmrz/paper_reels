@@ -1,0 +1,69 @@
+{
+ "scenes": [
+  {
+   "scene_id": "S1",
+   "path": "render/final/S1.mp4",
+   "duration_sec": 8.733,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S2",
+   "path": "render/final/S2.mp4",
+   "duration_sec": 10.167,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S3",
+   "path": "render/final/S3.mp4",
+   "duration_sec": 11.633,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S4",
+   "path": "render/final/S4.mp4",
+   "duration_sec": 12.1,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S5",
+   "path": "render/final/S5.mp4",
+   "duration_sec": 13.267,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S6",
+   "path": "render/final/S6.mp4",
+   "duration_sec": 10.967,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S7",
+   "path": "render/final/S7.mp4",
+   "duration_sec": 9.933,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  },
+  {
+   "scene_id": "S8",
+   "path": "render/final/S8.mp4",
+   "duration_sec": 7.533,
+   "overrun_sec": 0.0,
+   "attempts": 1,
+   "qa_issues": []
+  }
+ ],
+ "errors": {}
+}

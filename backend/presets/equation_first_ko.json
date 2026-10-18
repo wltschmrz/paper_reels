@@ -1,0 +1,90 @@
+{
+ "preset_id": "equation_first_ko",
+ "name": "수식 중심",
+ "creator_id": "demo",
+ "visibility": "public",
+ "style": {
+  "language": "ko",
+  "audience": "expert",
+  "target_length_sec": 75,
+  "tone": "lecture",
+  "lens": {
+   "geometric": 0.15,
+   "equation": 0.7,
+   "analogy": 0.0,
+   "empirical": 0.15
+  },
+  "narrative": {
+   "required_sections": [
+    "problem",
+    "method",
+    "theory",
+    "result"
+   ],
+   "opening": "problem_first",
+   "ending": "takeaway"
+  },
+  "math": {
+   "depth": 3,
+   "min_equation_dwell_sec": 4.0,
+   "color_terms": true
+  },
+  "visual": {
+   "theme": "dark",
+   "subtitles": true,
+   "term_header": true,
+   "source_line": true,
+   "bgm": "none",
+   "bgm_db": -28
+  },
+  "voice": {
+   "pace": 1.1
+  },
+  "free_instruction": "핵심 수식은 항마다 색을 입혀 하나씩 의미를 짚고, 유도 단계를 보여줘."
+ },
+ "models": {
+  "understand": {
+   "provider": "anthropic",
+   "model": "claude-opus-5-5",
+   "params": {}
+  },
+  "storyboard": {
+   "provider": "anthropic",
+   "model": "claude-opus-5-5",
+   "params": {}
+  },
+  "visual_code": {
+   "provider": "anthropic",
+   "model": "claude-opus-5-5",
+   "params": {}
+  },
+  "visual_qa": {
+   "provider": "anthropic",
+   "model": "claude-sonnet-5-5",
+   "params": {}
+  },
+  "judge": {
+   "provider": "anthropic",
+   "model": "claude-sonnet-5-5",
+   "params": {}
+  },
+  "tts": {
+   "provider": "supertonic_local",
+   "model": "supertonic-3-int8",
+   "params": {
+    "sid": 9,
+    "num_steps": 16
+   }
+  },
+  "asr": {
+   "provider": "sensevoice_local",
+   "model": "sense-voice-int8-2024-07-17",
+   "params": {}
+  },
+  "thumbnail": {
+   "provider": "render_frame",
+   "model": "hook_frame",
+   "params": {}
+  }
+ }
+}

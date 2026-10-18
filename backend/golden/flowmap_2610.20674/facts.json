@@ -1,0 +1,349 @@
+{
+ "paper_id": "arxiv:2610.20674",
+ "pipeline_version": "0.1.0",
+ "extractor": {
+  "provider": "anthropic",
+  "model": "claude-opus-5-5"
+ },
+ "facts": [
+  {
+   "id": "prob.tricks_unexplained",
+   "kind": "problem",
+   "statement": "Flow map training relies on stop gradient operators and adaptive weighting, but no prior work analyzed their impact on the training dynamics.",
+   "source": {
+    "kind": "abstract",
+    "label": "Abstract",
+    "quote": "none have analyzed the impact of these assumptions on the training dynamics of flow maps themselves"
+   }
+  },
+  {
+   "id": "bg.sampling_cost",
+   "kind": "problem",
+   "statement": "Sampling a flow matching model integrates the learned velocity over hundreds of steps, i.e. hundreds of network evaluations.",
+   "source": {
+    "kind": "section",
+    "label": "§1",
+    "quote": "integrating the learned velocity over hundreds of steps, hence requiring hundreds of neural network evaluations",
+    "page": 1
+   }
+  },
+  {
+   "id": "def.flowmap",
+   "kind": "definition",
+   "statement": "A flow map Φ(x_s, s, t) maps a point x_s at time s to the ODE solution at a later time t; sampling needs one evaluation Φ(x_0, 0, 1).",
+   "source": {
+    "kind": "equation",
+    "label": "Eq. (3)",
+    "quote": "computing Φ(x0, 0, 1), requiring only a single neural network evaluation",
+    "page": 3
+   },
+   "latex": "\\Phi^\\star(x_s,s,t)"
+  },
+  {
+   "id": "method.meanflow_loss",
+   "kind": "method",
+   "statement": "MeanFlow regresses the average velocity u onto a stop-gradient target built from u itself and the velocity v.",
+   "source": {
+    "kind": "equation",
+    "label": "Eq. (5)",
+    "page": 3
+   },
+   "latex": "u^{MF}_{tgt}=v(x,s)+(t-s)\\big(\\nabla_x u\\,v+\\partial_s u\\big)"
+  },
+  {
+   "id": "def.stopgrad",
+   "kind": "definition",
+   "statement": "sg sets the gradient of the terms inside it to zero.",
+   "source": {
+    "kind": "section",
+    "label": "§2",
+    "quote": "the terms within the sg function have their gradient artificially set to 0",
+    "page": 4
+   }
+  },
+  {
+   "id": "prob.no_guarantee",
+   "kind": "problem",
+   "statement": "The stop gradient might prevent optimization from decreasing the loss; in practice the MeanFlow loss does not converge to zero.",
+   "source": {
+    "kind": "section",
+    "label": "§2",
+    "quote": "the stop gradient operator might prevent optimization from necessarily decreasing the loss L",
+    "page": 4
+   }
+  },
+  {
+   "id": "thm1.convergence",
+   "kind": "theorem",
+   "statement": "Under functional gradient flow, the MeanFlow and Lagrangian objectives converge pointwise to the true flow map.",
+   "source": {
+    "kind": "theorem",
+    "label": "Theorem 1",
+    "page": 5
+   }
+  },
+  {
+   "id": "thm1.mf_closed_form",
+   "kind": "theorem",
+   "statement": "MeanFlow closed form: the learned map follows the true flow up to t_τ, then the initial map; t_τ increases from s to t.",
+   "source": {
+    "kind": "equation",
+    "label": "Eq. (13)",
+    "page": 5
+   },
+   "latex": "\\Phi^{MF}_\\tau(x,s,t)=\\Phi_0(\\Phi^\\star(x,s,t_\\tau),t_\\tau,t)"
+  },
+  {
+   "id": "thm1.lag_closed_form",
+   "kind": "theorem",
+   "statement": "Lagrangian closed form: the learned map follows the initial map up to s_τ, then the true flow; s_τ decreases from t to s.",
+   "source": {
+    "kind": "equation",
+    "label": "Eq. (14)",
+    "page": 5
+   },
+   "latex": "\\Phi^{L}_\\tau(x,s,t)=\\Phi^\\star(\\Phi_0(x,s,s_\\tau),s_\\tau,t)"
+  },
+  {
+   "id": "thm2.rate",
+   "kind": "theorem",
+   "statement": "MeanFlow error decays exponentially in optimization time.",
+   "source": {
+    "kind": "equation",
+    "label": "Eq. (15)",
+    "page": 6
+   },
+   "latex": "\\|\\Phi^{MF}_\\tau-\\Phi^\\star\\|_\\infty\\le 2Me^{-\\rho_{\\min}\\tau}"
+  },
+  {
+   "id": "setup.gauss_toy",
+   "kind": "setup",
+   "statement": "Synthetic setup used to validate Theorem 1.",
+   "source": {
+    "kind": "appendix",
+    "label": "Appendix C.1",
+    "quote": "initialize u0(x, s, t) = 0.8 cos(1.3x + 2s) − 0.2t",
+    "page": 22
+   },
+   "params": {
+    "p0": "N(0,1)",
+    "p1": "N(1,0.6^2)",
+    "interpolant": "linear",
+    "u0": "0.8*cos(1.3*x+2*s)-0.2*t",
+    "rho": 1,
+    "x_range": [
+     -4,
+     5
+    ]
+   }
+  },
+  {
+   "id": "res.synthetic_match",
+   "kind": "result",
+   "statement": "On synthetic data, the learned average velocities match the closed forms of Theorem 1.",
+   "source": {
+    "kind": "figure",
+    "label": "Fig. 2",
+    "page": 8
+   }
+  },
+  {
+   "id": "prop1.divergence",
+   "kind": "theorem",
+   "statement": "For every step size η and every ε, some initial error smaller than ε makes gradient descent diverge (MeanFlow; Lagrangian with v = 0).",
+   "source": {
+    "kind": "theorem",
+    "label": "Proposition 1",
+    "page": 7
+   }
+  },
+  {
+   "id": "prop1.counterexample",
+   "kind": "theorem",
+   "statement": "Counterexample: error ε(t−s)^m is multiplied by (1 − η(m+1)) at each step and diverges when η(m+1) > 2.",
+   "source": {
+    "kind": "appendix",
+    "label": "Appendix B.4",
+    "quote": "ek+1 = (1 − η(m + 1))ek",
+    "page": 18
+   },
+   "latex": "e_{k+1}=(1-\\eta(m+1))e_k",
+   "params": {
+    "rho": 1
+   }
+  },
+  {
+   "id": "method.normalized_update",
+   "kind": "method",
+   "statement": "Normalized update divides the residual by (‖r‖² + c)^p.",
+   "source": {
+    "kind": "equation",
+    "label": "Eq. (20)",
+    "page": 7
+   },
+   "latex": "u_{k+1}=u_k-\\eta\\rho\\frac{r_k}{(\\|r_k\\|^2+c)^p}"
+  },
+  {
+   "id": "thm4.bounded",
+   "kind": "theorem",
+   "statement": "For p ≥ 0.5 the normalized updates have uniformly bounded norms.",
+   "source": {
+    "kind": "theorem",
+    "label": "Theorem 4",
+    "page": 7
+   }
+  },
+  {
+   "id": "thm4.neighborhood",
+   "kind": "theorem",
+   "statement": "p = 1 yields convergence of MeanFlow to a neighborhood of the solution, of size O(η^(1/2)).",
+   "source": {
+    "kind": "theorem",
+    "label": "Theorem 4",
+    "page": 7
+   }
+  },
+  {
+   "id": "res.meanflow_p1_imagenet",
+   "kind": "result",
+   "statement": "p = 1.0 is the value found to work best for from-scratch training on ImageNet 256×256 in the original MeanFlow paper.",
+   "source": {
+    "kind": "section",
+    "label": "§3.3",
+    "page": 7
+   }
+  },
+  {
+   "id": "res.cifar.nfe1.p0.00",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 0.00, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "10.62",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 0.00, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.cifar.nfe1.p0.25",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 0.25, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "6.81",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 0.25, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.cifar.nfe1.p0.50",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 0.50, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "5.51",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 0.50, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.cifar.nfe1.p0.75",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 0.75, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "5.46",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 0.75, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.cifar.nfe1.p1.00",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 1.00, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "5.61",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 1.00, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.cifar.nfe1.p1.25",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 1.25, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "5.93",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 1.25, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.cifar.nfe1.p1.50",
+   "kind": "result",
+   "statement": "CIFAR-10 FID with p = 1.50, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "6.32",
+   "condition": "CIFAR-10, NFE 1, MeanFlow loss, p = 1.50, mean of 3 runs, 200K steps"
+  },
+  {
+   "id": "res.ffhq.nfe1.p0.75",
+   "kind": "result",
+   "statement": "FFHQ 64×64 FID with p = 0.75, one function evaluation (lowest in the NFE 1 column).",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "8.67",
+   "condition": "FFHQ 64x64, NFE 1, p = 0.75"
+  },
+  {
+   "id": "res.ffhq.nfe1.p1.50",
+   "kind": "result",
+   "statement": "FFHQ 64×64 FID with p = 1.5, one function evaluation.",
+   "source": {
+    "kind": "table",
+    "label": "Table 1",
+    "page": 9
+   },
+   "value": "20.25",
+   "condition": "FFHQ 64x64, NFE 1, p = 1.50"
+  },
+  {
+   "id": "lim.functional_setting",
+   "kind": "limitation",
+   "statement": "Results hold in an idealized functional gradient-flow setting; neural network parametrization and stochasticity are not covered.",
+   "source": {
+    "kind": "section",
+    "label": "§6 Limitations",
+    "page": 10
+   }
+  }
+ ],
+ "glossary": [
+  {
+   "term": "flow map",
+   "definition": "출발점·출발 시각·도착 시각을 넣으면 도착점을 내주는 함수"
+  },
+  {
+   "term": "stop gradient",
+   "definition": "값은 쓰되 그쪽으로 기울기를 보내지 않는 연산"
+  },
+  {
+   "term": "FID",
+   "definition": "생성 이미지와 실제 이미지 분포 사이의 거리, 낮을수록 좋음"
+  }
+ ]
+}

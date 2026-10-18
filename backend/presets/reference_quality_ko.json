@@ -1,0 +1,90 @@
+{
+  "preset_id": "reference_quality_ko",
+  "name": "원본 샘플 기반 · 기하적 설명",
+  "creator_id": "you",
+  "visibility": "public",
+  "style": {
+    "language": "ko",
+    "audience": "grad",
+    "target_length_sec": 60,
+    "tone": "calm_visual",
+    "lens": {
+      "geometric": 0.6,
+      "equation": 0.25,
+      "analogy": 0.05,
+      "empirical": 0.1
+    },
+    "narrative": {
+      "required_sections": [
+        "problem",
+        "method",
+        "result",
+        "limitation"
+      ],
+      "opening": "hook_question",
+      "ending": "takeaway"
+    },
+    "math": {
+      "depth": 2,
+      "min_equation_dwell_sec": 2.5,
+      "color_terms": true
+    },
+    "visual": {
+      "theme": "dark",
+      "subtitles": true,
+      "term_header": true,
+      "source_line": true,
+      "bgm": "soft_pad",
+      "bgm_db": -28
+    },
+    "voice": {
+      "pace": 1.22
+    },
+    "free_instruction": "원본 샘플처럼 논문의 핵심 메커니즘을 서로 다른 그래프·궤적·수식 변환으로 설명한다. 장면마다 시작 상태→변화→결론을 구체적으로 설계한다. 문장 단위로 시각 변화를 맞추고 그림과 수식의 같은 개념은 같은 색으로 표시한다. 고정된 점 애니메이션을 반복하지 않는다. 개념도는 실제 실험과 구분하고 수치·수식은 원문 근거가 있을 때만 사용한다."
+  },
+  "models": {
+    "understand": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "params": {}
+    },
+    "storyboard": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "params": {}
+    },
+    "visual_code": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "params": {}
+    },
+    "visual_qa": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "params": {}
+    },
+    "judge": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "params": {}
+    },
+    "tts": {
+      "provider": "supertonic_local",
+      "model": "supertonic-3-int8",
+      "params": {
+        "sid": 9,
+        "num_steps": 16
+      }
+    },
+    "asr": {
+      "provider": "sensevoice_local",
+      "model": "sense-voice-int8-2024-07-17",
+      "params": {}
+    },
+    "thumbnail": {
+      "provider": "render_frame",
+      "model": "hook_frame",
+      "params": {}
+    }
+  }
+}

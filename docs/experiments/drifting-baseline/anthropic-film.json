@@ -1,0 +1,53 @@
+{
+  "title": "추론은 한 번뿐, 점들은 학습 중에만 움직인다?",
+  "scenes": [
+    {
+      "heading": "흩어진 시작점",
+      "narration": "학습 초반에는 생성기가 만든 금색 점들이 실제 데이터와 무관하게 흩어져 있습니다. 학습은 이 분포를 데이터 쪽으로 조금씩 진화시키는 과정입니다.",
+      "visual": "noise",
+      "section": "problem",
+      "page": 3,
+      "quote": "The training process progressively evolves qi to match pdata."
+    },
+    {
+      "heading": "데이터가 끌어당김",
+      "narration": "학습하는 동안 드리프팅 필드는 생성된 샘플을 청록색 실제 데이터 쪽으로 끌어당깁니다. 데이터가 금색 샘플이 이동할 방향을 알려 주는 셈입니다.",
+      "visual": "attract",
+      "section": "method",
+      "page": 3,
+      "quote": "Intuitively, this field can be viewed as attracting by the data distribution p and repulsing by the sample distribution q."
+    },
+    {
+      "heading": "서로 밀어내기",
+      "narration": "동시에 생성된 샘플끼리는 서로 밀어내며 퍼집니다. 끌어당김만으로는 부족하고, 당김과 밀침이 대칭을 이루는 구성이 실험에서 중요했습니다.",
+      "visual": "repel",
+      "section": "method",
+      "page": 6,
+      "quote": "The anti-symmetric case (our ablation default) works well, while other cases fail catastrophically."
+    },
+    {
+      "heading": "균형과 평형",
+      "narration": "두 분포가 일치하면 당김과 밀침이 서로 상쇄되어 드리프트가 사라집니다. 샘플이 더는 움직일 이유가 없는 평형 상태에 도달하는 것입니다.",
+      "visual": "balance",
+      "section": "method",
+      "page": 6,
+      "quote": "Intuitively, for a sample x, we want attraction from p to be canceled by repulsion from q when p and q match."
+    },
+    {
+      "heading": "추론은 한 번",
+      "narration": "추론할 때는 점이 움직이지 않습니다. 노이즈를 제너레이터에 한 번 통과시켜 샘플을 얻고, 논문은 이 원스텝 방식으로 이미지 생성에서 강한 결과를 보고합니다.",
+      "visual": "one_step",
+      "section": "result",
+      "page": 8,
+      "quote": "Our method naturally performs one-step inference."
+    },
+    {
+      "heading": "한계와 범위",
+      "narration": "다만 드리프트가 영이면 분포가 같다는 역방향은 일반적으로 보장되지 않습니다. 또 이미지넷에서는 특징 인코더 없이는 방법이 작동하지 않았다고 밝힙니다.",
+      "visual": "limits",
+      "section": "limitation",
+      "page": 7,
+      "quote": "we were unable to make our method work on ImageNet without a feature encoder."
+    }
+  ]
+}

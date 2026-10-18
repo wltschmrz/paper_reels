@@ -1,0 +1,48 @@
+export type Paper = {
+  id: string;
+  title: string;
+  authors: string[];
+  abstract: string;
+  date: string;
+  topics: string[];
+  url: string;
+  pdfUrl: string;
+  preview: string | null;
+};
+export type Short = {
+  id: string;
+  paperId: string;
+  creator: string;
+  title: string;
+  style: string;
+  duration: number;
+  videoUrl: string | null;
+  thumbnailUrl: string | null;
+  demo?: boolean;
+  hookLines?: string[];
+  kicker?: string;
+  accent?: string;
+};
+export type Preset = {
+  lens?: string;
+  mathDepth?: string;
+  requiredSections?: string[];
+  stageModels?: Record<string, string>;
+  name: string;
+  audience: string;
+  approach: string;
+  language: string;
+  duration: string;
+  prompt: string;
+  model: string;
+  pace: string;
+  density: string;
+  focus: string;
+};
+export type Job = {
+  id: string;
+  paperId: string;
+  preset: Preset;
+  createdAt: number;
+  status: "running" | "ready" | "cancelled";
+};
