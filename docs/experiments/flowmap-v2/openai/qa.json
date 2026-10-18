@@ -1,0 +1,122 @@
+{
+  "issues": {
+    "S1": [],
+    "S3": [],
+    "S4": [],
+    "S5": [],
+    "S6": [],
+    "S7": [],
+    "S8": []
+  },
+  "vision_calls": {
+    "S1": 1,
+    "S3": 0,
+    "S4": 0,
+    "S5": 0,
+    "S6": 0,
+    "S7": 0,
+    "S8": 0
+  },
+  "unresolved": [],
+  "final_review_sources": {
+    "S1": "responses/061-preview_qa.txt",
+    "S3": "responses/050-preview_qa.txt",
+    "S4": "responses/051-preview_qa.txt",
+    "S5": "responses/052-preview_qa.txt",
+    "S6": "responses/058-preview_qa.txt",
+    "S7": "responses/059-preview_qa.txt",
+    "S8": "responses/049-preview_qa.txt"
+  },
+  "final_review_details": {
+    "S1": [
+      {
+        "scene_id": "S1",
+        "line_id": "s1b",
+        "severity": "minor",
+        "problem": "Under the yellow arrow, the small \"한 번\" label and the Φ(x0,0,1) formula are stacked tightly. The formula also sits close to the \"stop gradient, 왜 통할까?\" question below it, so the area looks crowded.",
+        "fix_hint": "Put \"한 번\" and Φ(x0,0,1) on one line, or move the formula about 10px lower and the question about 10px lower."
+      },
+      {
+        "scene_id": "S1",
+        "line_id": "s1c",
+        "severity": "minor",
+        "problem": "The text inside the trick boxes (\"stop gradient\", \"adaptive weighting\") is small for a phone screen. The box bottoms sit almost against the caption \"그림 아이콘은 종점을 뜻하는 개형\".",
+        "fix_hint": "Increase the box text size by about 20%, and add roughly 12px between the boxes and the caption by moving the boxes up or the caption down."
+      },
+      {
+        "scene_id": "S1",
+        "line_id": "s1c",
+        "severity": "minor",
+        "problem": "The enlarged arrowhead is close to the \"한 번\" label beneath it, which makes the area around the arrow feel cramped.",
+        "fix_hint": "Shift the \"한 번\" label about 6px lower, or keep the arrowhead the same size as in the previous line."
+      }
+    ],
+    "S3": [
+      {
+        "scene_id": "S3",
+        "line_id": "s3a",
+        "severity": "minor",
+        "problem": "The red arc with the X starts right on top of the 'z' and runs over the closing parenthesis of sg(z). It crowds the glyphs, and the arrow looks like it is attached to the letter.",
+        "fix_hint": "Raise the arc about 0.3 units above sg(z) and start it to the right of the parenthesis, so the arrow and X sit clear of the glyphs. Keep the '안쪽 기울기 = 0' label above the arc."
+      },
+      {
+        "scene_id": "S3",
+        "line_id": "s3d",
+        "severity": "minor",
+        "problem": "The caption '개념도 · 감소와 0 수렴은 보장되지 않음' is very small and low-contrast gray, so it is hard to read on a phone. The '0으로 수렴 아님' label also sits tight against the x-axis line.",
+        "fix_hint": "Enlarge the caption to about the size of the other labels and lighten the gray. Move '0으로 수렴 아님' about 0.15 units below the axis."
+      }
+    ],
+    "S4": [
+      {
+        "scene_id": "S4",
+        "line_id": "s4c",
+        "severity": "minor",
+        "problem": "The \"Lagrangian 비교\" heading sits right against the top border of the rounded card, so the text almost touches the line. It is also dim gray and low in contrast. The card in the first frame (s4a) has no matching header.",
+        "fix_hint": "Move the heading down about 15px, to y≈205 inside the card. Shift the \"앞 Φ0 뒤 Φ*\" row and the plot down a little to match. Lighten the heading color."
+      },
+      {
+        "scene_id": "S4",
+        "line_id": "s4a",
+        "severity": "minor",
+        "problem": "The caption \"정리 1: 점별 수렴\" is shifted about 55px right of center. The line below it (\"가정: functional gradient flow · Gaussian 예시\") is centered, so the two lines look misaligned. The same offset appears in all three frames.",
+        "fix_hint": "Center the \"정리 1: 점별 수렴\" caption on the same x as the \"가정:\" line."
+      },
+      {
+        "scene_id": "S4",
+        "line_id": "s4d",
+        "severity": "minor",
+        "problem": "The error-bound formula sits very close to the \"정리 1: 점별 수렴\" caption, only about 15px apart. The inset curve also has no axis labels.",
+        "fix_hint": "Move the formula up about 10px, or move the caption down. Add small axis labels (τ, error) to the inset."
+      }
+    ],
+    "S5": [],
+    "S6": [
+      {
+        "scene_id": "S6",
+        "line_id": "s6d",
+        "severity": "minor",
+        "problem": "The note 'ImageNet 256×256 · from scratch / p = 1.0 최적' sits tight against the 'Theorem 4 가정 · c = 1 개명' caption below it. Its two lines are packed closely and the block is left-aligned, off-center relative to the chart.",
+        "fix_hint": "Move the note up about 15px to just under the x-axis label, or merge it into the right-side p = 1 memo. Increase the line spacing, and keep at least 20px between it and the Theorem 4 caption."
+      },
+      {
+        "scene_id": "S6",
+        "line_id": "s6c",
+        "severity": "minor",
+        "problem": "The 'p = 1 / 해 근방 수렴 / O(η^{1/2})' memo ends just above the tail of the cyan curve. The gap is small, so the memo looks crowded against the curve.",
+        "fix_hint": "Raise the memo about 15–20px, or shift it right and up so it stays clear of the curve."
+      }
+    ],
+    "S7": [],
+    "S8": [
+      {
+        "scene_id": "S8",
+        "line_id": "s8d",
+        "severity": "minor",
+        "problem": "The limitation note (\"한계: 이상화된 함수 공간의 이론 / 신경망 매개변수화·확률적 학습은 제외\") is much smaller and dimmer than every other text. It is hard to read on a phone. It also sits tight under the third card and close to the subtitle.",
+        "fix_hint": "Increase the note's font size by about 30–40% and brighten it slightly. Leave about 20px of space above and below it, for example by moving the cards up a little or the subtitle down a little."
+      }
+    ]
+  },
+  "review_note": "Final per-scene reviews occurred across incremental editorial rechecks. See source responses and retained minor findings; no unresolved major/blocker."
+}

@@ -1,5 +1,7 @@
 # 통합 검증 기록 — 2026-10-18
 
+> 최신 결과: Windows Docker Desktop 격리 렌더와 실제 API를 사용한 Flow Map v2 영상 2편을 생성·검증·연결했다. [실측 비용·시간·수동 보완 내역](experiments/flowmap-v2/README.md). 아래 초기 키 미설정 기록은 이전 시점의 검증 이력이다.
+
 ## 확인한 결과
 
 | 검사                         | 결과                                                                                                                                                                                                                         |
@@ -53,3 +55,19 @@
 - 모든 정상 생성은 `needs_review`로 보관 후 explicit publish.
 
 이 보완으로 stage 순서·render layout·golden scene 자체를 바꾸지 않았다.
+
+## Reference v2 integration (2026-10-18)
+
+- Backend tests: 20 passed, including cache-boundary preservation, v2 motion validation, persistent uncertain-cost reservations, and bridge exclusion of env files.
+- Browser tests: 7 passed; inline flip preserves the other 20 papers. Grid/viewport checks passed at 320, 390, 768, 1440 px. Mobile grid was additionally rechecked after narrowing tile minimum width.
+- V2 golden regression: unchanged reference scene code, reused previously validated narration, new layout checks + preview/final render + composition + validation. Preview 56.1 sec, final 92.9 sec, composition 23.7 sec. M0 checks pass; no paid API calls. Evidence under `docs/validation/v2/`.
+- Windows bridge and live API v2 comparison subsequently completed; see the actual-run section and linked evidence below.
+
+## 실제 v2 실행 완료
+
+- GPT 편집 보완본 77.600초 / Claude 검토본 80.033초. 모두 1080×1920, 30fps, H.264/AAC.
+- Windows renderer Docker image build와 networkless render 실제 실행 확인. 생성된 Python을 개발 컨테이너에서 실행하지 않았다.
+- LLM 대본/코드/vision QA/judge 실제 호출 및 수정 루프 실행. 공통 facts는 ZIP 결과를 재사용하고 원문 대조 후 누락 근거를 보충했으며, 이해/사실 추출 단계를 새로 유료 실행한 실험은 아니다.
+- GPT 결과는 수동 편집과 독립적인 Sonnet 화면 재검토를 포함한다. 원본 품질과 동등함을 검증한 결과나 무개입 모델 벤치마크가 아니다.
+
+- 최종 데이터 테스트 3개, backend 테스트 20개, production build 통과. 브라우저 시나리오 8개 통과(새 계정명과 기존 baseline 계정명의 부분 일치 때문에 Drifting locator를 논문 카드로 한정한 뒤 해당 시나리오 재실행). 새 GPT/Claude 영상 모두 재생 시간이 실제로 증가하는지 확인했다.

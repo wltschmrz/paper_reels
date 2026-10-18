@@ -1,0 +1,1095 @@
+{
+  "limit_usd": 3.5,
+  "calls": [
+    {
+      "stage": "storyboard",
+      "model": "gpt-5.4",
+      "reserved_usd": 0.2082875,
+      "status": "returned",
+      "actual_usd": 0.1362775,
+      "usage": {
+        "input_tokens": 6511,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": true,
+        "output_tokens": 8000
+      },
+      "seconds": 92.27
+    },
+    {
+      "stage": "storyboard",
+      "model": "gpt-5.4",
+      "reserved_usd": 0.3282875,
+      "status": "returned",
+      "actual_usd": 0.2430295,
+      "usage": {
+        "input_tokens": 623,
+        "cache_read_tokens": 5888,
+        "cache_write_tokens": 0,
+        "incomplete": true,
+        "output_tokens": 16000
+      },
+      "seconds": 154.73
+    },
+    {
+      "stage": "storyboard",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.5691625,
+      "status": "returned",
+      "actual_usd": 0.0928525,
+      "usage": {
+        "input_tokens": 6565,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 5096
+      },
+      "seconds": 51.3
+    },
+    {
+      "stage": "storyboard",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.569471875,
+      "status": "returned",
+      "actual_usd": 0.060022,
+      "usage": {
+        "input_tokens": 704,
+        "cache_read_tokens": 5888,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 3786
+      },
+      "seconds": 35.19
+    },
+    {
+      "stage": "storyboard",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.569665625,
+      "status": "returned",
+      "actual_usd": 0.0783395,
+      "usage": {
+        "input_tokens": 735,
+        "cache_read_tokens": 5888,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 5002
+      },
+      "seconds": 43.76
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.239575,
+      "status": "returned",
+      "actual_usd": 0.0302,
+      "usage": {
+        "input_tokens": 4082,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1333
+      },
+      "seconds": 13.99
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.244875,
+      "status": "returned",
+      "actual_usd": 0.0509305,
+      "usage": {
+        "input_tokens": 3081,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2852
+      },
+      "seconds": 28.12
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.245675,
+      "status": "returned",
+      "actual_usd": 0.0812055,
+      "usage": {
+        "input_tokens": 3083,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 4870
+      },
+      "seconds": 51.95
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.24446875,
+      "status": "returned",
+      "actual_usd": 0.053028,
+      "usage": {
+        "input_tokens": 3032,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 3000
+      },
+      "seconds": 33.76
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.242165625,
+      "status": "returned",
+      "actual_usd": 0.0496805,
+      "usage": {
+        "input_tokens": 2707,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2831
+      },
+      "seconds": 29.24
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.242359375,
+      "status": "returned",
+      "actual_usd": 0.038488,
+      "usage": {
+        "input_tokens": 2832,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2064
+      },
+      "seconds": 18.32
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.240075,
+      "status": "returned",
+      "actual_usd": 0.0346705,
+      "usage": {
+        "input_tokens": 2355,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1889
+      },
+      "seconds": 17.58
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.3767875,
+      "status": "returned",
+      "actual_usd": 0.024655,
+      "usage": {
+        "input_tokens": 1108,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1459
+      },
+      "seconds": 18.26
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.283265625,
+      "status": "returned",
+      "actual_usd": 0.0621375,
+      "usage": {
+        "input_tokens": 4533,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 3323
+      },
+      "seconds": 26.79
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.267096875,
+      "status": "returned",
+      "actual_usd": 0.041593,
+      "usage": {
+        "input_tokens": 5106,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1892
+      },
+      "seconds": 13.43
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.249840625,
+      "status": "returned",
+      "actual_usd": 0.0210575,
+      "usage": {
+        "input_tokens": 1283,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1126
+      },
+      "seconds": 8.4
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.2666,
+      "status": "returned",
+      "actual_usd": 0.0427675,
+      "usage": {
+        "input_tokens": 3229,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2249
+      },
+      "seconds": 16.53
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.25905,
+      "status": "returned",
+      "actual_usd": 0.0389375,
+      "usage": {
+        "input_tokens": 2591,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2100
+      },
+      "seconds": 18.53
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.259390625,
+      "status": "returned",
+      "actual_usd": 0.03305,
+      "usage": {
+        "input_tokens": 2354,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1747
+      },
+      "seconds": 12.8
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.2545375,
+      "status": "returned",
+      "actual_usd": 0.0264325,
+      "usage": {
+        "input_tokens": 1735,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1409
+      },
+      "seconds": 10.77
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.279540625,
+      "status": "returned",
+      "actual_usd": 0.0110975,
+      "usage": {
+        "input_tokens": 1049,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 565
+      },
+      "seconds": 8.41
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.32883125,
+      "status": "returned",
+      "actual_usd": 0.0112875,
+      "usage": {
+        "input_tokens": 1155,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 560
+      },
+      "seconds": 8.42
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.28156875,
+      "status": "returned",
+      "actual_usd": 0.0094925,
+      "usage": {
+        "input_tokens": 1157,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 440
+      },
+      "seconds": 6.04
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.309828125,
+      "status": "returned",
+      "actual_usd": 0.0118675,
+      "usage": {
+        "input_tokens": 1291,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 576
+      },
+      "seconds": 7.22
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.3744875,
+      "status": "returned",
+      "actual_usd": 0.0098075,
+      "usage": {
+        "input_tokens": 1133,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 465
+      },
+      "seconds": 6.07
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.25103125,
+      "status": "returned",
+      "actual_usd": 0.029425,
+      "usage": {
+        "input_tokens": 1360,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1671
+      },
+      "seconds": 14.02
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.266421875,
+      "status": "returned",
+      "actual_usd": 0.0434725,
+      "usage": {
+        "input_tokens": 3175,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2305
+      },
+      "seconds": 16.31
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.27864375,
+      "status": "returned",
+      "actual_usd": 0.0643085,
+      "usage": {
+        "input_tokens": 3301,
+        "cache_read_tokens": 4864,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 3656
+      },
+      "seconds": 27.45
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.258384375,
+      "status": "returned",
+      "actual_usd": 0.032685,
+      "usage": {
+        "input_tokens": 2472,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1703
+      },
+      "seconds": 11.84
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.257940625,
+      "status": "returned",
+      "actual_usd": 0.03323,
+      "usage": {
+        "input_tokens": 2252,
+        "cache_read_tokens": 3840,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1776
+      },
+      "seconds": 12.99
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.259453125,
+      "status": "returned",
+      "actual_usd": 0.047178,
+      "usage": {
+        "input_tokens": 4574,
+        "cache_read_tokens": 1792,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2353
+      },
+      "seconds": 18.71
+    },
+    {
+      "stage": "visual_code",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.255365625,
+      "status": "returned",
+      "actual_usd": 0.0384625,
+      "usage": {
+        "input_tokens": 5575,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 1635
+      },
+      "seconds": 13.6
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.34969375,
+      "status": "returned",
+      "actual_usd": 0.0121475,
+      "usage": {
+        "input_tokens": 1049,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 635
+      },
+      "seconds": 8.66
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.299053125,
+      "status": "returned",
+      "actual_usd": 0.0123425,
+      "usage": {
+        "input_tokens": 1157,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 630
+      },
+      "seconds": 8.14
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.38928125,
+      "status": "returned",
+      "actual_usd": 0.0097475,
+      "usage": {
+        "input_tokens": 1133,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 461
+      },
+      "seconds": 6.58
+    },
+    {
+      "stage": "validate",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.1801125,
+      "status": "returned",
+      "actual_usd": 0.0875125,
+      "usage": {
+        "input_tokens": 8641,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 4394
+      },
+      "seconds": 37.75
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.54024375,
+      "status": "returned",
+      "actual_usd": 0.0122825,
+      "usage": {
+        "input_tokens": 1397,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 586
+      },
+      "seconds": 8.76
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.52604375,
+      "status": "returned",
+      "actual_usd": 0.0133275,
+      "usage": {
+        "input_tokens": 1503,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 638
+      },
+      "seconds": 8.57
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.594053125,
+      "status": "returned",
+      "actual_usd": 0.010705,
+      "usage": {
+        "input_tokens": 1558,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 454
+      },
+      "seconds": 6.66
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.443040625,
+      "status": "returned",
+      "actual_usd": 0.0087725,
+      "usage": {
+        "input_tokens": 1535,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 329
+      },
+      "seconds": 4.81
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.4951,
+      "status": "returned",
+      "actual_usd": 0.01228,
+      "usage": {
+        "input_tokens": 1516,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 566
+      },
+      "seconds": 7.36
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.493884375,
+      "status": "returned",
+      "actual_usd": 0.0121075,
+      "usage": {
+        "input_tokens": 1639,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 534
+      },
+      "seconds": 7.88
+    },
+    {
+      "stage": "preview_qa",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.631240625,
+      "status": "returned",
+      "actual_usd": 0.0122075,
+      "usage": {
+        "input_tokens": 1481,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 567
+      },
+      "seconds": 7.04
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.428225,
+      "status": "returned",
+      "actual_usd": 0.01586,
+      "usage": {
+        "input_tokens": 1840,
+        "output_tokens": 1218,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 10.6
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3468725,
+      "status": "returned",
+      "actual_usd": 0.013344,
+      "usage": {
+        "input_tokens": 2012,
+        "output_tokens": 932,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 8.15
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3848675,
+      "status": "returned",
+      "actual_usd": 0.017564,
+      "usage": {
+        "input_tokens": 2082,
+        "output_tokens": 1340,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 11.12
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.36141,
+      "status": "returned",
+      "actual_usd": 0.014552,
+      "usage": {
+        "input_tokens": 2041,
+        "output_tokens": 1047,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 8.67
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.392145,
+      "status": "returned",
+      "actual_usd": 0.0157,
+      "usage": {
+        "input_tokens": 2005,
+        "output_tokens": 1169,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 9.6
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.4018525,
+      "status": "returned",
+      "actual_usd": 0.017764,
+      "usage": {
+        "input_tokens": 2167,
+        "output_tokens": 1343,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 11.91
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.54599,
+      "status": "returned",
+      "actual_usd": 0.0116,
+      "usage": {
+        "input_tokens": 1960,
+        "output_tokens": 768,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.97
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3484775,
+      "status": "returned",
+      "actual_usd": 0.014444,
+      "usage": {
+        "input_tokens": 2012,
+        "output_tokens": 1042,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 8.52
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3793975,
+      "status": "returned",
+      "actual_usd": 0.015754,
+      "usage": {
+        "input_tokens": 2082,
+        "output_tokens": 1159,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 9.53
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3648475,
+      "status": "returned",
+      "actual_usd": 0.011992,
+      "usage": {
+        "input_tokens": 2041,
+        "output_tokens": 791,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.65
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3872825,
+      "status": "returned",
+      "actual_usd": 0.01441,
+      "usage": {
+        "input_tokens": 2005,
+        "output_tokens": 1040,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 8.55
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3977625,
+      "status": "returned",
+      "actual_usd": 0.013814,
+      "usage": {
+        "input_tokens": 2167,
+        "output_tokens": 948,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.92
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.41679,
+      "status": "returned",
+      "actual_usd": 0.01611,
+      "usage": {
+        "input_tokens": 1840,
+        "output_tokens": 1243,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 9.87
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3924925,
+      "status": "returned",
+      "actual_usd": 0.016244,
+      "usage": {
+        "input_tokens": 2167,
+        "output_tokens": 1191,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 9.54
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.4142925,
+      "status": "returned",
+      "actual_usd": 0.01438,
+      "usage": {
+        "input_tokens": 1840,
+        "output_tokens": 1070,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 8.56
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.39352,
+      "status": "returned",
+      "actual_usd": 0.01376,
+      "usage": {
+        "input_tokens": 2005,
+        "output_tokens": 975,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 8.67
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.4009475,
+      "status": "returned",
+      "actual_usd": 0.009574,
+      "usage": {
+        "input_tokens": 2167,
+        "output_tokens": 524,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 4.9
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.43521,
+      "status": "returned",
+      "actual_usd": 0.01191,
+      "usage": {
+        "input_tokens": 1840,
+        "output_tokens": 823,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.08
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.43619,
+      "status": "returned",
+      "actual_usd": 0.01683,
+      "usage": {
+        "input_tokens": 1840,
+        "output_tokens": 1315,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 10.46
+    },
+    {
+      "stage": "validate",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      },
+      "reserved_usd": 0.188484375,
+      "status": "returned",
+      "actual_usd": 0.0552025,
+      "usage": {
+        "input_tokens": 9367,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "incomplete": false,
+        "output_tokens": 2119
+      },
+      "seconds": 21.08
+    }
+  ]
+}

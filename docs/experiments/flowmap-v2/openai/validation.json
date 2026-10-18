@@ -1,0 +1,206 @@
+{
+ "checks": [
+  {
+   "name": "required_sections",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "subtitle_shape",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_exist",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_cited",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "numbers_grounded",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "tts_numbers_spelled",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "moving_named",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "reuse_frame_valid",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "length_budget",
+   "passed": true,
+   "detail": "estimated 79.7s, target 75s"
+  },
+  {
+   "name": "narration_intelligible",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "no_overrun",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "layout_qa",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_judged",
+   "passed": true,
+   "detail": "lines []; onscreen []"
+  }
+ ],
+ "claim_verdicts": [
+  {
+   "line_id": "s1a",
+   "verdict": "no_claim",
+   "note": "질문형 훅으로서 구체적 사실 진술이 없습니다."
+  },
+  {
+   "line_id": "s1b",
+   "verdict": "supported",
+   "note": "논문은 일반 flow matching 샘플링이 수백 번 적분/네트워크 평가를 필요로 하고, flow map 샘플링은 Φ(x_0,0,1) 한 번 평가로 가능하다고 말합니다."
+  },
+  {
+   "line_id": "s1c",
+   "verdict": "supported",
+   "note": "stop gradient와 adaptive weighting의 학습 동역학 영향이 prior work에서 분석되지 않았다고 합니다."
+  },
+  {
+   "line_id": "s3a",
+   "verdict": "supported",
+   "note": "sg는 내부 항들의 gradient를 0으로 두고 값은 사용합니다."
+  },
+  {
+   "line_id": "s3b",
+   "verdict": "supported",
+   "note": "MeanFlow는 u와 v로 만든 stop-gradient 타깃에 u를 회귀시킵니다."
+  },
+  {
+   "line_id": "s3c",
+   "verdict": "supported",
+   "note": "비유 표현이지만, sg 타깃을 사용한 자기-타깃 회귀라는 핵심은 인용 사실과 맞습니다."
+  },
+  {
+   "line_id": "s3d",
+   "verdict": "supported",
+   "note": "논문은 stop gradient 때문에 손실이 반드시 감소하지 않을 수 있고, 실제로 MeanFlow loss가 0으로 수렴하지 않는다고 설명합니다."
+  },
+  {
+   "line_id": "s4a",
+   "verdict": "supported",
+   "note": "Theorem 1은 이상화된 functional gradient flow setting에서의 수렴을 보입니다."
+  },
+  {
+   "line_id": "s4b",
+   "verdict": "supported",
+   "note": "Eq. (13)의 MeanFlow closed form은 learned map이 앞 구간에서는 true flow를 따르고 이후 initial map을 따름을 말합니다."
+  },
+  {
+   "line_id": "s4c",
+   "verdict": "supported",
+   "note": "Eq. (14)의 Lagrangian closed form은 반대로 앞부분은 initial map, 뒤부분은 true flow를 따릅니다."
+  },
+  {
+   "line_id": "s4d",
+   "verdict": "supported",
+   "note": "Eq. (15)는 MeanFlow 오차의 지수 감쇠 상계를 줍니다."
+  },
+  {
+   "line_id": "s5a",
+   "verdict": "supported",
+   "note": "논문은 gradient flow와 대비되는 실제의 유한 step gradient descent를 따로 분석합니다."
+  },
+  {
+   "line_id": "s5b",
+   "verdict": "supported",
+   "note": "Proposition 1은 유한 step gradient descent에서 발산 반례가 있음을 보입니다."
+  },
+  {
+   "line_id": "s5c",
+   "verdict": "supported",
+   "note": "Appendix B.4의 반례는 e_k=ε(t-s)^m 형태의 오차를 사용합니다."
+  },
+  {
+   "line_id": "s5d",
+   "verdict": "supported",
+   "note": "같은 반례에서 매 step 오차 배율은 (1-η(m+1))입니다."
+  },
+  {
+   "line_id": "s6a",
+   "verdict": "supported",
+   "note": "Eq. (20)의 normalized update는 잔차를 (‖r‖²+c)^p로 나누는 갱신입니다."
+  },
+  {
+   "line_id": "s6b",
+   "verdict": "supported",
+   "note": "Theorem 4는 p ≥ 0.5일 때 normalized update의 norm이 uniformly bounded라고 합니다."
+  },
+  {
+   "line_id": "s6c",
+   "verdict": "supported",
+   "note": "Theorem 4는 p=1에서 MeanFlow가 해의 근방 O(η^(1/2))로 수렴한다고 말합니다."
+  },
+  {
+   "line_id": "s6d",
+   "verdict": "supported",
+   "note": "§3.3은 original MeanFlow paper에서 ImageNet 256×256 from-scratch 학습에 p=1.0이 가장 잘 작동했다고 말합니다."
+  },
+  {
+   "line_id": "s7a",
+   "verdict": "supported",
+   "note": "논문은 좋은 성능이 특정 reweighting strength 범위에서만 나온다고 말합니다."
+  },
+  {
+   "line_id": "s7b",
+   "verdict": "supported",
+   "note": "Table 1에 따르면 CIFAR-10, NFE 1, MeanFlow loss, p=0.00, 3 runs 평균, 200K steps에서 FID는 10.62입니다."
+  },
+  {
+   "line_id": "s7c",
+   "verdict": "supported",
+   "note": "Table 1에 따르면 같은 조건에서 p=0.75의 FID는 5.46입니다."
+  },
+  {
+   "line_id": "s7d",
+   "verdict": "supported",
+   "note": "Table 1에 따르면 같은 조건에서 p=1.50의 FID는 6.32로 다시 커집니다."
+  },
+  {
+   "line_id": "s8a",
+   "verdict": "supported",
+   "note": "이상화된 functional gradient flow setting에서 수렴 결과가 성립합니다."
+  },
+  {
+   "line_id": "s8b",
+   "verdict": "supported",
+   "note": "유한한 step의 gradient descent에서는 그 수렴 보장이 일반적으로 유지되지 않으며 발산 반례가 있습니다."
+  },
+  {
+   "line_id": "s8c",
+   "verdict": "supported",
+   "note": "정규화와 p 범위의 중요성은 Theorem 4의 boundedness 결과와 실험적 sweet spot과 부합합니다."
+  },
+  {
+   "line_id": "s8d",
+   "verdict": "supported",
+   "note": "논문은 이론이 함수 공간의 이상화된 설정에 한정되고, 신경망 파라미터화와 stochasticity는 다루지 않는다고 밝힙니다."
+  }
+ ]
+}

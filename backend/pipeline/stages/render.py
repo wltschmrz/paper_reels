@@ -42,6 +42,16 @@ def contact_sheet(job: Path, sid: str, video: Path, timeline: list[dict]):
     subprocess.run(["ffmpeg", "-v", "error", "-y", *ins, "-filter_complex", fc, str(out)], check=True)
     for f in frames:
         f.unlink()
+    # Bound vision image size: keep at most three representative panels at phone-width 360px.
+    from PIL import Image
+    with Image.open(out) as sheet:
+        count = len(times)
+        panel = sheet.width // count
+        picks = sorted(set([0, count // 2, count - 1]))
+        thumbs = [sheet.crop((i*panel,0,(i+1)*panel,sheet.height)).resize((360,640)) for i in picks]
+        compact = Image.new("RGB", (360*len(thumbs),640))
+        for i, thumb in enumerate(thumbs): compact.paste(thumb,(360*i,0))
+        compact.save(out)
     return out
 
 

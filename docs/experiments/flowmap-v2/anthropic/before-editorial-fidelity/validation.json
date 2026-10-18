@@ -1,0 +1,211 @@
+{
+ "checks": [
+  {
+   "name": "required_sections",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "subtitle_shape",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_exist",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_cited",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "numbers_grounded",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "tts_numbers_spelled",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "moving_named",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "reuse_frame_valid",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "length_budget",
+   "passed": true,
+   "detail": "estimated 79.8s, target 75s"
+  },
+  {
+   "name": "narration_intelligible",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "no_overrun",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "layout_qa",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_judged",
+   "passed": false,
+   "detail": "lines ['s1a']; onscreen [{'scene_id': 'S2', 'text': '\\\\Phi(x_s,s,t) = x_s + (t-s) \\\\,u(x_s,s,t)', 'note': 'The average-velocity parametrization of the flow map is not stated in any fact of this scene. def.flowmap and method.meanflow_loss do not give this formula.'}, {'scene_id': 'S3', 'text': '출처 §2: sg가 손실 감소를 막을 수 있음', 'note': \"The fact says the stop gradient 'might prevent' the loss from decreasing. 'Can prevent' is slightly stronger.\"}, {'scene_id': 'S5', 'text': '(t-s)\\\\,\\\\partial_t\\\\,(t-s)^m = m \\\\,(t-s)^m', 'note': \"This intermediate derivation is not in any fact. Only e_{k+1}=(1−η(m+1))e_k is given. The 'm times larger' caption is also not cited.\"}, {'scene_id': 'S6', 'text': '상한 없음 ✗', 'note': 'Theorem 4 only gives a bound for p≥0.5. No fact says the update is unbounded for p<0.5.'}]"
+  }
+ ],
+ "claim_verdicts": [
+  {
+   "line_id": "s1a",
+   "verdict": "overgeneralized",
+   "note": "bg.sampling_cost is about sampling a flow matching model (hundreds of steps and network evaluations). The line says generative models in general."
+  },
+  {
+   "line_id": "s1b",
+   "verdict": "supported",
+   "note": "def.flowmap: sampling needs one evaluation Φ(x_0,0,1)."
+  },
+  {
+   "line_id": "s1c",
+   "verdict": "supported",
+   "note": "prob.tricks_unexplained: no prior work analyzed the impact of stop gradient and adaptive weighting on the training dynamics."
+  },
+  {
+   "line_id": "s2a",
+   "verdict": "supported",
+   "note": "Matches the definition of the flow map."
+  },
+  {
+   "line_id": "s2b",
+   "verdict": "supported",
+   "note": "s=0, t=1 gives Φ(x_0,0,1), a single evaluation."
+  },
+  {
+   "line_id": "s2c",
+   "verdict": "supported",
+   "note": "method.meanflow_loss: MeanFlow regresses the average velocity u."
+  },
+  {
+   "line_id": "s2d",
+   "verdict": "no_claim",
+   "note": "Transition question."
+  },
+  {
+   "line_id": "s3a",
+   "verdict": "supported",
+   "note": "The target is built from u itself and the velocity v (Eq. 5)."
+  },
+  {
+   "line_id": "s3b",
+   "verdict": "supported",
+   "note": "The target is wrapped in sg, which sets the gradient of the terms inside it to zero."
+  },
+  {
+   "line_id": "s3c",
+   "verdict": "supported",
+   "note": "Analogy for the self-built sg target; it matches method.meanflow_loss and def.stopgrad."
+  },
+  {
+   "line_id": "s3d",
+   "verdict": "supported",
+   "note": "prob.no_guarantee: sg might prevent the loss from decreasing, and in practice the loss does not converge to zero."
+  },
+  {
+   "line_id": "s4a",
+   "verdict": "supported",
+   "note": "The idealized setting is stated, consistent with Theorem 1 and lim.functional_setting."
+  },
+  {
+   "line_id": "s4b",
+   "verdict": "supported",
+   "note": "The condition is carried over from s4a. Theorem 1 and tension.sg_converges_anyway back the convergence claim."
+  },
+  {
+   "line_id": "s4c",
+   "verdict": "supported",
+   "note": "Eq. (13): the map follows the true flow up to t_τ, which grows from s to t. Eq. (15): the error decays exponentially."
+  },
+  {
+   "line_id": "s5a",
+   "verdict": "supported",
+   "note": "tension.flow_vs_descent: finite-step gradient descent can diverge."
+  },
+  {
+   "line_id": "s5b",
+   "verdict": "supported",
+   "note": "In the counterexample the error is multiplied by (1−η(m+1)) per step, so a larger m gives a larger factor."
+  },
+  {
+   "line_id": "s5c",
+   "verdict": "supported",
+   "note": "Divergence when η(m+1)>2. The counterexample setting (ρ=1, v=0) is shown on screen but not spoken."
+  },
+  {
+   "line_id": "s5d",
+   "verdict": "supported",
+   "note": "prop1.divergence: for every η and every ε, some initial error smaller than ε diverges."
+  },
+  {
+   "line_id": "s6a",
+   "verdict": "supported",
+   "note": "Eq. (20) divides the residual by (‖r‖²+c)^p."
+  },
+  {
+   "line_id": "s6b",
+   "verdict": "supported",
+   "note": "thm4.bounded: for p≥0.5 the normalized updates have uniformly bounded norms. The 'paper's assumptions' qualifier appears only on screen."
+  },
+  {
+   "line_id": "s6c",
+   "verdict": "supported",
+   "note": "thm4.neighborhood: p=1 gives convergence to a neighborhood of the solution."
+  },
+  {
+   "line_id": "s6d",
+   "verdict": "no_claim",
+   "note": "Transition question."
+  },
+  {
+   "line_id": "s7a",
+   "verdict": "supported",
+   "note": "CIFAR-10, NFE 1, FID, lower is better."
+  },
+  {
+   "line_id": "s7b",
+   "verdict": "supported",
+   "note": "10.62 at p=0 and 5.46 at p=0.75 match Table 1. 5.46 is the lowest among the tested p values (0–1.5)."
+  },
+  {
+   "line_id": "s7c",
+   "verdict": "supported",
+   "note": "6.32 at p=1.5 is worse than 5.46. The cited facts back this."
+  },
+  {
+   "line_id": "s8a",
+   "verdict": "supported",
+   "note": "The ideal-flow condition is kept."
+  },
+  {
+   "line_id": "s8b",
+   "verdict": "supported",
+   "note": "prop1.divergence and 'can diverge' agree."
+  },
+  {
+   "line_id": "s8c",
+   "verdict": "supported",
+   "note": "tension.sweet_spot and the CIFAR-10 result at p=0.75."
+  }
+ ]
+}

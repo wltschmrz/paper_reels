@@ -72,7 +72,7 @@ npm run test:e2e         # dev server 실행 중: 브라우저 핵심 흐름
 
 ## GitHub Pages
 
-`.github/workflows/pages.yml`이 main push 시 build → GitHub Pages 배포를 수행한다. GitHub repo Settings → Pages → Source를 **GitHub Actions**로 설정한다. 코드 push와 Pages 활성화는 현재 세션에서 수행하지 않았다. 설정과 push 이후 예상 주소는 `https://wltschmrz.github.io/paper_reels/`이며 현재 배포 완료 URL이 아니다.
+`.github/workflows/pages.yml`이 main push 시 build → GitHub Pages 배포를 수행한다. GitHub repo Settings → Pages → Source를 **GitHub Actions**로 설정한다. 배포 주소는 `https://wltschmrz.github.io/paper_reels/`이다. Actions의 Deploy 작업이 성공하면 접속할 수 있다. 첫 배포 전에는 저장소 Settings → Pages에서 GitHub Actions를 게시 소스로 선택해야 한다.
 
 Vite `base: './'` 및 asset resolver로 프로젝트 하위 경로를 지원한다. 화면 전환은 client state이므로 별도 서버 라우팅이 필요 없다. GitHub Pages에는 Python/Manim/FFmpeg worker가 올라가지 않는다. 실제 backend는 [아키텍처 문서](docs/ARCHITECTURE.md)의 별도 서비스로 확장한다.
 

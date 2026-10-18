@@ -1,0 +1,13 @@
+{
+  "changes": [
+    "Replaced verbose headers with larger concise labels while preserving source references.",
+    "Moved overlapping S3 analogy, S4 theorem note, S6 y-axis label, S7 sweet spot.",
+    "Enlarged S5 footnote and S8 conclusion cards.",
+    "Removed obsolete graphics before new plots; avoided opaque card backgrounds from group opacity.",
+    "Zoomed the Lagrangian and error-bound insets sequentially, preserving their calculations.",
+    "Moved remaining curve/label collisions, separated footnotes, corrected p=1.02 to the claimed p=1.00.",
+    "Enlarged table labels; only show the sweet-spot tag at the actually optimal displayed condition.",
+    "Final independent visual review uses Sonnet 5.5; this is an edited GPT result, not an unmodified model benchmark."
+  ],
+  "original_review": "before-editorial-layout/qa.json"
+}

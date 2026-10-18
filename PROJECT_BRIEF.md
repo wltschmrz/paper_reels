@@ -180,3 +180,16 @@ RQ3: creator identity, 설명 style, community feedback이 content selection과 
 - 단계 순서·render kit·데이터 계약을 유지한다. 추가 계약 검증은 line_id 경로 문자 제한, scene 중복 차단이다. 미검증 judge skip를 실서비스 통과로 보지 않는다. 통과 렌더도 기본 수동 검토 후 게시한다.
 - 모델 선택보다 P0 설명 관점·필수 섹션·수식 깊이·대상·길이를 먼저 노출한다.
 - API 키는 아직 미등록. LLM 및 Docker 격리 경로는 미실행. 개인 owner 개발용이며 멀티유저 BYOK/프로덕션 배포로 표현하지 않는다. 설정은 docs/BACKEND.md, 검증은 docs/VALIDATION.md 참고.
+
+## 2026-10-18 추가 요구: reference v2와 인라인 카드
+
+- `PIPELINE (2).md` / `scholarshorts-pipeline (2).zip`의 토큰 비용 효율화와 시각적 품질 향상 모두 통합한다.
+- Flow Map 원 논문으로 GPT/Claude 실제 Manim 영상 각 1개를 생성하여 사용자가 올린 원본과 비교한다. 고정 템플릿 영상으로 대체하지 않는다. 제공 근거 목록은 공유하며 대본 이후는 별도 생성한다. 비용 상한/usage 기록을 유지한다.
+- Abstract 화면의 카드에서 해당 논문만 뒤집어 Shorts 버전을 보여준다. 별도 목록 페이지로 이동하거나 다른 논문을 숨기지 않는다.
+- Your Perspective 생성 타일은 마지막 행에 여유가 있을 때만 표시한다. 생성 버튼은 타일 유무와 관계없이 남긴다.
+- 창 폭에 따라 카드 그리드를 조절하고 휴대폰에서도 가로 넘침 없이 제공한다.
+- Windows Docker Desktop `desktop-linux`, 개발 컨테이너 `cuda13-dev`. 파일 큐 브리지로 별도 격리 렌더 컨테이너를 사용한다. Docker daemon TCP 공개나 기존 개발 컨테이너 재생성은 하지 않는다.
+
+## 실제 Flow Map v2 비교 결과 보존
+
+2026-10-18: Windows Docker Desktop 파일 큐 bridge에서 네트워크 없는 컨테이너로 생성 코드를 실행해 GPT 편집 보완본(77.600초)과 Claude 검토본(80.033초)을 같은 Flow Map 논문에 연결했다. 원본 제공 영상(83.6초)은 그대로 유지한다. reference (2)의 비용 효율·영상 품질 개선을 모두 적용했지만, 두 새 영상은 검토·수동 보완을 포함하므로 무개입 모델 비교로 제시하지 않는다. 비용·경과 시간·원문 근거 보충·최종 소스와 검증 기록은 `docs/experiments/flowmap-v2/`에 보관한다. 실제 신규 facts 추출은 이번 비교에서 재실행하지 않았다.

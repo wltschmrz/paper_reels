@@ -28,3 +28,5 @@
 실제 연결된 샘플: `reference/flowmap_reel.mp4` → `public/videos/flowmap_reel.mp4`, 논문 `2610.20674`, 길이 83.6초. 썸네일은 18초의 실제 영상 프레임이다. 원본의 claims timeline은 첨부되지 않아 임의로 생성하지 않았다.
 
 추가 실제 영상 (2026-10-18): Drifting 원문 `2602.04770v2`에 GPT‑5.4 mini / Claude Sonnet 5.5 baseline 2편을 연결했다. 각각 `public/videos/drifting-openai-baseline.mp4` (51.636초), `drifting-anthropic-baseline.mp4` (67.003초). 사용량·시간·근거 및 고정 템플릿 렌더러 한계는 [비교 보고서](experiments/drifting-baseline/README.md)에 있다.
+
+Flow Map v2 실제 API 영상 2편을 같은 `2610.20674`에 추가했다: `flowmap-v2-openai.mp4` 77.600초(GPT-5.4 · Edited v2), `flowmap-v2-anthropic.mp4` 80.033초(Claude Opus 5.5). 각 썸네일은 실제 출력 프레임이며 원본 샘플과 함께 재생된다. [검증·비용·수동 보완 기록](experiments/flowmap-v2/README.md).

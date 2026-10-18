@@ -1,0 +1,5 @@
+{
+  "facts": "Shared reference v2 facts from supplied ZIP; extraction is reused, not regenerated.",
+  "renderer": "generated Manim in isolated Windows Docker Desktop container",
+  "budget_usd": 3.5
+}

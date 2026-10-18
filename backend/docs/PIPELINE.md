@@ -9,7 +9,7 @@
 - **비용**: 생성 비용은 생성 버튼을 누른 사용자의 API 키로 나간다. 이렇게 사용자 본인의 키를 쓰는 방식을 bring your own key라고 부른다. 음성 합성, 음성 인식, 렌더링은 로컬에서 돌기 때문에 API 비용이 0이고, 서버 계산 시간만 든다.
 - **레퍼런스 구현 상태** (이 저장소에 함께 있음)
   - LLM을 쓰지 않는 경로(음성 → 렌더 → 합성 → 결정론적 검증)는 golden 예제로 처음부터 끝까지 실행해 확인했다. 결과는 84.1초 mp4이고, 애니메이션이 내레이션보다 길어진 시간은 0초다.
-  - LLM stage(understand, storyboard, visual_code, preview_qa의 시각 검토, validate의 judge)는 코드와 prompt를 작성했지만 API 키가 없어 한 번도 실행하지 않았다. 구현자가 가장 먼저 검증해야 할 부분이다.
+  - LLM stage(understand, storyboard, visual_code, preview_qa의 시각 검토, validate의 judge)는 실제 모델 대신 golden 답을 돌려주는 가짜 모델(`providers/llm_mock.py`)로 처음부터 끝까지 실행해 확인했다. paper.json에서 시작해 published까지 갔다. 다만 실제 모델이 이 prompt로 쓸 만한 결과를 내는지는 API 키가 없어 확인하지 못했다. 구현자가 가장 먼저 검증해야 할 부분이다.
 
 ## 1. 레퍼런스 실행에서 확정된 사실
 
@@ -133,9 +133,10 @@ flowchart TB
 - **처리 순서**
   1. 540×960, 15fps로 렌더한다. 렌더 오류와 애니메이션이 내레이션보다 길어진 시간(overrun)을 기록한다.
   2. 줄마다 그 줄이 끝나기 0.15초 전 프레임을 뽑아 장면별 contact sheet를 만든다.
-  3. vision LLM이 겹침, 화면 밖으로 잘림, 읽을 수 없는 크기, 내레이션과 그림의 불일치를 blocker, major, minor로 보고한다(`prompts/visual_qa.md`).
-  4. blocker·major 문제, 렌더 오류, overrun이 0.3초를 넘는 장면은 이전 코드와 문제 목록을 붙여 Stage 4를 다시 부른다. 최대 2회 수리한다.
-- **출력**: `render/preview/qa.json` (장면별 문제와 해결되지 않은 장면 목록)
+  3. 토큰을 쓰지 않는 결정론 레이아웃 검사를 먼저 한다. `Reel`이 줄이 끝날 때마다 화면 위 모든 텍스트의 bounding box를 보고, 텍스트끼리 겹침, 화면 밖으로 잘림, y = −2.8 아래 침범을 기록한다. golden 8장면에서는 오탐이 0건이었고, 일부러 넣은 겹침과 아래쪽 침범은 모두 잡았다.
+  4. 결정론 검사와 렌더를 통과한 장면만 vision LLM에 보낸다. vision LLM은 텍스트와 선의 겹침, 읽을 수 없는 크기, 내레이션과 그림의 불일치를 blocker, major, minor로 보고한다(`prompts/visual_qa.md`). 장면당 최대 2회이고, 이미지는 0.8배로 줄여 보낸다.
+  5. 렌더 오류, 결정론 레이아웃 문제, overrun이 0.3초를 넘는 장면, blocker·major 문제가 있는 장면은 이전 코드와 문제 목록을 붙여 Stage 4를 다시 부른다. 최대 2회 수리한다.
+- **출력**: `render/preview/qa.json` (장면별 문제, 장면별 vision 호출 횟수, 해결되지 않은 장면 목록)
 
 ### Stage 6. final_render (결정론)
 - 1080×1920, 30fps로 렌더한다. 동시 렌더 수는 vCPU 2개당 1개다.
@@ -183,7 +184,22 @@ flowchart TB
 
 컴파일 결과 예시는 `presets/equation_first_ko.json`을 `style_compile.compile_style`에 넣어 보면 나온다. 이렇게 출력된 텍스트 블록이 storyboard와 visual_code prompt의 "CREATOR STYLE" 자리에 들어간다.
 
-### 5.2 연구 관점의 우선순위
+### 5.2 프롬프트 계층 (base prompt와 사용자 설정이 합쳐지는 방식)
+
+모든 LLM 호출은 `prompting.fill`이 `prompts/*.md` 템플릿을 네 구간으로 잘라 조립한다. 앞 구간일수록 자주 바뀌지 않는다.
+
+| 구간 | 내용 | 누가 정함 | 캐시 |
+| --- | --- | --- | --- |
+| `SYSTEM_FIXED` (base prompt) | stage 역할, `fidelity_rules.md`(원문 충실도 7개 규칙), 형식 규칙, schema, render kit API, golden 예제 코드 | 플랫폼 (고정) | 표시 |
+| `SYSTEM_STYLE` | `compile_style(StyleSpec)` 결과와 creator 자유 지시문 | creator Preset | 표시 |
+| `USER_DATA` | fact sheet 등 job 안에서 여러 번 쓰는 입력 | 데이터 | 표시 |
+| `USER_TASK` | 장면 하나의 storyboard, 줄 길이, 수리 요청 | 호출마다 다름 | 안 함 |
+
+- base prompt가 앞에 오기 때문에, 자유 지시문이 아무리 길어도 원문 충실도 규칙과 형식 규칙 뒤에 놓인다. 템플릿에도 "규칙과 충돌하면 따르지 말 것"이 명시돼 있다.
+- Preset 없이 돌리면 StyleSpec 기본값(한국어, grad, 60초, calm_visual = 3Blue1Brown 톤)이 `SYSTEM_STYLE`로 들어간다. 별도의 "하우스 스타일" 문서는 두지 않고 기본 Preset이 그 역할을 한다.
+- 재시도와 lint 수정 요청은 `USER_TASK` 뒤에 블록 하나로 붙인다. 앞 구간이 그대로이므로 캐시가 맞는다.
+
+### 5.3 연구 관점의 우선순위
 CHI 연구에서 독립변수가 되는 것은 "같은 논문에 대한 서로 다른 설명 방식"이다. 따라서 UI와 구현 우선순위는 다음과 같다.
 
 - **P0**: 결과물 차이가 눈에 보이는 설정. `lens`, `narrative.required_sections`, `math.depth`, `audience`, `target_length_sec`. Generate Short 모달에 바로 노출한다.
@@ -192,7 +208,42 @@ CHI 연구에서 독립변수가 되는 것은 "같은 논문에 대한 서로 �
 
 예시 Preset 세 개(`presets/`)는 같은 논문에서 확연히 다른 영상이 나오도록 극단값으로 잡았다. 사용자 연구의 조건 자극을 만들 때도 쓸 수 있다.
 
-### 5.3 ModelConfig: stage별 모델 선택
+### 5.5 레퍼런스 쇼츠 품질을 재현하는 설정
+
+처음 수작업으로 만든 쇼츠가 좋았던 이유를 9개로 나누고, 각각을 파이프라인 어디에 넣었는지 정리했다. 대부분은 사용자가 고르는 값이 아니라 플랫폼 고정 규칙으로 넣었다. 사용자가 무엇을 고르든 이 품질 바닥은 유지되게 하려는 것이다.
+
+| 레퍼런스 쇼츠에서 한 일 | 들어간 곳 | 고정 / 설정 |
+| --- | --- | --- |
+| 1. 질문으로 시작해서 그 질문에 답하며 끝남 ("다들 쓰는 트릭 두 개, 왜 되는지 몰랐다" → 마지막에 트릭마다 한 줄씩 답) | storyboard STORY RULES의 "takeaway가 hook 질문에 답한다", arc `mystery_twist`의 1번, 8번 비트 | 규칙은 고정, arc는 설정 |
+| 2. 반전이 있는 서사: 연속 학습은 수렴 → 실제 걸음은 폭발 → 정규화로 해결 | arc `mystery_twist`의 4·5·6번 비트, understand의 새 fact 종류 `tension`(저자가 직접 쓴 "그런데" 문장) | arc는 설정, tension 추출은 고정 |
+| 3. 장면마다 아이디어 하나, 헤더에 그 장면의 용어 하나를 쉬운 말로 정의 | storyboard FORMAT/STORY RULES | 고정 |
+| 4. 장면마다 무언가가 연속으로 변함 (학습 시간 τ, 걸음 수 k, 지수 p) | storyboard의 `visual.moving` 필드(게이트로 검사), visual_code VISUAL GRAMMAR의 "줄마다 화면이 변한다", "moving 값을 화면에 표시" | 고정 |
+| 5. 같은 그림을 다시 써서 머릿속 그림을 이어감 (2장의 궤적 그림을 4장에서 재사용) | `visual.reuse_frame_from` 필드(게이트로 검사), VISUAL GRAMMAR | 고정 |
+| 6. 시각화를 논문 실제 설정으로 계산 (부록 C.1 가우시안, 부록 B.4 반례 배수, Table 1) | understand의 `setup` fact와 `params`, visual_code의 "fact params로 계산" 규칙 | 고정 |
+| 7. 색 의미 일관 (노랑 = 새 개념, 청록 = 정답, 빨강 = 틀림·초기값, 회색 = 배경) | VISUAL GRAMMAR | 고정 |
+| 8. 비유는 개념당 하나, 바로 실제 대상과 연결 ("자기 답을 자기가 채점") | STORY RULES, `lens.analogy` 가중치 | 규칙은 고정, 비중은 설정 |
+| 9. 숫자는 조건과 함께, 단순화와 가정은 작은 각주로 | fidelity_rules, VISUAL GRAMMAR의 각주 규칙 | 고정 |
+
+추가로 두 가지 예시를 넣었다.
+- **storyboard 예시**: 레퍼런스 storyboard 중 세 장면(S1, S4, S5)을 `prompts/examples/storyboard_excerpt.json`으로 고정 구간에 넣었다. "내용은 따라 하지 말고 줄 길이, 헤더, 시각화 묘사의 구체성만 따라 하라"는 단서를 붙였다.
+- **visual_code 예제 코드**: 장면의 `visual.type`에 맞는 레퍼런스 장면 코드를 고른다(`runner.GOLDEN_BY_TYPE`). 예를 들어 flow_plot이면 S4, bar_chart이면 S7, equation_build이면 S3이다.
+
+사용자 설정에서 레퍼런스와 같은 결과를 원하면 `presets/reference_3b1b_ko.json`을 그대로 쓰면 된다. 핵심 값은 다음과 같다.
+
+| 필드 | 값 | 이유 |
+| --- | --- | --- |
+| `narrative.arc` | mystery_twist | 질문 → 그림 → 의문 → 메커니즘 → 반전 → 해결 → 증거 → 답 |
+| `tone` | calm_visual | 짧은 문장, 질문을 던지고 그림이 답하게 하는 3Blue1Brown 톤 |
+| `lens` | geometric 0.6, equation 0.25, empirical 0.1, analogy 0.05 | 그림이 논증을 끌고, 수식은 그림 옆 라벨 |
+| `math.depth` | 2 | 핵심 수식을 항별로 설명하되 유도는 하지 않음 |
+| `audience` | grad | 표준 ML 용어는 쓰고, 논문 고유 용어만 화면에서 정의 |
+| `narrative.required_sections` | problem, method, theory, result | 레퍼런스 쇼츠의 장면 구성 |
+| `target_length_sec`, `voice.pace` | 75, 1.22 | 레퍼런스는 84초였다. 릴스용으로 약간 줄임 |
+| `free_instruction` | 비움 | 위 장치로 충분하다. 자유 지시문은 논문별 강조점(예: "기존 연구와 차이를 강조")에만 쓰는 것이 좋다 |
+
+다른 서사를 원하면 arc만 바꾸면 된다. `problem_method_result`(요약형), `claim_evidence_caveat`(비판적 리뷰형), `derivation_walkthrough`(유도 중심형)가 있고, 비트 정의는 `prompts/arcs/*.md`에 글로 적혀 있어 코드를 몰라도 고칠 수 있다.
+
+### 5.4 ModelConfig: stage별 모델 선택
 
 | stage | 역할 | 기본값 (레퍼런스) | 비고 |
 | --- | --- | --- | --- |
@@ -236,15 +287,37 @@ CHI 연구에서 독립변수가 되는 것은 "같은 논문에 대한 서로 �
   - visual_qa와 judge는 키가 없으면 건너뛴 사실을 검증 보고서에 남긴다. 레퍼런스 runner가 이미 그렇게 동작한다.
 - **사용량 기록**: LLM 호출마다 `UsageRecord`(stage, provider, model, 입력·출력 토큰, 추정 비용)를 job에 쌓는다.
   - 가격표는 코드에 넣지 않고 `pricing.json`(예시: `pricing.example.json`)을 팀이 관리한다. 가격이 없는 모델은 비용 0으로 기록한다.
-- **사전 예상 비용** (추정치, 실제 측정으로 바꿔야 함): 본문과 부록을 합쳐 2만~2.5만 토큰 정도인 논문 기준, 쇼츠 1편에 대략 입력 17만 토큰, 출력 4.5만 토큰을 예상한다.
-  - understand: 입력 약 2.7만, 출력 약 0.7만. 논문당 한 번이며 캐시된다.
-  - storyboard: 입력 약 1.2만, 출력 약 0.6만
-  - visual_code: 장면당 입력 약 1만, 출력 약 0.25만. 8장면에 수리 30%를 더해 입력 약 10만, 출력 약 2.6만
-  - visual_qa: 장면당 이미지 1장과 텍스트 약 0.2만
-  - judge: 입력 약 1.5만, 출력 약 0.3만
-  - 이 숫자는 레퍼런스 실행에서 잰 값이 아니라 prompt 크기로 어림한 값이다. 구현 단계에서 실측으로 바꿔야 한다.
+- **쇼츠 1편 토큰 사용량** (golden 논문, 수리와 재시도 없이 한 번에 통과한 경우)
+  - 가짜 모델로 전체 파이프라인을 돌리면서 실제로 조립된 prompt 길이를 셌다.
+  - 토큰 수는 Claude tokenizer가 아니라 글자 수로 어림했다(한글 1.3자당 1토큰, 그 외 3.6자당 1토큰). 이미지는 Anthropic 문서의 공식 $\lceil w/28 \rceil \times \lceil h/28 \rceil$ 로 계산했다. 실제 API 사용량과 10~20% 정도 다를 수 있다.
+
+| stage | 호출 수 | 입력 토큰 (캐시 없을 때) | 입력 환산 토큰 (캐시 적용) | 출력 토큰 |
+| --- | --- | --- | --- | --- |
+| understand (논문당 1회, 공유) | 1 | 20,645 | 20,645 (캐시 안 함) | 3,044 |
+| storyboard | 1 | 6,676 | 8,345 | 3,468 |
+| visual_code | 8 | 35,426 | 16,995 | 8,046 |
+| preview_qa (이미지 포함) | 8 | 17,508 | 15,921 | 24 |
+| validate judge | 1 | 6,087 | 6,087 (캐시 안 함) | 495 |
+| creator 1명당 합계 (understand 제외) | 18 | 65,697 | 47,348 | 12,033 |
+
+  - "입력 환산 토큰"은 캐시 쓰기를 1.25배, 캐시 읽기를 0.05배(Claude Opus 5.5와 Sonnet 5.5 기준)로 환산한 값이다.
+  - 출력 토큰은 가짜 모델이 golden 답(장면 코드 약 1,000토큰)을 돌려준 값이라, 실제 모델 출력은 이보다 길 수 있다.
+  - 수리와 재시도가 생기면 캐시의 이득이 더 커진다. 수리 요청은 앞 구간을 그대로 두고 뒤에 붙기 때문이다.
+  - 5.5절의 품질 장치(서사 골격, 시각 문법, storyboard 예시, 장면 종류별 예제 코드)를 넣기 전에는 creator 1명당 입력 환산 약 37,800토큰이었다. 품질 장치가 약 9,500토큰을 더 쓴다. 가장 큰 몫은 장면 종류별 예제 코드다(종류가 장면마다 달라 캐시가 덜 맞는다). 예제를 하나로 고정하면 약 6,000토큰을 줄일 수 있지만, 장면 종류와 맞는 예제를 주는 쪽이 코드 품질에 유리하다고 판단했다. 실제 모델로 비교해 정할 일이다.
+- **토큰을 줄이는 장치** (지금 구조에 들어 있는 것)
+  1. 논문 원문(약 2만 토큰)은 understand에서 논문당 한 번만 읽는다. 이후 stage는 압축된 fact sheet(약 2,300토큰)만 받는다. understand 결과는 우리 저장소에 논문 단위로 저장해 다음 creator와 공유한다. 사용자 간에 실제로 비용이 줄어드는 곳은 여기다.
+  2. visual_code는 장면 하나와 그 장면이 인용한 fact만 받는다. 전체 storyboard와 전체 fact sheet를 매번 넣지 않는다.
+  3. prompt caching: `SYSTEM_FIXED`, `SYSTEM_STYLE`, `SYSTEM_EXAMPLE`, `USER_DATA`에 `cache_control`을 건다. visual_code는 같은 앞부분(규칙과 스타일, 약 2,500토큰)을 8번 이상 보내므로 입력 비용이 절반 이하가 된다. 장면 종류별 예제 코드는 같은 종류가 두 번 이상 나올 때만 캐시한다. 한 번만 부르는 understand와 judge는 캐시 쓰기 추가 비용(1.25배)만 생기므로 캐시하지 않는다.
+  4. JSON은 공백 없이 압축하고, schema에서 title 필드를 빼고, 원문에서 References, Acknowledgments, AI use statement 구간을 뺀다. understand 입력이 22,929에서 20,541토큰으로 줄었다.
+  5. 음성 합성, 발음 검증, 렌더, 합성, lint, storyboard 게이트, 레이아웃 검사는 모두 결정론이라 토큰을 쓰지 않는다. LLM 재호출 전에 이 검사들이 문제를 구체적으로 짚어 주므로 수리 횟수도 줄어든다.
+  6. vision 검사는 결정론 검사를 통과한 장면에만, 장면당 최대 2회, 0.8배로 줄인 이미지로 한다.
+- **캐시의 한계**: Anthropic prompt cache는 조직(workspace) 단위로 분리되고, 다른 조직과는 절대 공유되지 않는다. 사용자 본인 키 방식이면 사용자마다 조직이 달라서, 캐시 이득은 job 하나 안의 반복 호출에서만 생긴다. 플랫폼이 자기 키로 대신 결제하는 방식으로 바꾸면 `SYSTEM_FIXED`가 사용자 간에도 공유되도록 이미 맨 앞에 배치해 두었다.
+- **더 줄일 수 있는 곳** (아직 안 함)
+  - preview_qa 이미지가 두 번째로 큰 항목이다(약 15,000토큰). Preset에서 vision 검사를 끄는 선택지를 줄 수 있다. 품질과 비용 사이의 선택이다.
+  - visual_qa와 judge를 더 작은 모델로 돌릴 수 있다. 품질 확인이 필요하다.
+  - 장면 수리 때 파일 전체 대신 바뀐 부분만 받으면 출력 토큰이 준다. 다만 적용 실패 위험이 있다.
 - **비용 분담**: fact sheet를 논문 단위로 캐시하면 첫 생성자만 understand 비용을 낸다. 이후 생성자는 storyboard 이후 비용만 낸다.
-- **소요 시간**: LLM을 쓰지 않는 부분은 2 vCPU에서 약 4분 45초~5분 20초로 측정했다. LLM 호출은 순차로 18~25회(수리 포함) 정도로 보이는데, 실제 시간은 모델 응답 속도에 달려 있어 아직 측정하지 못했다. 처음 수작업 제작은 약 30분이 걸렸고, 그 대부분은 레이아웃 수정 반복이었다.
+- **소요 시간**: LLM을 쓰지 않는 부분은 2 vCPU에서 약 4분 45초~5분 20초로 측정했다. LLM 호출은 수리 없이 18회(위 표)이고 수리가 생기면 늘어난다. 실제 시간은 모델 응답 속도에 달려 있어 아직 측정하지 못했다. 처음 수작업 제작은 약 30분이 걸렸고, 그 대부분은 레이아웃 수정 반복이었다.
 
 ## 8. Job 실행과 웹 연동
 
@@ -290,12 +363,12 @@ pipeline/
   prompting.py          prompt 템플릿 채우기
   runner.py             stage 실행, 재시작, 진행률, 사용량, 수리 루프
   prompts/              fidelity_rules, understand, storyboard, visual_code, visual_qa, judge, visual_catalog, render_kit_api
-  providers/            base.py(인터페이스), tts_supertonic.py, asr_sensevoice.py, llm_anthropic.py
+  providers/            base.py(인터페이스), tts_supertonic.py, asr_sensevoice.py, llm_anthropic.py, llm_mock.py(가짜 모델, 캐시 사용량 모의 계산)
   render_kit/           theme.py(캔버스, 구역, 색), primitives.py, reel.py(Reel 동기화 엔진)
   stages/               narration.py, lint.py, render.py, compose.py, bgm.py
 presets/                geometric_intuition_ko, equation_first_ko, critical_review_en
 golden/flowmap_2610.20674/   facts.json, storyboard.json, preset.json, scenes/ (레퍼런스 영상과 같은 결과)
-tools/                  fetch_models.sh, run_golden.sh, Dockerfile
+tools/                  fetch_models.sh, run_golden.sh, text_to_paper.py, Dockerfile
 pricing.example.json
 ```
 
@@ -308,8 +381,11 @@ pricing.example.json
 | narration, lint, render(preview, final), compose | golden으로 실행 확인 |
 | runner의 재시작 경로와 결정론 검증 | golden으로 실행 확인 (최종 상태 published) |
 | style_compile, prompting | 출력 텍스트 확인 |
-| llm_anthropic, runner의 LLM stage, 수리 루프 | 작성만 함, 미실행 |
-| ingest, publish, worker, API | 미구현 |
+| runner의 LLM stage 경로 (prompt 조립, 캐시 구간, 사용량 기록, lint, 결정론 레이아웃 검사, judge) | 가짜 모델로 paper.json부터 published까지 실행 확인 |
+| 결정론 레이아웃 검사 | golden 오탐 0건, 일부러 넣은 문제 검출 확인 |
+| arc, tension fact, VISUAL GRAMMAR, storyboard 예시, 장면 종류별 예제 코드 | 가짜 모델로 전체 실행 확인 (published). 실제 모델에서의 효과는 미확인 |
+| llm_anthropic (실제 API 호출), 실제 모델의 출력 품질, 수리 루프의 실제 동작 | 작성만 함, 미실행 |
+| ingest(arXiv 원본), publish, worker, API | 미구현. `tools/text_to_paper.py`는 PDF 텍스트를 paper.json으로 바꾸는 임시 도구 |
 
 ## 11. 구현 작업 순서 (Codex 인계용)
 
@@ -323,11 +399,11 @@ pricing.example.json
   - 모든 장면의 overrun이 0.3초 미만이다.
 
 **M1. LLM stage 실행 검증** (가장 위험한 부분)
-- `llm_anthropic.py`로 golden 논문에 understand와 storyboard를 실행한다. understand 입력은 M2 전이므로 논문 텍스트를 손으로 paper.json에 넣는다.
+- 먼저 가짜 모델 실행을 재현한다(preset의 LLM provider를 `mock`으로 바꾸고 `runner.run(job, keys={"mock": "x"})`). 그다음 provider를 `anthropic`으로 바꿔 golden 논문에 understand와 storyboard를 실행한다. paper.json은 M2 전이므로 `tools/text_to_paper.py`로 PDF 텍스트에서 만든다.
 - 완료 기준
   - FactSheet와 Storyboard가 schema와 게이트를 3회 안에 통과한다.
   - 프리셋 세 개로 만든 storyboard가 서로 다른 section 구성과 primitive 분포를 보인다.
-  - 사용량이 `job.json`에 기록되고, 실측 토큰으로 7절의 추정치를 갱신한다.
+  - 사용량이 `job.json`에 기록되고, 두 번째 이후 visual_code 호출에서 `cache_read_tokens`가 0보다 크다. 실측 토큰으로 7절의 표를 갱신한다.
 
 **M2. ingest**
 - arXiv e-print 원본 처리와 PDF 대체 경로를 구현한다.

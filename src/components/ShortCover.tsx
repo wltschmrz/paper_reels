@@ -23,7 +23,7 @@ export default function ShortCover({
       )}
       <div className="cover-top">
         <span>{short.demo ? "DEMO" : "SHORT"}</span>
-        <span>{short.duration}s</span>
+        <span>{Math.round(short.duration)}s</span>
       </div>
       <div className="cover-hook">
         <span className="cover-kicker">{short.kicker || short.style}</span>

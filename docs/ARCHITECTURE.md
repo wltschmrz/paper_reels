@@ -64,3 +64,7 @@ Short asset 생성 후 URL을 제공하며 validation 또는 moderation이 실�
 ### 논문별 Shorts 이동
 
 초록 카드의 `쇼츠 버전 보기`와 논문 상세의 같은 버튼은 `shortsPaperId`를 설정해 해당 논문의 Shorts 목록만 표시한다. 검색/주제/정렬 상태는 그대로 유지하며 `초록 목록으로` 또는 `전체 쇼츠 목록`으로 범위를 해제할 수 있다. 영상이 없는 논문에서도 생성 진입용 empty state를 볼 수 있다. 영상 타일을 선택한 후에만 Explore로 이동한다.
+
+### Inline paper cards (supersedes scoped Shorts page)
+
+초록 화면에서 쇼츠 버튼을 누르면 `flippedPapers`에 해당 ID만 토글하여 카드 내부만 전환한다. 다른 논문·검색·정렬·페이지는 유지한다. 다시 누르면 초록으로 돌아온다. 각 카드의 ResizeObserver가 실제 가용 폭으로 열 수를 계산하며, Shorts 개수가 마지막 행을 정확히 채우면 Your Perspective 타일을 생략한다. 빈 슬롯이 있으면 남는 칸만 사용한다. 모바일 썸네일 최소 폭을 낮춰 일반 휴대폰에서는 두 개를 나란히 볼 수 있다. reduced-motion에서는 전환 애니메이션을 끈다.

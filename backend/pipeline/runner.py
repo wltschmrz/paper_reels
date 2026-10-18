@@ -76,20 +76,15 @@ class Ctx:
 
     def charge(self, stage, choice, usage: dict):
         p = self.prices.get(choice.provider, {}).get(choice.model, {})
-        cost = usage.get("input_tokens", 0) / 1e6 * p.get(
-            "input_per_mtok", 0
-        ) + usage.get("output_tokens", 0) / 1e6 * p.get("output_per_mtok", 0)
-        self.state.usage.append(
-            UsageRecord(
-                stage=stage,
-                provider=choice.provider,
-                model=choice.model,
-                input_tokens=usage.get("input_tokens", 0),
-                output_tokens=usage.get("output_tokens", 0),
-                est_cost_usd=round(cost, 4),
-            )
-        )
+        ip, op = p.get("input_per_mtok", 0) / 1e6, p.get("output_per_mtok", 0) / 1e6
+        u = {k: usage.get(k, 0) for k in ("input_tokens", "output_tokens", "cache_write_tokens", "cache_read_tokens")}
+        cost = (u["input_tokens"] + u["cache_write_tokens"] * p.get("cache_write_multiplier", 1.25)
+                + u["cache_read_tokens"] * p.get("cache_read_multiplier", 0.1)) * ip + u["output_tokens"] * op
+        self.state.usage.append(UsageRecord(stage=stage, provider=choice.provider, model=choice.model,
+                                           est_cost_usd=round(cost, 6), **u))
         self.save()
+        if usage.get("incomplete"):
+            raise RuntimeError("Model response incomplete; usage saved; stopping without automatic retry")
 
 
 def first_json(text):
@@ -105,7 +100,7 @@ def code_block(text):
 def ask_json(ctx, stage, choice, system, user, model_cls, extra_check=None, tries=3):
     llm, note = ctx.llm(stage, choice), ""
     for _ in range(tries):
-        text, usage = llm.complete(system, user + note)
+        text, usage = llm.complete(system, user + note, max_tokens=32000 if stage == "storyboard" else 8000)
         ctx.charge(stage, choice, usage)
         try:
             obj = model_cls.model_validate(first_json(text))
@@ -127,7 +122,7 @@ def done(ctx, name):
         return (j / "paper.json").exists() or (j / "facts.json").exists()
     if name == "visual_code":
         sb = Storyboard.model_validate_json((j / "storyboard.json").read_text())
-        return all((j / "scenes" / f"{s.scene_id}.py").exists() for s in sb.scenes)
+        return all((j / "scenes" / f"{s.scene_id}.py").exists() and not lint.lint_scene(j / "scenes" / f"{s.scene_id}.py", sb) for s in sb.scenes)
     marker = {
         "understand": "facts.json",
         "storyboard": "storyboard.json",
@@ -155,7 +150,7 @@ def stage_understand(ctx):
     paper = PaperDoc.model_validate_json((ctx.job / "paper.json").read_text())
     choice = ctx.preset.models.understand
     digest = hashlib.sha256(
-        (paper.model_dump_json() + choice.model_dump_json() + "facts-v2").encode()
+        (paper.model_dump_json() + choice.model_dump_json() + "facts-v3-tension").encode()
     ).hexdigest()
     cache = DATA / "facts"
     cache.mkdir(parents=True, exist_ok=True)
@@ -229,7 +224,8 @@ def write_scene(ctx, scene, repair=""):
     choice = ctx.preset.models.visual_code
     llm = ctx.llm("visual_code", choice)
     s, u = prompting.visual_code(
-        scene, durs, used, ctx.preset.style, prompting.reference_scene(scene["visual"]["type"]), repair
+        scene, durs, used, ctx.preset.style, prompting.reference_scene(scene["visual"]["type"]), repair,
+        cache_example=sum(s["visual"]["type"] == scene["visual"]["type"] for s in sb["scenes"]) > 1 or bool(repair)
     )
     path = ctx.job / "scenes" / f"{scene['scene_id']}.py"
     for _ in range(3):
@@ -252,7 +248,8 @@ def stage_visual_code(ctx):
         )
     sb = json.loads((ctx.job / "storyboard.json").read_text())
     for scene in sb["scenes"]:
-        if not (ctx.job / "scenes" / f"{scene['scene_id']}.py").exists():
+        path = ctx.job / "scenes" / f"{scene['scene_id']}.py"
+        if not path.exists() or lint.lint_scene(path, Storyboard.model_validate(sb)):
             write_scene(ctx, scene)
 
 
@@ -271,45 +268,32 @@ def qa_scene(ctx, scene) -> list[QAIssue]:
     return [QAIssue.model_validate(i) for i in first_json(text).get("issues", [])]
 
 
-def stage_preview_qa(ctx, max_repairs=2):
+def stage_preview_qa(ctx, max_repairs=2, vision_budget=2):
     sb = json.loads((ctx.job / "storyboard.json").read_text())
     by_id = {s["scene_id"]: s for s in sb["scenes"]}
-    todo, log = list(by_id), {}
+    todo, log, vision_used, bad = list(by_id), {}, {k: 0 for k in by_id}, {}
     for attempt in range(max_repairs + 1):
         reports, errors = render.run(ctx.job, "preview", only=todo)
-        bad = {}
-        for sid, err in errors.items():
-            bad[sid] = f"RENDER ERROR:\n{err}"
+        bad = {sid: f"RENDER ERROR:\n{err}" for sid, err in errors.items()}
         for r in reports:
-            issues = [
-                i
-                for i in qa_scene(ctx, by_id[r.scene_id])
-                if i.severity in ("blocker", "major")
-            ]
+            rep = json.loads((ctx.job / "render" / f"report_{r.scene_id}.json").read_text())
+            issues = [QAIssue(scene_id=r.scene_id, line_id=i["line_id"], severity="major", problem=i["problem"]) for i in rep.get("layout_issues", [])]
             if r.overrun_sec > 0.3:
-                issues.append(
-                    QAIssue(
-                        scene_id=r.scene_id,
-                        severity="major",
-                        problem=f"animations overrun narration by {r.overrun_sec:.2f}s",
-                    )
-                )
+                issues.append(QAIssue(scene_id=r.scene_id, severity="major", problem=f"animations overrun narration by {r.overrun_sec:.2f}s"))
+            if not issues and vision_used[r.scene_id] < vision_budget:
+                vision_used[r.scene_id] += 1
+                issues = [i for i in qa_scene(ctx, by_id[r.scene_id]) if i.severity in ("blocker", "major")]
             log[r.scene_id] = [i.model_dump() for i in issues]
             if issues:
-                bad[r.scene_id] = "REVIEW ISSUES:\n" + "\n".join(
-                    f"- [{i.severity}] {i.problem} -> {i.fix_hint}" for i in issues
-                )
+                bad[r.scene_id] = "REVIEW ISSUES:\n" + "\n".join(f"- [{i.severity}] {i.problem} -> {i.fix_hint}" for i in issues)
         if not bad or attempt == max_repairs:
             break
         for sid, msg in bad.items():
             prev = (ctx.job / "scenes" / f"{sid}.py").read_text()
             write_scene(ctx, by_id[sid], repair=f"PREVIOUS CODE:\n{prev}\n\n{msg}")
         todo = list(bad)
-    (ctx.job / "render" / "preview" / "qa.json").write_text(
-        json.dumps(
-            {"issues": log, "unresolved": list(bad)}, ensure_ascii=False, indent=1
-        )
-    )
+    (ctx.job / "render" / "preview" / "qa.json").write_text(json.dumps(
+        {"issues": log, "vision_calls": vision_used, "unresolved": list(bad)}, ensure_ascii=False, indent=1))
 
 
 def stage_final_render(ctx):

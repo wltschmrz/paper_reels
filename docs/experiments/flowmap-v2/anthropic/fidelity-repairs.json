@@ -1,0 +1,8 @@
+{
+  "new_fact_sources": [
+    "Original paper page 3 (\u00a72), average velocity definition",
+    "Original paper page 18 (B.4), explicit derivative identity"
+  ],
+  "claude_hook": "Restricted generative models to flow matching models",
+  "gpt_table_animation": null
+}

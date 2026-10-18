@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Bookmark,
   ArrowUpRight,
@@ -16,6 +17,7 @@ type Props = {
   paper: Paper;
   mode: "papers" | "shorts";
   shorts: Short[];
+  canFlip?: boolean;
   saved: boolean;
   reaction?: string;
   onSave: () => void;
@@ -30,6 +32,7 @@ export default function PaperCard({
   paper: p,
   mode,
   shorts,
+  canFlip = false,
   saved,
   reaction,
   onSave,
@@ -40,9 +43,31 @@ export default function PaperCard({
   onPlay,
   onShowShorts,
 }: Props) {
+  const row = useRef<HTMLDivElement>(null);
+  const [columns, setColumns] = useState(1);
+  useEffect(() => {
+    if (!row.current) return;
+    const observer = new ResizeObserver(([entry]) => {
+      setColumns(
+        Math.max(
+          1,
+          Math.floor(
+            (entry.contentRect.width + 12) /
+              (window.innerWidth <= 760 ? 144 : 172),
+          ),
+        ),
+      );
+    });
+    observer.observe(row.current);
+    return () => observer.disconnect();
+  }, [mode]);
+  const emptySlots =
+    shorts.length === 0
+      ? columns
+      : (columns - (shorts.length % columns)) % columns;
   return (
-    <article className="paper-card">
-      <div className="paper-main">
+    <article className="paper-card" data-paper-id={p.id} data-mode={mode}>
+      <div className="paper-main card-face" key={mode}>
         <div className="paper-meta">
           <span
             className={`topic ${p.topics[0] === "Drifting" ? "purple" : ""}`}
@@ -66,7 +91,13 @@ export default function PaperCard({
             </button>
           </>
         ) : (
-          <div className="shorts-row">
+          <div
+            className="shorts-row"
+            ref={row}
+            style={{
+              gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+            }}
+          >
             {shorts.map((s) => (
               <button
                 key={s.id}
@@ -77,15 +108,21 @@ export default function PaperCard({
                 <ShortCover short={s} />
               </button>
             ))}
-            <button className="create-tile" onClick={onGenerate}>
-              <Sparkles size={22} />
-              <strong>
-                {shorts.length
-                  ? "Your perspective"
-                  : "Be the first to explain it"}
-              </strong>
-              <span>Create a short for this paper</span>
-            </button>
+            {emptySlots > 0 && (
+              <button
+                className="create-tile"
+                style={{ gridColumn: `span ${emptySlots}` }}
+                onClick={onGenerate}
+              >
+                <Sparkles size={22} />
+                <strong>
+                  {shorts.length
+                    ? "Your perspective"
+                    : "Be the first to explain it"}
+                </strong>
+                <span>Create a short for this paper</span>
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -157,14 +194,17 @@ export default function PaperCard({
           </a>
         </div>
         <div>
-          {mode === "papers" && (
+          {canFlip && (
             <button
               className="short-count"
               onClick={onShowShorts}
-              aria-label={`${p.title} 쇼츠 버전 보기`}
+              aria-label={`${p.title} ${mode === "papers" ? "쇼츠 버전 보기" : "초록 보기"}`}
+              aria-expanded={mode === "shorts"}
             >
               <Play size={12} />
-              쇼츠 버전 보기 · {shorts.length}
+              {mode === "papers"
+                ? `쇼츠 버전 보기 · ${shorts.length}`
+                : "초록 보기"}
             </button>
           )}
           <button className="generate-button" onClick={onGenerate}>

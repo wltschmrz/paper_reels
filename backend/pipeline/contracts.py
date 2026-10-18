@@ -58,7 +58,10 @@ class Lens(BaseModel):
         return self
 
 
+Arc = Literal["mystery_twist", "problem_method_result", "claim_evidence_caveat", "derivation_walkthrough"]
+
 class Narrative(BaseModel):
+    arc: Arc = "mystery_twist"
     required_sections: list[SectionTag] = Field(default_factory=lambda: ["problem", "method", "result"])
     opening: Literal["hook_question", "hook_number", "problem_first"] = "hook_question"
     ending: Literal["takeaway", "open_question", "limitation"] = "takeaway"
@@ -150,7 +153,7 @@ class PaperDoc(BaseModel):
 
 class Fact(BaseModel):
     id: str
-    kind: Literal["problem", "method", "contribution", "definition", "equation", "theorem", "setup", "result", "limitation"]
+    kind: Literal["problem", "method", "contribution", "definition", "equation", "theorem", "setup", "result", "limitation", "tension"]
     statement: str
     value: Optional[str] = None
     condition: Optional[str] = None
@@ -183,6 +186,8 @@ class SceneHeader(BaseModel):
 class VisualIntent(BaseModel):
     type: VisualType
     description: str
+    moving: str = ""
+    reuse_frame_from: Optional[str] = None
     fact_refs: list[str] = Field(default_factory=list)
 
 
@@ -304,6 +309,8 @@ class UsageRecord(BaseModel):
     model: str
     input_tokens: int = 0
     output_tokens: int = 0
+    cache_write_tokens: int = 0
+    cache_read_tokens: int = 0
     characters: int = 0
     compute_sec: float = 0.0
     est_cost_usd: float = 0.0

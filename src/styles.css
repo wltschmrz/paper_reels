@@ -2215,3 +2215,67 @@ form > .primary {
   margin-bottom: 16px;
   flex-wrap: wrap;
 }
+
+/* Each paper flips independently; tiles adapt to their actual card width. */
+.card-face {
+  animation: card-turn-in 260ms ease-out;
+  transform-origin: center;
+}
+@keyframes card-turn-in {
+  from {
+    opacity: 0.25;
+    transform: perspective(1000px) rotateY(-12deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(0);
+  }
+}
+.shorts-row {
+  display: grid;
+  overflow: visible;
+  min-width: 0;
+  align-items: start;
+}
+.shorts-row .short-tile {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+.shorts-row .create-tile {
+  min-width: 0;
+  min-height: 240px;
+  height: 100%;
+}
+.paper-card,
+.feed-list,
+.main,
+.content-grid {
+  min-width: 0;
+}
+.paper-actions {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.paper-actions > div {
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .paper-card {
+    padding: 16px 14px 0;
+  }
+  .shorts-row .create-tile {
+    min-height: 210px;
+  }
+  .paper-actions {
+    padding: 12px 0;
+  }
+  .paper-title {
+    overflow-wrap: anywhere;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-face {
+    animation: none;
+  }
+}

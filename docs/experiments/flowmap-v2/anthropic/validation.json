@@ -1,0 +1,211 @@
+{
+ "checks": [
+  {
+   "name": "required_sections",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "subtitle_shape",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_exist",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_cited",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "numbers_grounded",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "tts_numbers_spelled",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "moving_named",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "reuse_frame_valid",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "length_budget",
+   "passed": true,
+   "detail": "estimated 80.2s, target 75s"
+  },
+  {
+   "name": "narration_intelligible",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "no_overrun",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "layout_qa",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_judged",
+   "passed": true,
+   "detail": "lines []; onscreen []"
+  }
+ ],
+ "claim_verdicts": [
+  {
+   "line_id": "s1a",
+   "verdict": "supported",
+   "note": "bg.sampling_cost: sampling a flow matching model takes hundreds of network evaluations."
+  },
+  {
+   "line_id": "s1b",
+   "verdict": "supported",
+   "note": "def.flowmap: sampling needs one evaluation Φ(x_0,0,1)."
+  },
+  {
+   "line_id": "s1c",
+   "verdict": "supported",
+   "note": "prob.tricks_unexplained: the paper says no prior work analyzed how these tricks affect training dynamics. The line only asks why they work."
+  },
+  {
+   "line_id": "s2a",
+   "verdict": "supported",
+   "note": "def.flowmap and def.average_velocity."
+  },
+  {
+   "line_id": "s2b",
+   "verdict": "supported",
+   "note": "def.flowmap: Φ(x_0,0,1) carries the starting point at time 0 to time 1 in one evaluation."
+  },
+  {
+   "line_id": "s2c",
+   "verdict": "supported",
+   "note": "def.average_velocity: Φ = x + (t-s)u. method.meanflow_loss: MeanFlow regresses u."
+  },
+  {
+   "line_id": "s2d",
+   "verdict": "no_claim",
+   "note": "Transition question."
+  },
+  {
+   "line_id": "s3a",
+   "verdict": "supported",
+   "note": "method.meanflow_loss: the target is built from u itself and the velocity v."
+  },
+  {
+   "line_id": "s3b",
+   "verdict": "supported",
+   "note": "def.stopgrad and method.meanflow_loss: the target sits inside sg, so its gradient is set to 0."
+  },
+  {
+   "line_id": "s3c",
+   "verdict": "supported",
+   "note": "The analogy matches the loss L = ||u - sg(u_tgt)||². The target is built from u itself and sits inside sg."
+  },
+  {
+   "line_id": "s3d",
+   "verdict": "supported",
+   "note": "prob.no_guarantee: the paper says sg 'might prevent' the loss from necessarily decreasing. 'No guarantee' is a faithful rendering."
+  },
+  {
+   "line_id": "s4a",
+   "verdict": "supported",
+   "note": "thm1.convergence is stated with the idealized gradient-flow setting, as lim.functional_setting requires."
+  },
+  {
+   "line_id": "s4b",
+   "verdict": "supported",
+   "note": "thm1.convergence and tension.sg_converges_anyway. The idealized-flow condition is stated in the preceding line and on screen."
+  },
+  {
+   "line_id": "s4c",
+   "verdict": "supported",
+   "note": "thm1.mf_closed_form: the map follows the true flow up to t_τ, which increases from s to t. thm2.rate: error decays exponentially."
+  },
+  {
+   "line_id": "s5a",
+   "verdict": "supported",
+   "note": "tension.flow_vs_descent: gradient descent with finite steps can diverge, unlike gradient flow."
+  },
+  {
+   "line_id": "s5b",
+   "verdict": "supported",
+   "note": "In the counterexample the error is multiplied by (1-η(m+1)) each step, so a larger m gives a larger factor. eq.counterexample_derivative gives (t-s)∂_t e = m e."
+  },
+  {
+   "line_id": "s5c",
+   "verdict": "supported",
+   "note": "prop1.counterexample: divergence when η(m+1) > 2. The line is read in the context of the counterexample."
+  },
+  {
+   "line_id": "s5d",
+   "verdict": "supported",
+   "note": "prop1.divergence: for every η there is some arbitrarily small initial error that makes gradient descent diverge."
+  },
+  {
+   "line_id": "s6a",
+   "verdict": "supported",
+   "note": "method.normalized_update divides the residual by (‖r‖²+c)^p. 'Residual magnitude' is a loose paraphrase but acceptable."
+  },
+  {
+   "line_id": "s6b",
+   "verdict": "supported",
+   "note": "thm4.bounded: for p ≥ 0.5 the updates have uniformly bounded norms. The on-screen text adds the 'under the paper's assumptions' qualifier."
+  },
+  {
+   "line_id": "s6c",
+   "verdict": "supported",
+   "note": "thm4.neighborhood: p = 1 gives convergence to a neighborhood of the solution, of size O(η^(1/2))."
+  },
+  {
+   "line_id": "s6d",
+   "verdict": "no_claim",
+   "note": "Transition question. tension.sweet_spot is the setup."
+  },
+  {
+   "line_id": "s7a",
+   "verdict": "supported",
+   "note": "Table 1 condition: CIFAR-10, NFE 1, lower FID is better (glossary)."
+  },
+  {
+   "line_id": "s7b",
+   "verdict": "supported",
+   "note": "p=0 gives 10.62 and p=0.75 gives 5.46. 5.46 is the lowest among the tested p values (the other values, 6.81, 5.51, 5.61, 5.93 and 6.32, are in the fact sheet but not cited on this line)."
+  },
+  {
+   "line_id": "s7c",
+   "verdict": "supported",
+   "note": "p=1.5 gives 6.32, worse than 5.46. This matches tension.sweet_spot."
+  },
+  {
+   "line_id": "s8a",
+   "verdict": "supported",
+   "note": "thm1.convergence under the idealized flow, and tension.sg_converges_anyway."
+  },
+  {
+   "line_id": "s8b",
+   "verdict": "supported",
+   "note": "prop1.divergence: finite-step descent can diverge."
+  },
+  {
+   "line_id": "s8c",
+   "verdict": "supported",
+   "note": "tension.sweet_spot: strong performance only in a specific range of reweighting strengths. res.cifar.nfe1.p0.75 gives the best CIFAR-10 FID among the tested values."
+  }
+ ]
+}

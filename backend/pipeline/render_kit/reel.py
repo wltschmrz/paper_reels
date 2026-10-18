@@ -30,6 +30,8 @@ class Reel(Scene):
         self.t_end = 0.0
         self.timeline = []
         self.overrun = 0.0
+        self.layout_issues = []
+        self.cur_line = None
 
     def now(self):
         return self.renderer.time
@@ -51,6 +53,46 @@ class Reel(Scene):
             g.add(b)
         return g
 
+    def _texts(self):
+        out = []
+
+        def walk(m):
+            if isinstance(m, (Text, MathTex, SingleStringMathTex, DecimalNumber)):
+                out.append(m)
+                return
+            for c in m.submobjects:
+                walk(c)
+
+        for m in self.mobjects:
+            walk(m)
+        return out
+
+    def _layout_check(self, line_id):
+        sub = set(self.sub.get_family()) if self.sub is not None else set()
+        boxes = []
+        for t in self._texts():
+            fam = [f for f in t.get_family() if f.has_points()]
+            if not fam or max(f.get_fill_opacity() for f in fam) < 0.5 or t.width < 1e-3:
+                continue
+            (x0, y0, _), (x1, y1, _) = t.get_corner(DL), t.get_corner(UR)
+            name = getattr(t, "text", None) or getattr(t, "tex_string", None) or type(t).__name__
+            boxes.append((name[:40], x0, x1, y0, y1, t in sub))
+            if x0 < -2.24 or x1 > 2.24 or y1 > 3.99 or y0 < -3.99:
+                self.layout_issues.append({"line_id": line_id, "problem": f"text '{name[:40]}' is outside the frame"})
+            elif y0 < th.ZONES["unsafe_below"] and t not in sub:
+                self.layout_issues.append({"line_id": line_id, "problem": f"text '{name[:40]}' is below y={th.ZONES['unsafe_below']} (covered by app UI)"})
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a, b = boxes[i], boxes[j]
+                if a[5] and b[5]:
+                    continue
+                w = min(a[2], b[2]) - max(a[1], b[1])
+                h = min(a[4], b[4]) - max(a[3], b[3])
+                if w > 0 and h > 0:
+                    small = min((a[2] - a[1]) * (a[4] - a[3]), (b[2] - b[1]) * (b[4] - b[3]))
+                    if small > 0 and w * h > 0.15 * small:
+                        self.layout_issues.append({"line_id": line_id, "problem": f"text '{a[0]}' overlaps text '{b[0]}'"})
+
     def dur(self, line_id):
         return self.nar["lines"][line_id]["duration_sec"]
 
@@ -58,6 +100,9 @@ class Reel(Scene):
         if self.t_end > 0 and self.now() > self.t_end + 0.05:
             self.overrun += self.now() - self.t_end
         self.hold()
+        if self.cur_line:
+            self._layout_check(self.cur_line)
+        self.cur_line = line_id
         ln = self.lines[line_id]
         self.add_sound(str(JOB / self.nar["lines"][line_id]["path"]))
         if self.sub is not None:
@@ -84,9 +129,11 @@ class Reel(Scene):
         self.hold()
         if extra > 0:
             self.wait(extra)
+        if self.cur_line:
+            self._layout_check(self.cur_line)
         self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.3)
         out = JOB / "render"
         out.mkdir(exist_ok=True)
         (out / f"report_{self.sid}.json").write_text(json.dumps(
             {"scene_id": self.sid, "overrun_sec": round(self.overrun, 3), "duration_sec": round(self.now(), 3),
-             "timeline": self.timeline, "onscreen_text": P.ONSCREEN}, ensure_ascii=False, indent=1))
+             "timeline": self.timeline, "layout_issues": self.layout_issues, "onscreen_text": P.ONSCREEN}, ensure_ascii=False, indent=1))

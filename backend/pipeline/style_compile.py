@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from .contracts import StyleSpec
 from .validators import RATE
 
@@ -59,6 +61,7 @@ def compile_style(style: StyleSpec) -> str:
         "EXPLANATION LENS (allocate screen time roughly by these weights):\n" + lens_block(style),
         f"MATH DEPTH {style.math.depth}: {MATH[style.math.depth]} Hold any displayed equation at least {style.math.min_equation_dwell_sec:.1f} s."
         + (" Color each named term consistently across scenes." if style.math.color_terms else ""),
+        (Path(__file__).parent / "prompts" / "arcs" / f"{style.narrative.arc}.md").read_text().strip(),
         "REQUIRED SECTIONS (each must be the section tag of at least one scene): " + ", ".join(style.narrative.required_sections),
         f"OPENING: {OPENING[style.narrative.opening]}",
         f"ENDING: {ENDING[style.narrative.ending]}",

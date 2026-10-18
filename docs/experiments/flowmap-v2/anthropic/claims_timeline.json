@@ -1,0 +1,299 @@
+[
+ {
+  "scene_id": "S1",
+  "line_id": "s1a",
+  "start": 0.0,
+  "end": 3.53,
+  "subtitle": "플로우 매칭은 수백 번 계산해\n그림 하나를 만듭니다.",
+  "claims": [
+   "bg.sampling_cost"
+  ]
+ },
+ {
+  "scene_id": "S1",
+  "line_id": "s1b",
+  "start": 3.633,
+  "end": 5.219,
+  "subtitle": "플로우 맵은\n단 한 번이면 되죠.",
+  "claims": [
+   "def.flowmap"
+  ]
+ },
+ {
+  "scene_id": "S1",
+  "line_id": "s1c",
+  "start": 5.333,
+  "end": 7.258,
+  "subtitle": "그런데 그 학습 트릭은\n왜 통하는 걸까요?",
+  "claims": [
+   "prob.tricks_unexplained"
+  ]
+ },
+ {
+  "scene_id": "S2",
+  "line_id": "s2a",
+  "start": 7.666,
+  "end": 10.671,
+  "subtitle": "시각 s의 점을 넣으면\n시각 t의 도착점을 주는 함수.",
+  "claims": [
+   "def.flowmap",
+   "def.average_velocity"
+  ]
+ },
+ {
+  "scene_id": "S2",
+  "line_id": "s2b",
+  "start": 10.766,
+  "end": 14.062,
+  "subtitle": "s가 0, t가 1이면\n노이즈가 곧장 데이터가 됩니다.",
+  "claims": [
+   "def.flowmap",
+   "def.average_velocity"
+  ]
+ },
+ {
+  "scene_id": "S2",
+  "line_id": "s2c",
+  "start": 14.166,
+  "end": 16.244,
+  "subtitle": "MeanFlow는 이걸\n평균 속도 u로 배웁니다.",
+  "claims": [
+   "method.meanflow_loss",
+   "def.average_velocity"
+  ]
+ },
+ {
+  "scene_id": "S2",
+  "line_id": "s2d",
+  "start": 16.333,
+  "end": 17.714,
+  "subtitle": "그럼 정답지는\n어디서 올까요?",
+  "claims": [
+   "method.meanflow_loss",
+   "def.average_velocity"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3a",
+  "start": 18.133,
+  "end": 20.504,
+  "subtitle": "정답지는 u 자신과\n속도 v로 만듭니다.",
+  "claims": [
+   "method.meanflow_loss"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3b",
+  "start": 20.6,
+  "end": 22.945,
+  "subtitle": "그리고 stop gradient로\n그 정답지를 얼려 두죠.",
+  "claims": [
+   "def.stopgrad"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3c",
+  "start": 23.033,
+  "end": 27.034,
+  "subtitle": "직접 쓴 답안지로 채점하는 학생,\n그 답안지가 이 목표값입니다.",
+  "claims": [
+   "method.meanflow_loss",
+   "def.stopgrad"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3d",
+  "start": 27.133,
+  "end": 29.083,
+  "subtitle": "손실이 줄어든다는\n보장도 없습니다.",
+  "claims": [
+   "prob.no_guarantee"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4a",
+  "start": 29.499,
+  "end": 31.86,
+  "subtitle": "이상적인 경사 흐름에서\n논문은 증명합니다.",
+  "claims": [
+   "thm1.convergence",
+   "lim.functional_setting"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4b",
+  "start": 31.966,
+  "end": 34.85,
+  "subtitle": "stop gradient가 있어도\n진짜 플로우 맵에 수렴한다.",
+  "claims": [
+   "thm1.convergence",
+   "tension.sg_converges_anyway"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4c",
+  "start": 34.966,
+  "end": 38.516,
+  "subtitle": "앞쪽부터 진짜 경로로 바뀌고,\n오차는 지수적으로 줄죠.",
+  "claims": [
+   "thm1.mf_closed_form",
+   "thm2.rate"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5a",
+  "start": 39.933,
+  "end": 42.782,
+  "subtitle": "하지만 실제 학습은\n유한한 보폭 η로 걷습니다.",
+  "claims": [
+   "tension.flow_vs_descent",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5b",
+  "start": 42.9,
+  "end": 45.341,
+  "subtitle": "오차가 가파를수록\n걸음마다 크게 곱해지고,",
+  "claims": [
+   "prop1.counterexample",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5c",
+  "start": 45.433,
+  "end": 48.306,
+  "subtitle": "η(m+1)이 2를 넘으면\n발산합니다.",
+  "claims": [
+   "prop1.counterexample",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5d",
+  "start": 48.4,
+  "end": 50.331,
+  "subtitle": "보폭을 줄여도\n그런 오차는 늘 있습니다.",
+  "claims": [
+   "prop1.divergence",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6a",
+  "start": 50.731,
+  "end": 52.817,
+  "subtitle": "해법은 업데이트를\n잔차 크기로 나누는 것.",
+  "claims": [
+   "method.normalized_update",
+   "derived.unweighted_step"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6b",
+  "start": 52.931,
+  "end": 55.444,
+  "subtitle": "p가 0.5 이상이면\n보폭이 늘 유계입니다.",
+  "claims": [
+   "thm4.bounded"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6c",
+  "start": 55.531,
+  "end": 57.249,
+  "subtitle": "p가 1이면 해 근처로\n수렴합니다.",
+  "claims": [
+   "thm4.neighborhood"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6d",
+  "start": 57.364,
+  "end": 59.37,
+  "subtitle": "그럼 실제로는\np가 얼마일 때 좋을까요?",
+  "claims": [
+   "tension.sweet_spot"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7a",
+  "start": 59.763,
+  "end": 62.755,
+  "subtitle": "CIFAR-10, 한 번 생성 FID.\n낮을수록 좋습니다.",
+  "claims": [
+   "res.cifar.nfe1.p0.00"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7b",
+  "start": 62.863,
+  "end": 67.128,
+  "subtitle": "p 0에서 10.62,\np 0.75에서 5.46로 가장 낮고,",
+  "claims": [
+   "res.cifar.nfe1.p0.00",
+   "res.cifar.nfe1.p0.75"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7c",
+  "start": 67.23,
+  "end": 69.993,
+  "subtitle": "p 1.5에서는 6.32로\n다시 나빠집니다.",
+  "claims": [
+   "res.cifar.nfe1.p1.50",
+   "tension.sweet_spot"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8a",
+  "start": 70.396,
+  "end": 73.778,
+  "subtitle": "이상적 흐름에선 stop gradient로도\n진짜 맵에 수렴합니다.",
+  "claims": [
+   "thm1.convergence",
+   "tension.sg_converges_anyway"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8b",
+  "start": 73.896,
+  "end": 75.643,
+  "subtitle": "유한한 보폭에선\n발산할 수 있고,",
+  "claims": [
+   "prop1.divergence"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8c",
+  "start": 75.763,
+  "end": 78.632,
+  "subtitle": "정규화 세기 p가 적당할 때\n성능이 가장 좋습니다.",
+  "claims": [
+   "tension.sweet_spot",
+   "res.cifar.nfe1.p0.75"
+  ]
+ }
+]

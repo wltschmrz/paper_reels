@@ -1,0 +1,40 @@
+{"job_id": "flowmap-v2-openai", "stage": "storyboard", "progress": 0.13, "status": "running", "wall_time": 1792293256.341607}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "storyboard: Model response incomplete; usage saved; stopping without automatic retry", "est_cost_usd": 0.1363, "wall_time": 1792293352.8703399}
+{"job_id": "flowmap-v2-openai", "stage": "storyboard", "progress": 0.13, "status": "running", "wall_time": 1792293404.1748877}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "storyboard: Model response incomplete; usage saved; stopping without automatic retry", "est_cost_usd": 0.3793, "wall_time": 1792293565.732667}
+{"job_id": "flowmap-v2-openai", "stage": "storyboard", "progress": 0.13, "status": "running", "wall_time": 1792293602.660446}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "storyboard: storyboard: no valid output after 3 tries", "est_cost_usd": 0.6105, "wall_time": 1792293739.7741735}
+{"job_id": "flowmap-v2-openai", "stage": "narration", "progress": 0.23, "status": "running", "wall_time": 1792293814.7199688}
+{"job_id": "flowmap-v2-openai", "stage": "narration", "progress": 0.4, "sec": 127.2, "wall_time": 1792293941.879175}
+{"job_id": "flowmap-v2-openai", "stage": "visual_code", "progress": 0.4, "status": "running", "wall_time": 1792293941.8800724}
+{"job_id": "flowmap-v2-openai", "stage": "visual_code", "progress": 0.55, "sec": 201.1, "wall_time": 1792294143.0077183}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792294143.0089586}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.75, "sec": 817.1, "wall_time": 1792294960.0707707}
+{"job_id": "flowmap-v2-openai", "stage": "final_render", "progress": 0.75, "status": "running", "wall_time": 1792294960.0787039}
+{"job_id": "flowmap-v2-openai", "stage": "final_render", "progress": 0.9, "sec": 421.1, "wall_time": 1792295381.2179132}
+{"job_id": "flowmap-v2-openai", "stage": "compose", "progress": 0.9, "status": "running", "wall_time": 1792295381.2184184}
+{"job_id": "flowmap-v2-openai", "stage": "compose", "progress": 0.95, "sec": 20.8, "wall_time": 1792295401.9706335}
+{"job_id": "flowmap-v2-openai", "stage": "validate", "progress": 0.95, "status": "running", "wall_time": 1792295401.9712555}
+{"job_id": "flowmap-v2-openai", "stage": "validate", "progress": 1.0, "sec": 39.1, "wall_time": 1792295441.0266092}
+{"job_id": "flowmap-v2-openai", "status": "needs_review", "error": null, "est_cost_usd": 1.7034, "wall_time": 1792295441.034392}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792295580.7917945}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "preview_qa: Editorial layout recheck: ['S1', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8']", "est_cost_usd": 1.7851, "wall_time": 1792295786.5079596}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792295868.9419997}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "preview_qa: Editorial layout recheck: ['S1', 'S3', 'S4', 'S5', 'S6', 'S7']", "est_cost_usd": 1.8915, "wall_time": 1792296062.7813478}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792296102.1411319}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "preview_qa: Editorial layout recheck: ['S1', 'S6', 'S7']", "est_cost_usd": 1.9619, "wall_time": 1792296254.2359743}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792296284.5413265}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "preview_qa: Editorial layout recheck: ['S1', 'S6', 'S7']", "est_cost_usd": 1.9943, "wall_time": 1792296361.661579}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792296399.6148684}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "preview_qa: Editorial layout recheck: ['S1']", "est_cost_usd": 2.032, "wall_time": 1792296477.4178097}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792296536.854174}
+{"job_id": "flowmap-v2-openai", "status": "failed", "error": "preview_qa: Editorial layout recheck: ['S1']", "est_cost_usd": 2.0439, "wall_time": 1792296556.8341343}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792296614.8860111}
+{"job_id": "flowmap-v2-openai", "stage": "preview_qa", "progress": 0.75, "sec": 23.4, "wall_time": 1792296638.2365646}
+{"job_id": "flowmap-v2-openai", "stage": "final_render", "progress": 0.75, "status": "running", "wall_time": 1792296638.244599}
+{"job_id": "flowmap-v2-openai", "stage": "final_render", "progress": 0.9, "sec": 184.1, "wall_time": 1792296822.3618965}
+{"job_id": "flowmap-v2-openai", "stage": "compose", "progress": 0.9, "status": "running", "wall_time": 1792296822.3624609}
+{"job_id": "flowmap-v2-openai", "stage": "compose", "progress": 0.95, "sec": 21.3, "wall_time": 1792296843.639973}
+{"job_id": "flowmap-v2-openai", "stage": "validate", "progress": 0.95, "status": "running", "wall_time": 1792296843.6407857}
+{"job_id": "flowmap-v2-openai", "stage": "validate", "progress": 1.0, "sec": 21.4, "wall_time": 1792296865.035167}
+{"job_id": "flowmap-v2-openai", "status": "published", "error": null, "est_cost_usd": 2.1159, "wall_time": 1792296865.0426903}

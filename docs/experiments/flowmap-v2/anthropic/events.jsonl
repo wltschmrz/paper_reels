@@ -1,0 +1,31 @@
+{"job_id": "flowmap-v2-anthropic", "stage": "storyboard", "progress": 0.13, "status": "running", "wall_time": 1792293357.3266053}
+{"job_id": "flowmap-v2-anthropic", "status": "failed", "error": "storyboard: Model response incomplete; usage saved; stopping without automatic retry", "est_cost_usd": 0.2113, "wall_time": 1792293429.7560518}
+{"job_id": "flowmap-v2-anthropic", "stage": "storyboard", "progress": 0.13, "status": "running", "wall_time": 1792293467.8133488}
+{"job_id": "flowmap-v2-anthropic", "status": "failed", "error": "storyboard: Request timed out or interrupted. This could be due to a network timeout, dropped connection, or request cancellation. See https://docs.anthropic.com/en/api/errors#long-requests for more details.", "est_cost_usd": 0.2113, "wall_time": 1792293656.6688375}
+{"job_id": "flowmap-v2-anthropic", "stage": "storyboard", "progress": 0.13, "status": "running", "wall_time": 1792293708.1902077}
+{"job_id": "flowmap-v2-anthropic", "stage": "storyboard", "progress": 0.23, "sec": 73.9, "wall_time": 1792293782.0510378}
+{"job_id": "flowmap-v2-anthropic", "stage": "narration", "progress": 0.23, "status": "running", "wall_time": 1792293782.0575213}
+{"job_id": "flowmap-v2-anthropic", "stage": "narration", "progress": 0.4, "sec": 92.5, "wall_time": 1792293874.5531185}
+{"job_id": "flowmap-v2-anthropic", "stage": "visual_code", "progress": 0.4, "status": "running", "wall_time": 1792293874.5544102}
+{"job_id": "flowmap-v2-anthropic", "stage": "visual_code", "progress": 0.55, "sec": 294.4, "wall_time": 1792294168.9188743}
+{"job_id": "flowmap-v2-anthropic", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792294168.9232423}
+{"job_id": "flowmap-v2-anthropic", "stage": "preview_qa", "progress": 0.75, "sec": 779.2, "wall_time": 1792294948.0959778}
+{"job_id": "flowmap-v2-anthropic", "stage": "final_render", "progress": 0.75, "status": "running", "wall_time": 1792294948.1036062}
+{"job_id": "flowmap-v2-anthropic", "stage": "final_render", "progress": 0.9, "sec": 403.4, "wall_time": 1792295351.5103931}
+{"job_id": "flowmap-v2-anthropic", "stage": "compose", "progress": 0.9, "status": "running", "wall_time": 1792295351.5109181}
+{"job_id": "flowmap-v2-anthropic", "stage": "compose", "progress": 0.95, "sec": 25.1, "wall_time": 1792295376.644148}
+{"job_id": "flowmap-v2-anthropic", "stage": "validate", "progress": 0.95, "status": "running", "wall_time": 1792295376.6446986}
+{"job_id": "flowmap-v2-anthropic", "stage": "validate", "progress": 1.0, "sec": 33.4, "wall_time": 1792295410.0418754}
+{"job_id": "flowmap-v2-anthropic", "status": "needs_review", "error": null, "est_cost_usd": 2.1854, "wall_time": 1792295410.050251}
+{"job_id": "flowmap-v2-anthropic", "stage": "preview_qa", "progress": 0.55, "status": "running", "wall_time": 1792295597.6068697}
+{"job_id": "flowmap-v2-anthropic", "stage": "preview_qa", "progress": 0.75, "sec": 29.8, "wall_time": 1792295627.3655386}
+{"job_id": "flowmap-v2-anthropic", "stage": "final_render", "progress": 0.75, "status": "running", "wall_time": 1792295627.3737364}
+{"job_id": "flowmap-v2-anthropic", "stage": "final_render", "progress": 0.9, "sec": 18.0, "wall_time": 1792295645.4130158}
+{"job_id": "flowmap-v2-anthropic", "stage": "compose", "progress": 0.9, "status": "running", "wall_time": 1792295645.4137676}
+{"job_id": "flowmap-v2-anthropic", "stage": "compose", "progress": 0.95, "sec": 21.6, "wall_time": 1792295667.0157983}
+{"job_id": "flowmap-v2-anthropic", "stage": "validate", "progress": 0.95, "status": "running", "wall_time": 1792295667.0165222}
+{"job_id": "flowmap-v2-anthropic", "stage": "validate", "progress": 1.0, "sec": 29.7, "wall_time": 1792295696.6685174}
+{"job_id": "flowmap-v2-anthropic", "status": "needs_review", "error": null, "est_cost_usd": 2.2672, "wall_time": 1792295696.6764386}
+{"job_id": "flowmap-v2-anthropic", "stage": "validate", "progress": 0.95, "status": "running", "wall_time": 1792295759.239268}
+{"job_id": "flowmap-v2-anthropic", "stage": "validate", "progress": 1.0, "sec": 30.2, "wall_time": 1792295789.4806283}
+{"job_id": "flowmap-v2-anthropic", "status": "published", "error": null, "est_cost_usd": 2.3393, "wall_time": 1792295789.4883363}

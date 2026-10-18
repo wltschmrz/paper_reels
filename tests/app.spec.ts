@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import shorts from "../src/data/shorts.json" with { type: "json" };
 test("research discovery, persistence, simulation, evaluation and collections", async ({
   page,
 }) => {
@@ -151,7 +152,7 @@ test("seeded thumbnail opens discussion and persists independent feedback", asyn
     .locator("nav")
     .getByRole("button", { name: "Paper Shorts", exact: true })
     .click();
-  await expect(page.locator(".short-tile")).toHaveCount(15);
+  await expect(page.locator(".short-tile")).toHaveCount(shorts.length);
   await page.screenshot({ path: "test-results/sample-shorts.png" });
   await page
     .locator(".short-tile")
@@ -252,7 +253,7 @@ test("both budgeted Drifting baselines play under their source paper", async ({
       .getByRole("button", { name: "Paper Shorts", exact: true })
       .click();
     await page
-      .locator(".short-tile")
+      .locator('[data-paper-id="2602.04770"] .short-tile')
       .filter({ hasText: `@${creator}` })
       .click();
     const video = page.locator("video");
@@ -276,24 +277,95 @@ test("both budgeted Drifting baselines play under their source paper", async ({
   }
 });
 
-test("abstract card opens only that paper’s shorts and preserves search on return", async ({
+test("paper flips inline without hiding other papers and restores abstract", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByLabel("논문 검색").fill("2602.04770");
-  await page
+  const card = page.locator('[data-paper-id="2602.04770"]');
+  const other = page.locator('[data-paper-id="2610.20674"]');
+  await card
     .getByRole("button", {
       name: "Generative Modeling via Drifting 쇼츠 버전 보기",
       exact: true,
     })
     .click();
-  await expect(page.locator(".paper-card")).toHaveCount(1);
-  await expect(page.locator(".paper-card")).toContainText("@you_openai");
-  await expect(page.locator(".paper-card")).toContainText("@you_anthropic");
+  await expect(page.locator(".paper-card")).toHaveCount(21);
+  await expect(card).toHaveAttribute("data-mode", "shorts");
+  await expect(other).toHaveAttribute("data-mode", "papers");
+  await expect(card).toContainText("@you_openai");
   await expect(page.locator("video")).toHaveCount(0);
-  await page
-    .getByRole("button", { name: "초록 목록으로", exact: true })
+  await card
+    .getByRole("button", {
+      name: "Generative Modeling via Drifting 초록 보기",
+      exact: true,
+    })
     .click();
-  await expect(page.getByLabel("논문 검색")).toHaveValue("2602.04770");
-  await expect(page.locator(".abstract")).toBeVisible();
+  await expect(card.locator(".abstract")).toBeVisible();
+});
+
+test("shorts grid fits viewport and omits creation tile when row is full", async ({
+  page,
+}) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const card = page.locator('[data-paper-id="2602.04770"]');
+    await card
+      .getByRole("button", {
+        name: "Generative Modeling via Drifting 쇼츠 버전 보기",
+        exact: true,
+      })
+      .click();
+    const row = card.locator(".shorts-row");
+    await expect(row).toBeVisible();
+    await expect
+      .poll(async () =>
+        page.evaluate(() => document.documentElement.scrollWidth),
+      )
+      .toBeLessThanOrEqual(width);
+    const columns = await row.evaluate(
+      (el) => getComputedStyle(el).gridTemplateColumns.split(" ").length,
+    );
+    const count = await row.locator(".short-tile").count();
+    await expect(row.locator(".create-tile")).toHaveCount(
+      count % columns === 0 ? 0 : 1,
+    );
+    await card.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `test-results/inline-${width}.png` });
+  }
+});
+
+test("both Flow Map v2 videos play alongside the original paper", async ({
+  page,
+}) => {
+  for (const provider of ["openai", "anthropic"]) {
+    const short = shorts.find((s) => s.id === `flowmap-v2-${provider}`);
+    expect(short).toBeDefined();
+    await page.goto("/");
+    const card = page.locator('[data-paper-id="2610.20674"]');
+    await card.getByRole("button", { name: /쇼츠 버전 보기/ }).click();
+    await expect(page.locator(".paper-card")).toHaveCount(21);
+    await card
+      .locator(".short-tile")
+      .filter({ hasText: `@you_${provider}_v2` })
+      .click();
+    const video = page.locator("video");
+    await expect
+      .poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState))
+      .toBeGreaterThanOrEqual(1);
+    expect(
+      await video.evaluate((v: HTMLVideoElement) => v.duration),
+    ).toBeCloseTo(short!.duration, 0);
+    await video.evaluate((v: HTMLVideoElement) => {
+      v.muted = true;
+      return v.play();
+    });
+    await expect
+      .poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime))
+      .toBeGreaterThan(0.1);
+    await video.evaluate((v: HTMLVideoElement) => v.pause());
+    await expect(page.locator(".reel-caption")).toContainText(
+      "On the Stability and Convergence of Flow Map Training",
+    );
+  }
 });

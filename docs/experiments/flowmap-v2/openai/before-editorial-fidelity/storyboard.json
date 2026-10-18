@@ -1,0 +1,397 @@
+{
+  "paper_id": "arxiv:2610.20674",
+  "preset_id": "reference_v2_openai",
+  "language": "ko",
+  "title": "왜 stop gradient가 통할까: MeanFlow의 수렴과 실패",
+  "hook_title": "멈춘 기울기, 왜 통할까",
+  "render": {
+    "subtitles": true,
+    "term_header": true,
+    "source_line": true,
+    "theme": "dark"
+  },
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "section": "hook",
+      "header": {
+        "definition": "flow map = 한 번에 종점까지 보내는 생성 함수",
+        "source": "출처: §1, Eq. (3)"
+      },
+      "visual": {
+        "type": "title_card",
+        "description": "왼쪽은 노이즈에서 그림까지 작은 화살표 수백 개, 오른쪽은 한 번의 굵은 노란 화살표 하나. 가운데에 'stop gradient, 왜 통할까?' 질문.",
+        "moving": "",
+        "reuse_frame_from": null,
+        "fact_refs": [
+          "bg.sampling_cost",
+          "def.flowmap",
+          "prob.tricks_unexplained"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s1a",
+          "subtitle": "왜 멈춘 기울기가\n정답으로 갈까요?",
+          "tts_text": "왜 멈춘 기울기가 정답으로 갈까요?",
+          "claims": []
+        },
+        {
+          "line_id": "s1b",
+          "subtitle": "보통은 수백 번 적분하지만,\nflow map은 한 번입니다.",
+          "tts_text": "보통은 수백 번 적분하지만, 플로우 맵은 한 번입니다.",
+          "claims": [
+            "bg.sampling_cost",
+            "def.flowmap"
+          ]
+        },
+        {
+          "line_id": "s1c",
+          "subtitle": "그 핵심 트릭 둘의 효과는\n분석이 없었습니다.",
+          "tts_text": "그 핵심 트릭 둘의 효과는 분석이 없었습니다.",
+          "claims": [
+            "prob.tricks_unexplained"
+          ]
+        }
+      ],
+      "min_dwell_sec": 8.0
+    },
+    {
+      "scene_id": "S3",
+      "section": "problem",
+      "header": {
+        "definition": "stop gradient = 값은 쓰고, 그 안쪽 기울기는 영으로 둠",
+        "source": "출처: §2, Eq. (5)"
+      },
+      "visual": {
+        "type": "equation_build",
+        "description": "MeanFlow 목표식의 타깃 u_tgt를 단계별로 쌓는다. sg 박스 안을 회색으로, 바깥 업데이트 화살표는 파란색. 오른쪽에 '거울 속 정답지' 비유 카드 하나와 '정답지 = sg 타깃' 매핑.",
+        "moving": "equation reveal stage from 0 to 3",
+        "reuse_frame_from": null,
+        "fact_refs": [
+          "def.stopgrad",
+          "method.meanflow_loss",
+          "prob.no_guarantee"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s3a",
+          "subtitle": "stop gradient는\n값만 남깁니다.",
+          "tts_text": "스톱 그래디언트는 값만 남깁니다.",
+          "claims": [
+            "def.stopgrad"
+          ]
+        },
+        {
+          "line_id": "s3b",
+          "subtitle": "MeanFlow는 그 값을 넣어\n자기 타깃을 만듭니다.",
+          "tts_text": "민플로우는 그 값을 넣어 자기 타깃을 만듭니다.",
+          "claims": [
+            "method.meanflow_loss"
+          ]
+        },
+        {
+          "line_id": "s3c",
+          "subtitle": "거울 속 정답지를 보는 꼴인데,\n거울 = sg 타깃입니다.",
+          "tts_text": "거울 속 정답지를 보는 꼴인데, 거울은 에스 지 타깃입니다.",
+          "claims": [
+            "method.meanflow_loss",
+            "def.stopgrad"
+          ]
+        },
+        {
+          "line_id": "s3d",
+          "subtitle": "그래서 손실이 꼭 줄지 않고,\n영으로도 안 갑니다.",
+          "tts_text": "그래서 손실이 꼭 줄지 않고, 영으로도 안 갑니다.",
+          "claims": [
+            "prob.no_guarantee"
+          ]
+        }
+      ],
+      "min_dwell_sec": 10.0
+    },
+    {
+      "scene_id": "S4",
+      "section": "theory",
+      "header": {
+        "definition": "functional gradient flow = 걸음을 무한히 잘게 쪼갠 이상화 학습",
+        "source": "출처: Theorem 1, Eq. (13), Eq. (14), Eq. (15)"
+      },
+      "visual": {
+        "type": "param_sweep",
+        "description": "S2의 같은 프레임 재사용. 최적화 시간 τ가 커질수록 MeanFlow는 앞쪽 구간이 참 경로로 바뀌고, 비교 카드로 Lagrangian은 뒤쪽 구간이 바뀐다. 한쪽에 오차 막대가 지수적으로 줄어드는 작은 인셋.",
+        "moving": "optimization time τ from 0 to 4.5",
+        "reuse_frame_from": null,
+        "fact_refs": [
+          "thm1.convergence",
+          "thm1.mf_closed_form",
+          "thm1.lag_closed_form",
+          "thm2.rate",
+          "tension.sg_converges_anyway",
+          "setup.gauss_toy"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s4a",
+          "subtitle": "이상화된 gradient flow에선,\n놀랍게도 수렴합니다.",
+          "tts_text": "이상화된 그래디언트 플로우에선, 놀랍게도 수렴합니다.",
+          "claims": [
+            "thm1.convergence",
+            "tension.sg_converges_anyway"
+          ]
+        },
+        {
+          "line_id": "s4b",
+          "subtitle": "MeanFlow는 앞에서부터\n참 경로로 바뀝니다.",
+          "tts_text": "민플로우는 앞에서부터 참 경로로 바뀝니다.",
+          "claims": [
+            "thm1.mf_closed_form"
+          ]
+        },
+        {
+          "line_id": "s4c",
+          "subtitle": "Lagrangian은 반대로,\n뒤에서부터 바뀌죠.",
+          "tts_text": "라그랑지안은 반대로, 뒤에서부터 바뀌죠.",
+          "claims": [
+            "thm1.lag_closed_form"
+          ]
+        },
+        {
+          "line_id": "s4d",
+          "subtitle": "그리고 MeanFlow 오차는\n지수적으로 줄어듭니다.",
+          "tts_text": "그리고 민플로우 오차는 지수적으로 줄어듭니다.",
+          "claims": [
+            "thm2.rate"
+          ]
+        }
+      ],
+      "min_dwell_sec": 11.0
+    },
+    {
+      "scene_id": "S5",
+      "section": "problem",
+      "header": {
+        "definition": "gradient descent = 유한한 학습률 η로 끊어 가는 실제 업데이트",
+        "source": "출처: Proposition 1, Appendix B.4"
+      },
+      "visual": {
+        "type": "function_plot",
+        "description": "오차 e_k와 갱신식 e_(k+1) = (1-η(m+1))e_k. m이 커질수록 배율이 음수 큰 값으로 바뀌며 진동 폭발. η는 고정, 두 곡선만 비교.",
+        "moving": "gradient-descent step k from 0 to 8",
+        "reuse_frame_from": null,
+        "fact_refs": [
+          "prop1.divergence",
+          "prop1.counterexample",
+          "tension.flow_vs_descent"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s5a",
+          "subtitle": "하지만 실제는\n유한한 걸음입니다.",
+          "tts_text": "하지만 실제는 유한한 걸음입니다.",
+          "claims": [
+            "tension.flow_vs_descent"
+          ]
+        },
+        {
+          "line_id": "s5b",
+          "subtitle": "그때는 gradient flow와 달리,\n발산 반례가 있습니다.",
+          "tts_text": "그때는 그래디언트 플로우와 달리, 발산 반례가 있습니다.",
+          "claims": [
+            "prop1.divergence",
+            "tension.flow_vs_descent"
+          ]
+        },
+        {
+          "line_id": "s5c",
+          "subtitle": "오차 ε 곱하기\n(t−s)^m 형태에선,",
+          "tts_text": "오차를 작은 계수와 시간 간격의 거듭제곱을 곱한 형태로 두면,",
+          "claims": [
+            "prop1.counterexample"
+          ]
+        },
+        {
+          "line_id": "s5d",
+          "subtitle": "매 걸음 배율이\n일 빼기 η(m+1)입니다.",
+          "tts_text": "매 걸음 배율이 일 빼기 에타 곱하기 엠 더하기 일입니다.",
+          "claims": [
+            "prop1.counterexample"
+          ]
+        }
+      ],
+      "min_dwell_sec": 10.0
+    },
+    {
+      "scene_id": "S6",
+      "section": "method",
+      "header": {
+        "definition": "normalized update = 잔차를 크기별로 나눠 과한 걸음을 누르는 갱신",
+        "source": "출처: Eq. (20), Theorem 4, §3.3"
+      },
+      "visual": {
+        "type": "param_sweep",
+        "description": "같은 오차 곡선 위에 정규화 배율을 얹는다. p가 커질수록 큰 잔차 화살표가 짧아진다. 화면 아래 p = 0.5 경계선, 오른쪽엔 p = 1 메모.",
+        "moving": "normalization exponent p from 0 to 1.5",
+        "reuse_frame_from": "S5",
+        "fact_refs": [
+          "method.normalized_update",
+          "thm4.bounded",
+          "thm4.neighborhood",
+          "res.meanflow_p1_imagenet"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s6a",
+          "subtitle": "해법은 잔차를\n정규화하는 갱신입니다.",
+          "tts_text": "해법은 잔차를 정규화하는 갱신입니다.",
+          "claims": [
+            "method.normalized_update"
+          ]
+        },
+        {
+          "line_id": "s6b",
+          "subtitle": "p가 영 점 오 이상이면,\n업데이트 크기가 bounded입니다.",
+          "tts_text": "피가 영 점 오 이상이면, 업데이트 크기가 바운디드입니다.",
+          "claims": [
+            "thm4.bounded"
+          ]
+        },
+        {
+          "line_id": "s6c",
+          "subtitle": "특히 p가 일이면,\n해 근방까지 수렴합니다.",
+          "tts_text": "특히 피가 일이면, 해 근방까지 수렴합니다.",
+          "claims": [
+            "thm4.neighborhood"
+          ]
+        },
+        {
+          "line_id": "s6d",
+          "subtitle": "원래 MeanFlow도\nImageNet에선 p 일이었습니다.",
+          "tts_text": "원래 민플로우도 이미지넷에선 피 일이었습니다.",
+          "claims": [
+            "res.meanflow_p1_imagenet"
+          ]
+        }
+      ],
+      "min_dwell_sec": 10.0
+    },
+    {
+      "scene_id": "S7",
+      "section": "result",
+      "header": {
+        "definition": "FID = 생성 분포와 실제 분포의 거리, 낮을수록 좋음",
+        "source": "출처: Table 1"
+      },
+      "visual": {
+        "type": "bar_chart",
+        "description": "CIFAR-10, NFE 1, MeanFlow loss, mean of 3 runs, 200K steps 막대 일곱 개. p 영, 영 점 이오, 영 점 오, 영 점 칠오, 일, 일 점 이오, 일 점 오. 각 막대 위에 10.62, 6.81, 5.51, 5.46, 5.61, 5.93, 6.32 표기. p=0.75 강조.",
+        "moving": "normalization exponent p from 0.00 to 1.50",
+        "reuse_frame_from": null,
+        "fact_refs": [
+          "res.cifar.nfe1.p0.00",
+          "res.cifar.nfe1.p0.25",
+          "res.cifar.nfe1.p0.50",
+          "res.cifar.nfe1.p0.75",
+          "res.cifar.nfe1.p1.00",
+          "res.cifar.nfe1.p1.25",
+          "res.cifar.nfe1.p1.50",
+          "tension.sweet_spot"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s7a",
+          "subtitle": "실험도 sweet spot을\n보여 줍니다.",
+          "tts_text": "실험도 스위트 스폿을 보여 줍니다.",
+          "claims": [
+            "tension.sweet_spot"
+          ]
+        },
+        {
+          "line_id": "s7b",
+          "subtitle": "CIFAR-10, NFE 일에서\np 영은 FID 십 점 육이입니다.",
+          "tts_text": "시파 텐, 엔에프이 일에서 피 영은 에프아이디 십 점 육이입니다.",
+          "claims": [
+            "res.cifar.nfe1.p0.00"
+          ]
+        },
+        {
+          "line_id": "s7c",
+          "subtitle": "같은 조건에서 p 영 점 칠오는\nFID 오 점 사육입니다.",
+          "tts_text": "같은 조건에서, 피 영 점 칠 오의 점수는 오 점 사 육입니다.",
+          "claims": [
+            "res.cifar.nfe1.p0.75"
+          ]
+        },
+        {
+          "line_id": "s7d",
+          "subtitle": "그리고 p 일 점 오는\nFID 육 점 삼이로 다시 오릅니다.",
+          "tts_text": "피가 일 점 오일 때는, 점수가 육 점 삼 이로 다시 높아집니다.",
+          "claims": [
+            "res.cifar.nfe1.p1.50"
+          ]
+        }
+      ],
+      "min_dwell_sec": 10.0
+    },
+    {
+      "scene_id": "S8",
+      "section": "takeaway",
+      "header": {
+        "definition": "idealized setting = 함수 공간의 gradient flow만 다루는 설정",
+        "source": "출처: Theorem 1, Theorem 4, §6 Limitations"
+      },
+      "visual": {
+        "type": "cards",
+        "description": "세 장 카드. 첫째 '왜 통하나'에 gradient flow 수렴. 둘째 '왜 실패하나'에 finite step 발산. 셋째 '무엇이 고치나'에 normalized update와 p 범위. 하단에 limitation 한 줄.",
+        "moving": "",
+        "reuse_frame_from": null,
+        "fact_refs": [
+          "thm1.convergence",
+          "prop1.divergence",
+          "thm4.bounded",
+          "lim.functional_setting"
+        ]
+      },
+      "lines": [
+        {
+          "line_id": "s8a",
+          "subtitle": "답은 이겁니다.\n이상화된 flow에선 통합니다.",
+          "tts_text": "답은 이겁니다. 이상화된 플로우에선 통합니다.",
+          "claims": [
+            "thm1.convergence"
+          ]
+        },
+        {
+          "line_id": "s8b",
+          "subtitle": "하지만 유한한 걸음에선\n그 보장이 깨집니다.",
+          "tts_text": "하지만 유한한 걸음에선 그 보장이 깨집니다.",
+          "claims": [
+            "prop1.divergence"
+          ]
+        },
+        {
+          "line_id": "s8c",
+          "subtitle": "그래서 정규화와 p 범위가\n핵심입니다.",
+          "tts_text": "그래서 정규화와 피 범위가 핵심입니다.",
+          "claims": [
+            "thm4.bounded"
+          ]
+        },
+        {
+          "line_id": "s8d",
+          "subtitle": "단, 이론은 함수 공간 설정이고\n신경망 확률성은 별도입니다.",
+          "tts_text": "단, 이론은 함수 공간 설정이고 신경망 확률성은 별도입니다.",
+          "claims": [
+            "lim.functional_setting"
+          ]
+        }
+      ],
+      "min_dwell_sec": 9.0
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+ "issues": {
+  "S1": [
+   {
+    "scene_id": "S1",
+    "line_id": "s1a",
+    "severity": "major",
+    "problem": "상단의 정의 문구(\"flow map = 한 번에 종점까지 보내는 생성 함수\")와 출처 텍스트가 너무 작아서 휴대폰 화면에서 읽기 어렵습니다.",
+    "fix_hint": "상단 정의와 출처 폰트를 키우세요. 예: 정의는 현재 대비 약 1.4~1.6배, 출처는 최소 본문 보조텍스트 수준(예: 18~22px 상당)으로 확대하고 상단 여백은 유지하세요."
+   }
+  ],
+  "S3": [
+   {
+    "scene_id": "S3",
+    "line_id": "s3c",
+    "severity": "major",
+    "problem": "text '\\mathrm{sg}\\!\\left( u^{MF}_{\\mathrm{tgt}' overlaps text '비유'",
+    "fix_hint": ""
+   }
+  ],
+  "S5": [
+   {
+    "scene_id": "S5",
+    "line_id": "s5a",
+    "severity": "major",
+    "problem": "The top header/source text and the small gray footer text are very tiny relative to the vertical frame and are likely unreadable on a phone.",
+    "fix_hint": "Increase header and source/footer text size by about 25–40%, or shorten the header/source and move them into a larger two-line block near the top."
+   },
+   {
+    "scene_id": "S5",
+    "line_id": "s5d",
+    "severity": "major",
+    "problem": "The yellow note under the update equation is too small to read on a phone.",
+    "fix_hint": "Enlarge the yellow annotation to at least the size of the main equation labels, or place it on its own line directly below the equation with more spacing."
+   }
+  ],
+  "S6": [
+   {
+    "scene_id": "S6",
+    "line_id": "s6a",
+    "severity": "major",
+    "problem": "text '업데이트크기' overlaps text 'DecimalNumber'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S6",
+    "line_id": "s6b",
+    "severity": "major",
+    "problem": "text '업데이트크기' overlaps text 'DecimalNumber'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S6",
+    "line_id": "s6c",
+    "severity": "major",
+    "problem": "text '업데이트크기' overlaps text 'DecimalNumber'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S6",
+    "line_id": "s6d",
+    "severity": "major",
+    "problem": "text '업데이트크기' overlaps text 'DecimalNumber'",
+    "fix_hint": ""
+   }
+  ],
+  "S8": [
+   {
+    "scene_id": "S8",
+    "line_id": "s8a",
+    "severity": "major",
+    "problem": "The card contents are too small to read on a phone. In all sampled frames, the theorem/proposition labels and the multi-line text inside each of the three cards are tiny against the full-screen layout.",
+    "fix_hint": "Enlarge the three cards substantially (for example, make each card about 25–30% wider/taller), reduce the amount of text inside each card to 2–3 short lines, and increase card text size to at least ~16–18 px equivalent in the 1080x1920 design."
+   },
+   {
+    "scene_id": "S8",
+    "line_id": "s8d",
+    "severity": "major",
+    "problem": "The small limitation note under the cards is too small to read on a phone, and the top definition/source header is also very tiny.",
+    "fix_hint": "Increase the bottom limitation line and the top header/source text by about 1.5–2x, or split the top definition and source into fewer, larger lines with more spacing."
+   }
+  ],
+  "S4": [
+   {
+    "scene_id": "S4",
+    "line_id": "s4a",
+    "severity": "major",
+    "problem": "text 'learnedmap' overlaps text '정리1:pointwise로참flowmap에수렴'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S4",
+    "line_id": "s4b",
+    "severity": "major",
+    "problem": "text 'learnedmap' overlaps text '정리1:pointwise로참flowmap에수렴'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S4",
+    "line_id": "s4c",
+    "severity": "major",
+    "problem": "text 'learnedmap' overlaps text '정리1:pointwise로참flowmap에수렴'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S4",
+    "line_id": "s4d",
+    "severity": "major",
+    "problem": "text 'learnedmap' overlaps text '정리1:pointwise로참flowmap에수렴'",
+    "fix_hint": ""
+   }
+  ],
+  "S7": [
+   {
+    "scene_id": "S7",
+    "line_id": "s7a",
+    "severity": "major",
+    "problem": "text 'CIFAR-10·NFE1·FIDMeanFlowloss·meanof3run' overlaps text 'sweetspot'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S7",
+    "line_id": "s7b",
+    "severity": "major",
+    "problem": "text 'CIFAR-10·NFE1·FIDMeanFlowloss·meanof3run' overlaps text 'sweetspot'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S7",
+    "line_id": "s7c",
+    "severity": "major",
+    "problem": "text 'CIFAR-10·NFE1·FIDMeanFlowloss·meanof3run' overlaps text 'sweetspot'",
+    "fix_hint": ""
+   },
+   {
+    "scene_id": "S7",
+    "line_id": "s7d",
+    "severity": "major",
+    "problem": "text 'CIFAR-10·NFE1·FIDMeanFlowloss·meanof3run' overlaps text 'sweetspot'",
+    "fix_hint": ""
+   }
+  ]
+ },
+ "vision_calls": {
+  "S1": 2,
+  "S3": 1,
+  "S4": 0,
+  "S5": 2,
+  "S6": 1,
+  "S7": 1,
+  "S8": 2
+ },
+ "unresolved": [
+  "S1",
+  "S3",
+  "S4",
+  "S5",
+  "S6",
+  "S7",
+  "S8"
+ ]
+}

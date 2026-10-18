@@ -193,7 +193,8 @@ def test_openai_adapter_uses_responses_and_records_tokens(monkeypatch):
         captured["store"] is False
         and captured["input"][0]["content"][1]["type"] == "input_image"
     )
-    assert usage == {"input_tokens": 10, "output_tokens": 2}
+    assert usage["input_tokens"] == 10 and usage["output_tokens"] == 2
+    assert usage["cache_read_tokens"] == 0 and not usage["incomplete"]
 
 
 def test_resume_does_not_publish_failed_validation(tmp_path, preset, monkeypatch):

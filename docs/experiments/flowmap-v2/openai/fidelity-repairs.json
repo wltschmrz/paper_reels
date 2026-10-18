@@ -1,0 +1,8 @@
+{
+  "new_fact_sources": [
+    "Original paper page 3 (\u00a72), average velocity definition",
+    "Original paper page 18 (B.4), explicit derivative identity"
+  ],
+  "claude_hook": null,
+  "gpt_table_animation": "Display only actual Table 1 p conditions, no interpolated experimental labels"
+}

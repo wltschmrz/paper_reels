@@ -1,0 +1,602 @@
+{
+  "limit_usd": 3.5,
+  "calls": [
+    {
+      "stage": "storyboard",
+      "model": "claude-opus-5-5",
+      "reserved_usd": 0.30126,
+      "status": "returned",
+      "actual_usd": 0.211286,
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 8000,
+        "cache_write_tokens": 10254,
+        "cache_read_tokens": 0,
+        "incomplete": true
+      },
+      "seconds": 67.65
+    },
+    {
+      "stage": "storyboard",
+      "model": "claude-opus-5-5",
+      "reserved_usd": 0.46126,
+      "status": "uncertain"
+    },
+    {
+      "stage": "storyboard",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.782975,
+      "status": "returned",
+      "actual_usd": 0.2049194,
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 8780,
+        "cache_write_tokens": 5672,
+        "cache_read_tokens": 4717,
+        "incomplete": false
+      },
+      "seconds": 70.34
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.33555,
+      "status": "returned",
+      "actual_usd": 0.075437,
+      "usage": {
+        "input_tokens": 2678,
+        "output_tokens": 2358,
+        "cache_write_tokens": 3513,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 18.95
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.35095,
+      "status": "returned",
+      "actual_usd": 0.1538856,
+      "usage": {
+        "input_tokens": 1322,
+        "output_tokens": 6622,
+        "cache_write_tokens": 3091,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 59.11
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.343685,
+      "status": "returned",
+      "actual_usd": 0.11582260000000001,
+      "usage": {
+        "input_tokens": 3715,
+        "output_tokens": 5013,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 44.96
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.354745,
+      "status": "returned",
+      "actual_usd": 0.0963008,
+      "usage": {
+        "input_tokens": 1620,
+        "output_tokens": 4425,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 6604,
+        "incomplete": false
+      },
+      "seconds": 34.33
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.343165,
+      "status": "returned",
+      "actual_usd": 0.0872266,
+      "usage": {
+        "input_tokens": 3626,
+        "output_tokens": 3601,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 26.88
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.339425,
+      "status": "returned",
+      "actual_usd": 0.1002546,
+      "usage": {
+        "input_tokens": 3188,
+        "output_tokens": 4340,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 36.42
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.338595,
+      "status": "returned",
+      "actual_usd": 0.0765586,
+      "usage": {
+        "input_tokens": 3244,
+        "output_tokens": 3144,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 26.72
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.337915,
+      "status": "returned",
+      "actual_usd": 0.09096660000000001,
+      "usage": {
+        "input_tokens": 2911,
+        "output_tokens": 3931,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 35.3
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.33667,
+      "status": "returned",
+      "actual_usd": 0.011004,
+      "usage": {
+        "input_tokens": 1532,
+        "output_tokens": 794,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.46
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.211535,
+      "status": "returned",
+      "actual_usd": 0.013454,
+      "usage": {
+        "input_tokens": 1497,
+        "output_tokens": 1046,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 9.17
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.39576,
+      "status": "returned",
+      "actual_usd": 0.01199,
+      "usage": {
+        "input_tokens": 1510,
+        "output_tokens": 897,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.84
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2448525,
+      "status": "returned",
+      "actual_usd": 0.016024,
+      "usage": {
+        "input_tokens": 1507,
+        "output_tokens": 1301,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 11.58
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2798675,
+      "status": "returned",
+      "actual_usd": 0.016548,
+      "usage": {
+        "input_tokens": 1499,
+        "output_tokens": 1355,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 11.81
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2798425,
+      "status": "returned",
+      "actual_usd": 0.015292,
+      "usage": {
+        "input_tokens": 1596,
+        "output_tokens": 1210,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 9.64
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2602125,
+      "status": "returned",
+      "actual_usd": 0.008332,
+      "usage": {
+        "input_tokens": 1446,
+        "output_tokens": 544,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 5.72
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.351125,
+      "status": "returned",
+      "actual_usd": 0.0671886,
+      "usage": {
+        "input_tokens": 2669,
+        "output_tokens": 2387,
+        "cache_write_tokens": 1614,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 18.85
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.37683,
+      "status": "returned",
+      "actual_usd": 0.1200296,
+      "usage": {
+        "input_tokens": 3963,
+        "output_tokens": 4401,
+        "cache_write_tokens": 3091,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 33.24
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.36959,
+      "status": "returned",
+      "actual_usd": 0.09718360000000001,
+      "usage": {
+        "input_tokens": 3839,
+        "output_tokens": 3410,
+        "cache_write_tokens": 2585,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 24.52
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.38517,
+      "status": "returned",
+      "actual_usd": 0.1046488,
+      "usage": {
+        "input_tokens": 4682,
+        "output_tokens": 4230,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 6604,
+        "incomplete": false
+      },
+      "seconds": 31.95
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.37006,
+      "status": "returned",
+      "actual_usd": 0.0991616,
+      "usage": {
+        "input_tokens": 4031,
+        "output_tokens": 3509,
+        "cache_write_tokens": 2431,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 25.93
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.36327,
+      "status": "returned",
+      "actual_usd": 0.0897936,
+      "usage": {
+        "input_tokens": 3519,
+        "output_tokens": 3247,
+        "cache_write_tokens": 2015,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 24.58
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.35833,
+      "status": "returned",
+      "actual_usd": 0.0810086,
+      "usage": {
+        "input_tokens": 3889,
+        "output_tokens": 2905,
+        "cache_write_tokens": 1330,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 24.88
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2111025,
+      "status": "returned",
+      "actual_usd": 0.010352,
+      "usage": {
+        "input_tokens": 1456,
+        "output_tokens": 744,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.28
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.334235,
+      "status": "returned",
+      "actual_usd": 0.008116,
+      "usage": {
+        "input_tokens": 1618,
+        "output_tokens": 488,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 4.7
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.220905,
+      "status": "returned",
+      "actual_usd": 0.010636,
+      "usage": {
+        "input_tokens": 1583,
+        "output_tokens": 747,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.29
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.418335,
+      "status": "returned",
+      "actual_usd": 0.009842,
+      "usage": {
+        "input_tokens": 1596,
+        "output_tokens": 665,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 6.28
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2452675,
+      "status": "returned",
+      "actual_usd": 0.011546,
+      "usage": {
+        "input_tokens": 1593,
+        "output_tokens": 836,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.75
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.279685,
+      "status": "returned",
+      "actual_usd": 0.01114,
+      "usage": {
+        "input_tokens": 1585,
+        "output_tokens": 797,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 6.86
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2738,
+      "status": "returned",
+      "actual_usd": 0.011784,
+      "usage": {
+        "input_tokens": 1682,
+        "output_tokens": 842,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.67
+    },
+    {
+      "stage": "visual_code",
+      "model": "claude-opus-5-5",
+      "params": {},
+      "reserved_usd": 0.353445,
+      "status": "returned",
+      "actual_usd": 0.0620086,
+      "usage": {
+        "input_tokens": 2834,
+        "output_tokens": 2095,
+        "cache_write_tokens": 1614,
+        "cache_read_tokens": 3513,
+        "incomplete": false
+      },
+      "seconds": 14.94
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.2110075,
+      "status": "returned",
+      "actual_usd": 0.009442,
+      "usage": {
+        "input_tokens": 1456,
+        "output_tokens": 653,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 7.82
+    },
+    {
+      "stage": "validate",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.12825,
+      "status": "returned",
+      "actual_usd": 0.076188,
+      "usage": {
+        "input_tokens": 11304,
+        "output_tokens": 5358,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 32.1
+    },
+    {
+      "stage": "preview_qa",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.3216975,
+      "status": "returned",
+      "actual_usd": 0.00991,
+      "usage": {
+        "input_tokens": 1835,
+        "output_tokens": 624,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 6.84
+    },
+    {
+      "stage": "validate",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.133775,
+      "status": "returned",
+      "actual_usd": 0.071874,
+      "usage": {
+        "input_tokens": 12222,
+        "output_tokens": 4743,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 28.34
+    },
+    {
+      "stage": "validate",
+      "model": "claude-sonnet-5-5",
+      "params": {},
+      "reserved_usd": 0.1346325,
+      "status": "returned",
+      "actual_usd": 0.07213,
+      "usage": {
+        "input_tokens": 12365,
+        "output_tokens": 4740,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "incomplete": false
+      },
+      "seconds": 27.98
+    }
+  ]
+}

@@ -330,6 +330,38 @@
     "label": "§6 Limitations",
     "page": 10
    }
+  },
+  {
+   "id": "tension.sg_converges_anyway",
+   "kind": "tension",
+   "statement": "The stop gradient alters the gradient direction, yet the MeanFlow update still leads to the true flow map.",
+   "source": {
+    "kind": "theorem",
+    "label": "Theorem 3 (§3.2)",
+    "page": 6,
+    "quote": "somewhat remarkably, Theorem 3 shows that the update direction induced by the MeanFlow loss implicitly leads us closer to the true flow map anyway"
+   }
+  },
+  {
+   "id": "tension.flow_vs_descent",
+   "kind": "tension",
+   "statement": "Gradient flow provably converges, but gradient descent with finite steps can diverge, even for the trivial velocity v = 0.",
+   "source": {
+    "kind": "section",
+    "label": "§3.3",
+    "page": 7,
+    "quote": "In contrast to the gradient flow results, we can show that gradient descent is not guaranteed to converge, even for the trivial velocity v = 0."
+   }
+  },
+  {
+   "id": "tension.sweet_spot",
+   "kind": "tension",
+   "statement": "Strong performance is only achieved for a specific range of reweighting strengths.",
+   "source": {
+    "kind": "abstract",
+    "label": "Abstract",
+    "quote": "which is only achieved for a specific range of reweighting strengths"
+   }
   }
  ],
  "glossary": [

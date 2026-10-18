@@ -1,0 +1,75 @@
+{
+ "checks": [
+  {
+   "name": "required_sections",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "subtitle_shape",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_exist",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_cited",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "numbers_grounded",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "tts_numbers_spelled",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "moving_named",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "reuse_frame_valid",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "length_budget",
+   "passed": true,
+   "detail": "estimated 84.4s, target 80s"
+  },
+  {
+   "name": "narration_intelligible",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "no_overrun",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "layout_qa",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "visual_review_executed",
+   "passed": true,
+   "detail": "skipped: no visual QA key"
+  },
+  {
+   "name": "claims_judged",
+   "passed": true,
+   "detail": "skipped: no judge key; golden regression only, not scientific validation"
+  }
+ ],
+ "claim_verdicts": []
+}

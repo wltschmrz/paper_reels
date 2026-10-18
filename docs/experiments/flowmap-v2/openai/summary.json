@@ -1,0 +1,27 @@
+{
+  "duration_sec": 77.6,
+  "returned_usage_estimated_usd": 2.115909,
+  "uncertain_reserved_usd": 0,
+  "estimated_usd_by_model": {
+    "claude-sonnet-5-5": 0.275606,
+    "gpt-5.4": 1.840304
+  },
+  "api_response_wait_sec": 1149.36,
+  "wall_elapsed_including_retries_and_manual_interventions_sec": 3608.7,
+  "completed_stage_sec": {
+    "storyboard": 0,
+    "narration": 127.2,
+    "visual_code": 201.1,
+    "preview_qa": 840.5,
+    "final_render": 605.2,
+    "compose": 42.1,
+    "validate": 60.5
+  },
+  "tokens": {
+    "input_tokens": 156832,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 75264,
+    "output_tokens": 121584
+  },
+  "validation_passed": true
+}

@@ -265,5 +265,31 @@
     "videoUrl": "videos/drifting-anthropic-baseline.mp4",
     "thumbnailUrl": "thumbnails/drifting-anthropic-baseline.jpg",
     "demo": false
+  },
+  {
+    "id": "flowmap-v2-openai",
+    "paperId": "2610.20674",
+    "creator": "you_openai_v2",
+    "title": "멈춘 기울기, 왜 통할까",
+    "style": "GPT-5.4 · Edited v2",
+    "kicker": "FLOW MAP · API V2",
+    "accent": "#f4cb56",
+    "duration": 77.6,
+    "videoUrl": "videos/flowmap-v2-openai.mp4",
+    "thumbnailUrl": "thumbnails/flowmap-v2-openai.jpg",
+    "demo": false
+  },
+  {
+    "id": "flowmap-v2-anthropic",
+    "paperId": "2610.20674",
+    "creator": "you_anthropic_v2",
+    "title": "한 번에 생성, 왜 통할까?",
+    "style": "Claude Opus 5.5 · Reference v2",
+    "kicker": "FLOW MAP · API V2",
+    "accent": "#6bdcc4",
+    "duration": 80.033,
+    "videoUrl": "videos/flowmap-v2-anthropic.mp4",
+    "thumbnailUrl": "thumbnails/flowmap-v2-anthropic.jpg",
+    "demo": false
   }
 ]

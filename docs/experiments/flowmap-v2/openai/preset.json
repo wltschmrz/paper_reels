@@ -1,0 +1,99 @@
+{
+  "preset_id": "reference_v2_openai",
+  "name": "레퍼런스 쇼츠 스타일 (3B1B · 미스터리 → 반전 → 해결)",
+  "creator_id": "you",
+  "visibility": "public",
+  "style": {
+    "language": "ko",
+    "audience": "grad",
+    "target_length_sec": 75,
+    "tone": "calm_visual",
+    "lens": {
+      "geometric": 0.6,
+      "equation": 0.25,
+      "analogy": 0.05,
+      "empirical": 0.1
+    },
+    "narrative": {
+      "arc": "mystery_twist",
+      "required_sections": [
+        "problem",
+        "method",
+        "theory",
+        "result"
+      ],
+      "opening": "hook_question",
+      "ending": "takeaway"
+    },
+    "math": {
+      "depth": 2,
+      "min_equation_dwell_sec": 2.5,
+      "color_terms": true
+    },
+    "visual": {
+      "theme": "dark",
+      "subtitles": true,
+      "term_header": true,
+      "source_line": true,
+      "bgm": "soft_pad",
+      "bgm_db": -28.0
+    },
+    "voice": {
+      "pace": 1.22
+    },
+    "free_instruction": "Use 6-8 scenes and concise visual descriptions (at most 120 Korean characters each). Keep the complete JSON compact. Prioritize finishing all required sections within the narration budget."
+  },
+  "models": {
+    "understand": {
+      "provider": "openai",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      }
+    },
+    "storyboard": {
+      "provider": "openai",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      }
+    },
+    "visual_code": {
+      "provider": "openai",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      }
+    },
+    "visual_qa": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "params": {}
+    },
+    "judge": {
+      "provider": "openai",
+      "model": "gpt-5.4",
+      "params": {
+        "reasoning_effort": "low"
+      }
+    },
+    "tts": {
+      "provider": "supertonic_local",
+      "model": "supertonic-3-int8",
+      "params": {
+        "sid": 9,
+        "num_steps": 16
+      }
+    },
+    "asr": {
+      "provider": "sensevoice_local",
+      "model": "sense-voice-int8-2024-07-17",
+      "params": {}
+    },
+    "thumbnail": {
+      "provider": "render_frame",
+      "model": "hook_frame",
+      "params": {}
+    }
+  }
+}

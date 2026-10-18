@@ -163,7 +163,7 @@ PYTHONPATH=. ../.venv/bin/python -m tools.smoke_llm --provider openai --preset e
 
 신고 API는 이 backend가 생성한 timeline이 있는 게시물에 적용한다. 제공 MP4에는 실제 timeline 파일이 없으므로 임의의 타임스탬프 근거를 만들어 붙이지 않았다. 기존 프론트의 댓글·좋아요는 여전히 localStorage이며 서버 신고 UI 연결은 후속 작업이다.
 
-## 9. 확인 범위
+## 9. 초기 확인 범위 (API 키 등록 전 기록)
 
 `docs/VALIDATION.md`에 이 세션의 실행 결과와 미검증 범위를 기록한다. 원본 reference 문서의 84.1~84.2초와 이번 제공 MP4의 83.6초를 구분한다. API 키가 없어 LLM stage·실측 API 비용·혼합 공급자 전체 생성·모델 품질 비교는 검증하지 않았다. Docker build도 미실행이다. 이 한계를 숨기지 않고 개발 서버에서 상태로 보여준다.
 
@@ -176,3 +176,37 @@ PYTHONPATH=. ../.venv/bin/python -m tools.smoke_llm --provider openai --preset e
 실제 storyboard 프롬프트에 원본의 장면별 시각 설계를 참고 자료로 연결했다. 원본의 논문 주장/수치를 복사하지 않고, 장면마다 시작→변화→결론을 설계하도록 한다. 코드 생성에는 늘 같은 S4를 넣던 것에서 해당 visual type에 맞는 golden 장면을 선택하도록 바꿨다. 기존 음성 동기화·Manim·미리보기 검토·수정 루프는 유지한다.
 
 이 개선은 프롬프트/구조 검증까지 완료했으며, 새로운 논문으로 원본 품질을 재현한 영상 검증은 아직 아니다. 생성 코드의 실행에 필요한 Docker가 현재 개발 컨테이너에 없다. Docker가 가능한 독립 worker 환경에서 `docker build -f backend/tools/Dockerfile.render -t scholarshorts-render:local backend`로 렌더 이미지를 준비하고 API의 readiness가 통과한 뒤 실행해야 한다. Docker CLI만 설치하는 것으로는 충분하지 않고 daemon 접근·bind mount 경로도 일치해야 한다. 격리를 우회해 생성 코드를 로컬로 실행하지 않는다.
+
+## Reference v2 / Windows Docker Desktop bridge
+
+`reference/PIPELINE (2).md`와 `scholarshorts-pipeline (2).zip`의 품질·토큰 효율 개선을 함께 통합했다. narrative.arc, tension facts, visual.moving/reuse_frame_from, 서사 예제, 시각화 종류별 helper 포함 예제, 압축 JSON/스키마, 고정/스타일/예제/데이터/작업 프롬프트 블록을 사용한다. Claude는 최대 4개의 명시적 cache breakpoint를 사용하며 일회성 코드 예제는 캐시하지 않는다. GPT는 안정된 prefix와 자동 캐시를 사용한다. 두 공급자 모두 일반 입력·캐시 읽기·캐시 쓰기·출력 usage를 분리한다. 공급자 오류 자동 재시도를 끄고, 잘린 응답도 사용량을 저장한 후 멈춘다.
+
+레이아웃/overrun 결정론 검사에 실패하면 유료 비전 검토를 생략하며, 비전 입력은 대표 3패널 이하(각 270×480)로 줄인다. 원본 fixture의 scene 코드는 변경하지 않는다. 기존 파일 경로/scene ID 검사, 키 보호, PDF 수집, 근거 캐시 잠금, 실패 검증 게시 차단은 보존했다. ZIP의 mock provider를 실제 생성 경로에 넣지 않았다.
+
+Windows PowerShell에서:
+
+```powershell
+docker cp cuda13-dev:/workspace/mvp/paper_reels/backend/tools/connect-renderer.ps1 "$env:TEMP\scholarshorts-renderer.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\scholarshorts-renderer.ps1"
+```
+
+이 스크립트는 Docker 소켓/daemon을 외부에 공개하거나 개발 컨테이너를 재생성하지 않는다. 전용 렌더 이미지를 빌드한 뒤 파일 큐를 읽는다. 장면·음성·스토리보드·신뢰된 render kit만 복사하고, API 키는 전달하지 않는다. 렌더 컨테이너는 network=none, readonly root, non-root UID, cap-drop ALL, no-new-privileges, CPU 2 / memory 3GB / pids 128 / 900초 제한을 사용한다. PowerShell 창을 유지해야 하며 Ctrl+C로 중단한다. 최초 이미지 빌드 완료 전 유료 실행을 시작하지 않는다. 개발 API의 기존 Docker readiness는 자동 변경하지 않으며 현재 bridge는 수동 비교 CLI용이다.
+
+연결 후 컨테이너에서:
+
+```bash
+PYTHONPATH=backend .venv/bin/python backend/tools/run_reference_comparison.py --provider openai
+PYTHONPATH=backend .venv/bin/python backend/tools/run_reference_comparison.py --provider anthropic
+```
+
+Flow Map 논문의 동일한 제공 근거 목록을 재사용하고 대본부터 새로 생성한다. GPT‑5.4 (medium), Claude Opus 5.5 (검토 Sonnet 5.5), 각 작업 $3.50 상한. 불명확한 요청 비용은 예약액을 유지한다. 기록은 ignored `backend/data/jobs/flowmap-v2-*/budget.json`, `job.json`, `events.jsonl`에 남긴다. 영상을 완성/검증하기 전에는 manifest에 등록하지 않는다.
+
+### 유료 v2 비교 실행과 재개
+
+`backend/tools/run_reference_comparison.py --provider openai|anthropic`은 연결된 Desktop bridge에서만 시작한다. 제공 ZIP의 공통 facts를 재사용하고 대본부터 실제 API를 사용한다. 기본 구성은 GPT-5.4(low reasoning) 또는 Opus 5.5 생성 + Sonnet 5.5 검토이며, 75초 목표·6–8개 장면을 요청한다. 공급자별 실험 job은 $3.50 상한을 갖고, timeout 응답은 사용량을 알 수 없어 예약 비용을 유지한다. SDK의 암묵적 유료 재시도는 끈다. 실제 청구액은 공급자 대시보드로 확인해야 한다.
+
+이 비교 스크립트는 owner API의 SQLite queue와 별개인 개발용 CLI다. `backend/data/jobs/flowmap-v2-{provider}`의 완료 파일을 재사용해 재개하며, 코드 파일이 있어도 lint 실패 상태이면 완료로 인정하지 않는다. 실행 중인 동일 job을 중복 실행하지 않는다. `responses/`에 반환된 모델 응답을, `budget.json`에 실패 요청을 포함한 사용량과 예약액을, `events.jsonl`에 단계별 시간을 보관한다.
+
+검증을 통과한 출력만 `PYTHONPATH=backend .venv/bin/python backend/tools/export_reference_comparison.py --provider openai` (또는 `anthropic`)로 정적 웹 manifest에 등록한다. 이 명령은 원격 GitHub 배포를 하지 않는다. 원본 제공 영상은 유지하며 새 비교 영상을 같은 Flow Map 논문에 추가한다.
+
+현재 v2 비교 실행에서는 Windows Docker Desktop build/run 및 GPT/Claude 대본→음성→Manim→검토→합성→검증이 실제로 완료됐다. 비용, 시간 및 수동 보완 범위는 [Flow Map v2 보고서](experiments/flowmap-v2/README.md)를 참조한다.

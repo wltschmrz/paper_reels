@@ -1,0 +1,279 @@
+[
+ {
+  "scene_id": "S1",
+  "line_id": "s1a",
+  "start": 0.0,
+  "end": 1.876,
+  "subtitle": "왜 멈춘 기울기가\n정답으로 갈까요?",
+  "claims": []
+ },
+ {
+  "scene_id": "S1",
+  "line_id": "s1b",
+  "start": 1.967,
+  "end": 4.965,
+  "subtitle": "보통은 수백 번 적분하지만,\nflow map은 한 번입니다.",
+  "claims": [
+   "bg.sampling_cost",
+   "def.flowmap"
+  ]
+ },
+ {
+  "scene_id": "S1",
+  "line_id": "s1c",
+  "start": 5.067,
+  "end": 7.326,
+  "subtitle": "그 핵심 트릭 둘의 효과는\n분석이 없었습니다.",
+  "claims": [
+   "prob.tricks_unexplained"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3a",
+  "start": 7.733,
+  "end": 9.399,
+  "subtitle": "stop gradient는\n값만 남깁니다.",
+  "claims": [
+   "def.stopgrad"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3b",
+  "start": 9.5,
+  "end": 11.955,
+  "subtitle": "MeanFlow는 그 값을 넣어\n자기 타깃을 만듭니다.",
+  "claims": [
+   "method.meanflow_loss"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3c",
+  "start": 12.066,
+  "end": 15.521,
+  "subtitle": "거울 속 정답지를 보는 꼴인데,\n거울 = sg 타깃입니다.",
+  "claims": [
+   "method.meanflow_loss",
+   "def.stopgrad"
+  ]
+ },
+ {
+  "scene_id": "S3",
+  "line_id": "s3d",
+  "start": 15.633,
+  "end": 18.263,
+  "subtitle": "그래서 손실이 꼭 줄지 않고,\n영으로도 안 갑니다.",
+  "claims": [
+   "prob.no_guarantee"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4a",
+  "start": 18.666,
+  "end": 21.831,
+  "subtitle": "이상화된 gradient flow에선,\n놀랍게도 수렴합니다.",
+  "claims": [
+   "thm1.convergence",
+   "tension.sg_converges_anyway"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4b",
+  "start": 21.933,
+  "end": 24.306,
+  "subtitle": "MeanFlow는 앞에서부터\n참 경로로 바뀝니다.",
+  "claims": [
+   "thm1.mf_closed_form"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4c",
+  "start": 24.399,
+  "end": 26.527,
+  "subtitle": "Lagrangian은 반대로,\n뒤에서부터 바뀌죠.",
+  "claims": [
+   "thm1.lag_closed_form"
+  ]
+ },
+ {
+  "scene_id": "S4",
+  "line_id": "s4d",
+  "start": 26.633,
+  "end": 29.011,
+  "subtitle": "그리고 MeanFlow 오차는\n지수적으로 줄어듭니다.",
+  "claims": [
+   "thm2.rate"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5a",
+  "start": 29.399,
+  "end": 31.068,
+  "subtitle": "하지만 실제는\n유한한 걸음입니다.",
+  "claims": [
+   "tension.flow_vs_descent",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5b",
+  "start": 31.166,
+  "end": 34.269,
+  "subtitle": "그때는 gradient flow와 달리,\n발산 반례가 있습니다.",
+  "claims": [
+   "prop1.divergence",
+   "tension.flow_vs_descent",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5c",
+  "start": 34.366,
+  "end": 38.028,
+  "subtitle": "오차 ε 곱하기\n(t−s)^m 형태에선,",
+  "claims": [
+   "prop1.counterexample",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S5",
+  "line_id": "s5d",
+  "start": 38.132,
+  "end": 41.303,
+  "subtitle": "매 걸음 배율이\n일 빼기 η(m+1)입니다.",
+  "claims": [
+   "prop1.counterexample",
+   "eq.counterexample_derivative"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6a",
+  "start": 41.698,
+  "end": 43.749,
+  "subtitle": "해법은 잔차를\n정규화하는 갱신입니다.",
+  "claims": [
+   "method.normalized_update",
+   "derived.unweighted_step"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6b",
+  "start": 43.865,
+  "end": 47.084,
+  "subtitle": "p가 영 점 오 이상이면,\n업데이트 크기가 bounded입니다.",
+  "claims": [
+   "thm4.bounded"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6c",
+  "start": 47.198,
+  "end": 49.524,
+  "subtitle": "특히 p가 일이면,\n해 근방까지 수렴합니다.",
+  "claims": [
+   "thm4.neighborhood"
+  ]
+ },
+ {
+  "scene_id": "S6",
+  "line_id": "s6d",
+  "start": 49.631,
+  "end": 52.271,
+  "subtitle": "원래 MeanFlow도\nImageNet에선 p 일이었습니다.",
+  "claims": [
+   "res.meanflow_p1_imagenet"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7a",
+  "start": 52.664,
+  "end": 54.206,
+  "subtitle": "실험도 sweet spot을\n보여 줍니다.",
+  "claims": [
+   "tension.sweet_spot"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7b",
+  "start": 54.297,
+  "end": 58.048,
+  "subtitle": "CIFAR-10, NFE 일에서\np 영은 FID 십 점 육이입니다.",
+  "claims": [
+   "res.cifar.nfe1.p0.00"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7c",
+  "start": 58.164,
+  "end": 62.0,
+  "subtitle": "같은 조건에서 p 영 점 칠오는\nFID 오 점 사육입니다.",
+  "claims": [
+   "res.cifar.nfe1.p0.75"
+  ]
+ },
+ {
+  "scene_id": "S7",
+  "line_id": "s7d",
+  "start": 62.097,
+  "end": 65.647,
+  "subtitle": "그리고 p 일 점 오는\nFID 육 점 삼이로 다시 오릅니다.",
+  "claims": [
+   "res.cifar.nfe1.p1.50"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8a",
+  "start": 66.061,
+  "end": 68.586,
+  "subtitle": "답은 이겁니다.\n이상화된 flow에선 통합니다.",
+  "claims": [
+   "thm1.convergence"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8b",
+  "start": 68.694,
+  "end": 71.079,
+  "subtitle": "하지만 유한한 걸음에선\n그 보장이 깨집니다.",
+  "claims": [
+   "prop1.divergence"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8c",
+  "start": 71.194,
+  "end": 73.285,
+  "subtitle": "그래서 정규화와 p 범위가\n핵심입니다.",
+  "claims": [
+   "thm4.bounded"
+  ]
+ },
+ {
+  "scene_id": "S8",
+  "line_id": "s8d",
+  "start": 73.394,
+  "end": 77.183,
+  "subtitle": "단, 이론은 함수 공간 설정이고\n신경망 확률성은 별도입니다.",
+  "claims": [
+   "lim.functional_setting"
+  ]
+ }
+]

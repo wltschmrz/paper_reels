@@ -48,7 +48,7 @@ export default function App() {
     refreshShorts();
   }, []);
   const [view, setView] = useState<View>("papers");
-  const [shortsPaperId, setShortsPaperId] = useState<string | null>(null);
+  const [flippedPapers, setFlippedPapers] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [topic, setTopic] = useState("All topics");
   const [sort, setSort] = useState("Curated");
@@ -125,7 +125,6 @@ export default function App() {
   const filtered = useMemo(() => {
     let list = papers.filter(
       (p) =>
-        (!shortsPaperId || view !== "shorts" || p.id === shortsPaperId) &&
         (topic === "All topics" || p.topics.includes(topic)) &&
         `${p.title} ${p.abstract} ${p.authors.join(" ")} ${p.id}`
           .toLowerCase()
@@ -146,7 +145,6 @@ export default function App() {
       );
     return list;
   }, [
-    shortsPaperId,
     topic,
     search,
     view,
@@ -158,15 +156,19 @@ export default function App() {
   ]);
   const switchView = (v: View) => {
     setView(v);
-    setShortsPaperId(null);
     setMenu(false);
     if (v !== "collections") setCollectionFilter("");
   };
-  const showPaperShorts = (p: Paper) => {
-    switchView("shorts");
-    setShortsPaperId(p.id);
+  const showPaperShorts = (p: Paper, forceOpen = false) => {
+    setFlippedPapers((ids) =>
+      ids.includes(p.id)
+        ? forceOpen
+          ? ids
+          : ids.filter((id) => id !== p.id)
+        : [...ids, p.id],
+    );
     setDetail(null);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (view === "explore") switchView("papers");
   };
   const toggleSave = (p: Paper) => {
     setSaved((old) =>
@@ -546,23 +548,6 @@ export default function App() {
                   <ChevronDown size={13} />
                 </label>
               </div>
-              {view === "shorts" && shortsPaperId && (
-                <div className="paper-shorts-context panel">
-                  <strong>이 논문의 쇼츠 버전</strong>
-                  <button
-                    className="text-button"
-                    onClick={() => switchView("papers")}
-                  >
-                    초록 목록으로
-                  </button>
-                  <button
-                    className="text-button"
-                    onClick={() => setShortsPaperId(null)}
-                  >
-                    전체 쇼츠 목록
-                  </button>
-                </div>
-              )}
               <div className="content-grid">
                 <section className="feed-list">
                   <div className="list-caption">
@@ -578,7 +563,12 @@ export default function App() {
                       <PaperCard
                         key={p.id}
                         paper={p}
-                        mode={view === "shorts" ? "shorts" : "papers"}
+                        mode={
+                          view === "shorts" || flippedPapers.includes(p.id)
+                            ? "shorts"
+                            : "papers"
+                        }
+                        canFlip={view !== "shorts"}
                         shorts={shorts.filter((s) => s.paperId === p.id)}
                         saved={saved.includes(p.id)}
                         reaction={reactions[p.id]}
@@ -732,7 +722,7 @@ export default function App() {
                 </button>
                 <button
                   className="secondary"
-                  onClick={() => showPaperShorts(detail)}
+                  onClick={() => showPaperShorts(detail, true)}
                 >
                   <Clapperboard size={15} /> 쇼츠 버전 보기
                 </button>

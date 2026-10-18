@@ -1,0 +1,55 @@
+{
+  "source": "responses/004-storyboard.txt",
+  "changes": [
+    "Removed redundant background S2 and outro S9 to meet duration budget; remaining narration retained.",
+    "Normalized English terms/numerals in TTS pronunciation only.",
+    "Cleared reuse reference to removed S2."
+  ],
+  "validation": [
+    {
+      "name": "required_sections",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "subtitle_shape",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "claims_exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "claims_cited",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "numbers_grounded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tts_numbers_spelled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "moving_named",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reuse_frame_valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "length_budget",
+      "passed": true,
+      "detail": "estimated 79.8s, target 75s"
+    }
+  ]
+}

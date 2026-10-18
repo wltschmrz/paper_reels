@@ -1,0 +1,206 @@
+{
+ "checks": [
+  {
+   "name": "required_sections",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "subtitle_shape",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_exist",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "claims_cited",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "numbers_grounded",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "tts_numbers_spelled",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "moving_named",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "reuse_frame_valid",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "length_budget",
+   "passed": true,
+   "detail": "estimated 79.7s, target 75s"
+  },
+  {
+   "name": "narration_intelligible",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "no_overrun",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "layout_qa",
+   "passed": false,
+   "detail": "['S1', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8']"
+  },
+  {
+   "name": "claims_judged",
+   "passed": false,
+   "detail": "lines []; onscreen [{'scene_id': 'S6', 'text': 'Theorem 4의 가정 아래, c = 1로 그린 개형', 'note': 'The scene labels this as a schematic, which is good, but the specific numeric choice c = 1 is not supported by any cited fact in this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.01', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.02', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.03', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.04', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.06', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.08', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.12', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.16', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.21', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.27', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.34', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.41', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.48', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.54', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.59', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.63', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.67', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.69', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.71', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.72', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.73', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.74', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.76', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.77', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.78', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.79', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.81', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.83', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.87', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.91', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 0.96', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.02', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.09', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.16', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.23', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.29', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.34', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.38', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.42', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.44', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.46', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.47', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.48', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}, {'scene_id': 'S7', 'text': 'p = 1.49', 'note': 'Intermediate p value shown on screen is not one of the discrete Table 1 conditions cited for this scene.'}]"
+  }
+ ],
+ "claim_verdicts": [
+  {
+   "line_id": "s1a",
+   "verdict": "no_claim",
+   "note": "Rhetorical hook; no checkable factual claim."
+  },
+  {
+   "line_id": "s1b",
+   "verdict": "supported",
+   "note": "Matches §1/Eq. (3): standard sampling uses hundreds of evaluations, while a flow map sample uses one evaluation Φ(x_0,0,1)."
+  },
+  {
+   "line_id": "s1c",
+   "verdict": "supported",
+   "note": "Matches the paper's problem statement that prior work had not analyzed the impact of stop gradient and adaptive weighting on flow-map training dynamics."
+  },
+  {
+   "line_id": "s3a",
+   "verdict": "supported",
+   "note": "Matches the definition of stop gradient: values are used, but gradients through the wrapped terms are set to zero."
+  },
+  {
+   "line_id": "s3b",
+   "verdict": "supported",
+   "note": "Matches Eq. (5): MeanFlow builds a stop-gradient target from u itself together with v."
+  },
+  {
+   "line_id": "s3c",
+   "verdict": "supported",
+   "note": "The mirror analogy is nonliteral, but the factual content 'the mirror = sg target' is consistent with MeanFlow using a stop-gradient target built from its own current quantity."
+  },
+  {
+   "line_id": "s3d",
+   "verdict": "supported",
+   "note": "Matches §2: stop gradient can prevent guaranteed loss decrease, and the MeanFlow loss does not converge to zero in practice."
+  },
+  {
+   "line_id": "s4a",
+   "verdict": "supported",
+   "note": "Correctly keeps the setting: under idealized functional gradient flow, the objectives converge pointwise to the true flow map."
+  },
+  {
+   "line_id": "s4b",
+   "verdict": "supported",
+   "note": "Matches Eq. (13): the MeanFlow learned map follows the true flow on the front part of the interval, with the cutoff advancing forward."
+  },
+  {
+   "line_id": "s4c",
+   "verdict": "supported",
+   "note": "Matches Eq. (14): the Lagrangian form switches in the opposite direction, with the true-flow part appearing from the back."
+  },
+  {
+   "line_id": "s4d",
+   "verdict": "supported",
+   "note": "Matches Eq. (15): the MeanFlow error decays exponentially in optimization time."
+  },
+  {
+   "line_id": "s5a",
+   "verdict": "supported",
+   "note": "Consistent with the paper's contrast between idealized gradient flow and practical finite-step gradient descent."
+  },
+  {
+   "line_id": "s5b",
+   "verdict": "supported",
+   "note": "Matches Proposition 1 and the stated tension: finite-step gradient descent can diverge, unlike the gradient-flow result."
+  },
+  {
+   "line_id": "s5c",
+   "verdict": "supported",
+   "note": "Matches the counterexample form e_k = ε(t-s)^m from Appendix B.4."
+  },
+  {
+   "line_id": "s5d",
+   "verdict": "supported",
+   "note": "Matches the counterexample recurrence e_{k+1} = (1-η(m+1))e_k."
+  },
+  {
+   "line_id": "s6a",
+   "verdict": "supported",
+   "note": "Matches Eq. (20): the proposed fix is a normalized update that divides by a residual-size term."
+  },
+  {
+   "line_id": "s6b",
+   "verdict": "supported",
+   "note": "Matches Theorem 4: for p ≥ 0.5, normalized updates have uniformly bounded norms."
+  },
+  {
+   "line_id": "s6c",
+   "verdict": "supported",
+   "note": "Matches Theorem 4: at p = 1, MeanFlow converges to a neighborhood of the solution."
+  },
+  {
+   "line_id": "s6d",
+   "verdict": "supported",
+   "note": "Matches §3.3: p = 1.0 was reported as best for from-scratch ImageNet 256×256 training in the original MeanFlow paper."
+  },
+  {
+   "line_id": "s7a",
+   "verdict": "supported",
+   "note": "Consistent with the paper's claim that strong performance occurs only in a specific range of reweighting strengths."
+  },
+  {
+   "line_id": "s7b",
+   "verdict": "supported",
+   "note": "Matches Table 1 exactly: CIFAR-10, NFE 1, MeanFlow loss, mean of 3 runs, 200K steps, FID 10.62 at p = 0.00."
+  },
+  {
+   "line_id": "s7c",
+   "verdict": "supported",
+   "note": "Matches Table 1 exactly: CIFAR-10, NFE 1, MeanFlow loss, mean of 3 runs, 200K steps, FID 5.46 at p = 0.75."
+  },
+  {
+   "line_id": "s7d",
+   "verdict": "supported",
+   "note": "Matches Table 1 exactly: CIFAR-10, NFE 1, MeanFlow loss, mean of 3 runs, 200K steps, FID 6.32 at p = 1.50."
+  },
+  {
+   "line_id": "s8a",
+   "verdict": "supported",
+   "note": "Acceptable summary of Theorem 1 because it keeps the idealized-flow setting."
+  },
+  {
+   "line_id": "s8b",
+   "verdict": "supported",
+   "note": "Matches Proposition 1: the convergence guarantee from gradient flow does not carry over to finite-step gradient descent."
+  },
+  {
+   "line_id": "s8c",
+   "verdict": "supported",
+   "note": "Supported as a summary of the normalized-update result: the paper highlights normalization and the p ≥ 0.5 regime as the stabilizing condition."
+  },
+  {
+   "line_id": "s8d",
+   "verdict": "supported",
+   "note": "Matches the stated limitation: the theory is in a functional setting and does not cover neural-network parametrization or stochasticity."
+  }
+ ]
+}

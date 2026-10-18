@@ -7,6 +7,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def command(job, sid, manim_args, timeout):
+    if os.getenv("SS_RENDER_MODE") == "desktop_bridge":
+        from .desktop_bridge import command as bridge_command
+        return bridge_command(job, sid, manim_args, timeout)
     if os.getenv("SS_RENDER_MODE") == "trusted_golden":
         expected = ROOT / "golden/flowmap_2610.20674/scenes"
         for p in (job / "scenes").glob("*.py"):

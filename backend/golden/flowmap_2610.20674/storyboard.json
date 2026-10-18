@@ -24,7 +24,9 @@
     "fact_refs": [
      "bg.sampling_cost",
      "prob.tricks_unexplained"
-    ]
+    ],
+    "moving": "",
+    "reuse_frame_from": null
    },
    "lines": [
     {
@@ -66,7 +68,9 @@
     "fact_refs": [
      "def.flowmap",
      "setup.gauss_toy"
-    ]
+    ],
+    "moving": "particles moving along the true trajectories from t = 0 to t = 1",
+    "reuse_frame_from": null
    },
    "lines": [
     {
@@ -108,7 +112,9 @@
     "fact_refs": [
      "method.meanflow_loss",
      "def.stopgrad"
-    ]
+    ],
+    "moving": "the loss equation changing from ? to u_tgt to sg(u_tgt)",
+    "reuse_frame_from": null
    },
    "lines": [
     {
@@ -160,7 +166,9 @@
      "thm1.lag_closed_form",
      "thm2.rate",
      "setup.gauss_toy"
-    ]
+    ],
+    "moving": "training time τ from 0 to 4.5, switch point t_τ = 1 − e^(−τ)",
+    "reuse_frame_from": "S2"
    },
    "lines": [
     {
@@ -217,7 +225,9 @@
     "description": "오차 ε(t−s)^m 곡선 두 개(m=2, m=24)를 걸음마다 0.7배, −1.5배로 갱신",
     "fact_refs": [
      "prop1.counterexample"
-    ]
+    ],
+    "moving": "gradient-descent step k from 0 to 8",
+    "reuse_frame_from": null
    },
    "lines": [
     {
@@ -225,7 +235,8 @@
      "subtitle": "하지만 실제 학습은\n유한한 걸음으로 갑니다.",
      "tts_text": "하지만 실제 학습은 유한한 걸음으로 갑니다.",
      "claims": [
-      "prop1.divergence"
+      "prop1.divergence",
+      "tension.flow_vs_descent"
      ]
     },
     {
@@ -269,7 +280,9 @@
      "method.normalized_update",
      "thm4.bounded",
      "thm4.neighborhood"
-    ]
+    ],
+    "moving": "normalization exponent p from 0 to 1",
+    "reuse_frame_from": null
    },
    "lines": [
     {
@@ -321,7 +334,9 @@
      "res.cifar.nfe1.p0.75",
      "res.cifar.nfe1.p1.50",
      "res.ffhq.nfe1.p1.50"
-    ]
+    ],
+    "moving": "bars growing, then highlight moving from p = 0 to p = 0.75",
+    "reuse_frame_from": null
    },
    "lines": [
     {
@@ -348,7 +363,8 @@
      "claims": [
       "res.cifar.nfe1.p1.25",
       "res.cifar.nfe1.p1.50",
-      "res.ffhq.nfe1.p1.50"
+      "res.ffhq.nfe1.p1.50",
+      "tension.sweet_spot"
      ]
     }
    ]
@@ -363,7 +379,9 @@
    "visual": {
     "type": "cards",
     "description": "요약 카드 두 장 후 arXiv 카드",
-    "fact_refs": []
+    "fact_refs": [],
+    "moving": "",
+    "reuse_frame_from": null
    },
    "lines": [
     {

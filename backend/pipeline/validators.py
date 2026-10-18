@@ -6,6 +6,7 @@ from .render_kit.theme import GAP_SEC, SUBTITLE
 RATE = {"ko": ("syllable", 5.94), "en": ("word", 2.6)}
 NUM = re.compile(r"(?<![A-Za-z_])-?\d+(?:\.\d+)?")
 NO_CLAIM_SECTIONS = {"hook", "outro"}
+MOVING_SECTIONS = {"problem", "method", "theory", "result"}
 
 
 def width_units(row):
@@ -63,6 +64,13 @@ def validate_storyboard(sb: Storyboard, style: StyleSpec, facts: FactSheet) -> l
     if sb.language == "ko":
         digits = [ln.line_id for ln in sb.all_lines() if re.search(r"\d", ln.tts_text)]
         checks.append(Check(name="tts_numbers_spelled", passed=not digits, detail=f"digits in tts_text {digits}" if digits else ""))
+
+    unnamed = [s.scene_id for s in sb.scenes if s.section in MOVING_SECTIONS and not s.visual.moving.strip()]
+    checks.append(Check(name="moving_named", passed=not unnamed, detail=f"scenes without visual.moving {unnamed}" if unnamed else ""))
+    order = [s.scene_id for s in sb.scenes]
+    badref = [s.scene_id for s in sb.scenes if s.visual.reuse_frame_from and (s.visual.reuse_frame_from not in order
+              or order.index(s.visual.reuse_frame_from) >= order.index(s.scene_id))]
+    checks.append(Check(name="reuse_frame_valid", passed=not badref, detail=f"reuse_frame_from must point to an earlier scene {badref}" if badref else ""))
 
     est = estimate_sec(sb, style.voice.pace)
     lo, hi = style.target_length_sec * 0.8, style.target_length_sec * 1.2
