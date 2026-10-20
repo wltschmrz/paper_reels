@@ -1,6 +1,6 @@
 # ScholarShorts
 
-[http://localhost:5173/#/](https://wltschmrz.github.io/paper_reels/)
+[https://wltschmrz.github.io/paper_reels/](https://wltschmrz.github.io/paper_reels/)
 
 **One paper, multiple perspectives.** 실제 논문 21편으로 체험하는 논문 탐색 + 개인화된 Shorts 제작 프로토타입.
 
