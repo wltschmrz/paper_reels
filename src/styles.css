@@ -2567,7 +2567,7 @@ html {
 }
 
 @media (max-width: 760px) {
-  .feed-tabs {
+  .explore-workspace .feed-tabs {
     display: none;
   }
 }

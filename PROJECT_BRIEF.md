@@ -236,3 +236,5 @@ Explore는 메인 상단 Papers / Paper Shorts 옆에서도 접근한다. Explor
 Explore의 쇼츠 위아래 여백은 최종 desktop 각각 36px, mobile 각각 20px로 조정한다. 독립 설명 패널과 wheel 전환은 유지한다.
 
 모바일에서 쇼츠 크기 확보를 위해 상단 Papers/Paper Shorts/Explore 탭을 숨기고 햄버거 내비게이션을 사용한다. Explore 영상 여백은 각각 8px로 줄이고, 영상/설명 패널 높이 비중은 65%/35%로 조정한다. Desktop은 그대로 유지한다.
+
+모바일 상단 탭 숨김은 Explore 화면에만 적용한다. Paper Feed/Paper Shorts에서는 상단 탭을 계속 표시한다.
