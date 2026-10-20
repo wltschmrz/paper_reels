@@ -15,6 +15,8 @@ export type Short = {
   creator: string;
   title: string;
   style: string;
+  explanationStyle?: "intuition" | "geometry" | "mathematics";
+  editorialFocus?: string;
   duration: number;
   videoUrl: string | null;
   thumbnailUrl: string | null;

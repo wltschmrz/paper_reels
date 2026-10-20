@@ -1,0 +1,344 @@
+.digest-page {
+  max-width: 850px;
+  margin: 0 auto;
+  color: #28343a;
+}
+.digest-page-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12px;
+  color: #616b70;
+  margin-bottom: 34px;
+}
+.digest-page-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.digest-nav-label {
+  color: var(--muted);
+}
+.digest-page-heading h1 {
+  font-size: 27px;
+  margin: 0 0 8px;
+  letter-spacing: -0.7px;
+}
+.digest-page-heading > p {
+  color: #6d797e;
+  margin: 0 0 30px;
+}
+.digest-envelope {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+}
+.digest-subject {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.digest-subject h2 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+.digest-demo {
+  background: #eaf5f1;
+  color: var(--teal);
+  border-radius: 5px;
+  padding: 5px 8px;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+.digest-sender {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 22px;
+  font-size: 12px;
+}
+.digest-sender > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.digest-sender p {
+  margin: 5px 0 0;
+  color: #6d797e;
+}
+.digest-sender > time {
+  margin-left: auto;
+  color: #6d797e;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.digest-sender-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #eaf5f1;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+.digest-email {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 8px #133e3b05;
+}
+.digest-brand {
+  color: var(--dark);
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 22px;
+  letter-spacing: -0.7px;
+}
+.digest-summary {
+  text-align: center;
+  background: #eaf5f1;
+  padding: 37px 24px 35px;
+}
+.digest-summary h2 {
+  color: var(--dark);
+  font-size: 24px;
+  margin: 0 0 7px;
+  letter-spacing: -0.6px;
+}
+.digest-summary time {
+  color: #657d76;
+  font-size: 14px;
+}
+.digest-summary p {
+  line-height: 1.8;
+  margin: 22px 0;
+  font-size: 14px;
+}
+.digest-page .digest-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--teal);
+  color: white;
+  border-radius: 10px;
+  padding: 14px 30px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.digest-page .digest-cta:hover {
+  background: var(--dark);
+}
+.digest-content {
+  background: #f7f9fa;
+  padding: 32px 38px;
+}
+.digest-content > p {
+  line-height: 1.7;
+  margin: 0 0 13px;
+}
+.digest-greeting {
+  font-weight: 600;
+}
+.digest-play {
+  margin: 5px 0 20px;
+}
+.digest-page .digest-disclosure {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #6d797e;
+}
+.digest-papers {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+.digest-paper {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--teal);
+  border-radius: 12px;
+  padding: 17px 19px;
+}
+.digest-paper:hover {
+  border-top-color: #bcded5;
+  border-right-color: #bcded5;
+  border-bottom-color: #bcded5;
+}
+.digest-paper-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #6d797e;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+.digest-score {
+  background: var(--teal);
+  color: white;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.digest-paper h3 {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 12px 0 6px;
+  overflow-wrap: anywhere;
+}
+.digest-authors {
+  color: #6d797e;
+  line-height: 1.6;
+  font-size: 12px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.digest-paper-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 15px;
+}
+.digest-paper-actions > * {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--teal);
+  padding: 3px 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+.digest-paper-actions > *:hover {
+  text-decoration: underline;
+}
+.digest-more {
+  text-align: center;
+  padding-top: 28px;
+}
+.digest-email-footer {
+  text-align: center;
+  padding: 29px 32px;
+  background: #fff;
+  color: #6d797e;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.digest-email-footer p {
+  margin: 0 0 6px;
+}
+.digest-email-footer > div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+  color: var(--dark);
+}
+.digest-email-footer small {
+  display: block;
+  margin-top: 22px;
+}
+.digest-player {
+  padding: 20px;
+  text-align: center;
+}
+.digest-player h3 {
+  font-size: 15px;
+}
+.digest-player video {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  max-height: 55vh;
+  background: #10171d;
+  margin: 16px auto;
+  border-radius: 8px;
+}
+.digest-player-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.app-footer {
+  margin: 12px 32px 25px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  color: #727c80;
+  font-size: 12px;
+}
+.app-footer a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .digest-page-nav {
+    margin-bottom: 25px;
+  }
+  .digest-nav-label {
+    display: none;
+  }
+  .digest-page-heading h1 {
+    font-size: 23px;
+  }
+  .digest-subject h2 {
+    font-size: 17px;
+  }
+  .digest-sender {
+    flex-wrap: wrap;
+  }
+  .digest-sender > time {
+    width: calc(100% - 50px);
+    margin: 0 0 0 50px;
+  }
+  .digest-sender > div {
+    flex: 1;
+  }
+  .digest-sender > div > span {
+    display: block;
+    font-size: 11px;
+    margin-top: 3px;
+  }
+  .digest-summary {
+    padding: 30px 16px;
+  }
+  .digest-summary h2 {
+    color: var(--dark);
+    font-size: 21px;
+  }
+  .digest-content {
+    padding: 24px 12px;
+  }
+  .digest-paper {
+    padding: 14px;
+  }
+  .digest-paper h3 {
+    font-size: 14px;
+  }
+  .digest-email-footer {
+    padding: 25px 16px;
+  }
+  .digest-page .digest-cta {
+    padding: 13px 23px;
+  }
+  .digest-desktop-break {
+    display: none;
+  }
+  .app-footer {
+    margin: 12px 16px 24px;
+  }
+}

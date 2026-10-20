@@ -68,3 +68,39 @@ Short asset 생성 후 URL을 제공하며 validation 또는 moderation이 실�
 ### Inline paper cards (supersedes scoped Shorts page)
 
 초록 화면에서 쇼츠 버튼을 누르면 `flippedPapers`에 해당 ID만 토글하여 카드 내부만 전환한다. 다른 논문·검색·정렬·페이지는 유지한다. 다시 누르면 초록으로 돌아온다. 각 카드의 ResizeObserver가 실제 가용 폭으로 열 수를 계산하며, Shorts 개수가 마지막 행을 정확히 채우면 Your Perspective 타일을 생략한다. 빈 슬롯이 있으면 남는 칸만 사용한다. 모바일 썸네일 최소 폭을 낮춰 일반 휴대폰에서는 두 개를 나란히 볼 수 있다. reduced-motion에서는 전환 애니메이션을 끈다.
+
+### Email Digest Preview (2026-10-20)
+
+현재 MVP를 보존하는 독립 frontend 화면이다. `App.tsx`가 `#/digest-preview`와 hashchange를 감지한다. 기존 state 기반 view는 유지하고 router dependency는 추가하지 않는다. 해시 경로이므로 GitHub Pages repository subpath에서 직접 접근·새로고침 시 서버 fallback이 필요 없다. footer 링크, browser back/forward, 기존 sidebar 탐색이 가능하다.
+
+- `src/data/digestMockData.ts`: 출처가 있는 기존 paper catalogue 4개를 참조하며 시연 score/count/email metadata를 분리한다. 실시간 추천이 아니다.
+- `src/pages/DigestPreviewPage.tsx`, `digest.css`: beige/cream/orange email preview, metadata, CTA 및 독립 CSS.
+- `src/components/digest/DigestPaperCard.tsx`: 실제 저자·날짜·원문 링크와 예시 relevance score.
+- Play the Digest는 digest 순서대로 논문별 첫 실제 영상만 선택한다. Watch Shorts는 해당 논문의 모든 실제 영상을 제공한다. 공통 Modal 및 asset resolver를 재사용하며 마지막 영상 이후 종료 메시지를 표시한다. 영상이 없으면 생성 완료를 가장하지 않고 설명 modal을 제공한다.
+- Manage Preferences는 기존 브라우저 관심사 modal이다. 구독/해지/발송/랭킹 모델/스타일 변형은 구현하지 않는다.
+
+백업: `legacy-mvp-before-digest-2026-10-20` tag (`7708aaf`) 및 로컬 `.cache/backups/legacy-mvp-before-digest-2026-10-20.bundle`. bundle은 ignored이며 API 키와 ignored backend runtime 데이터가 포함되지 않는다. 기존 사이트를 별도 폴더에서 확인하려면 `git worktree add ../paper_reels-legacy legacy-mvp-before-digest-2026-10-20`. 이는 backend 데이터 복원이 아닌 버전 관리된 코드·정적 미디어 복원이다.
+
+### 소비자 화면에서 생성 분리
+
+`App`에서 Studio/BackendJobs mount, 생성 상태·시뮬레이션 타이머, 생성 CTA를 제거했다. `PaperCard`와 `Explore`의 onGenerate 계약도 제거한다. Shorts가 없는 카드에만 비대화형 availability 안내를 제공하고 기존 영상 행의 빈 칸은 그대로 둔다. Studio 및 backend 코드는 공급자 도구/legacy 참조를 위해 유지하며 소비자 화면에서는 실행하지 않는다. 브라우저의 기존 ss-jobs/ss-presets를 지우지 않는다.
+
+Email preview의 최신 디자인은 사이트의 `--teal`, `--dark`, `--border` 토큰을 공유하며 white/mint 배경을 사용한다. 상단 header와 footer 모두 hash 링크를 제공한다. 모바일 header에서는 링크 텍스트를 숨기고 Mail 아이콘과 aria-label을 유지한다.
+
+### 데모 explanation style
+
+`src/data/explanationStyles.json`이 Intuition / Geometry / Mathematics 라벨·설명·색상의 공통 정의다. `Short.explanationStyle`과 `editorialFocus`는 선택 필드이며 실제 영상에는 추가하지 않는다. `ShortCover`는 demo=true + videoUrl 없음 + 스타일 정의가 있는 카드에만 새 배지·색상·관점 부제를 적용한다. Explore에서는 해당 논문에 맞춘 설명 초점을 표시한다.
+
+`scripts/create_demo_shorts.py`는 기존 manifest 순서를 유지하고 명시적으로 나열된 미제작 demo ID 12개만 갱신한다. videoUrl이 있으면 demo 플래그와 무관하게 건너뛴다. 기존 실제 영상, 사용자 추가 항목과 파일에는 쓰지 않는다. 후킹의 근거는 papers.json의 원문 abstract이며 SVG는 설명용 개념도다.
+
+### 공개 피드 숨김 / 고정 폭 스타일 슬롯
+
+App에서 정적+remote manifest를 합친 후 Drifting baseline 두 ID를 제외한 배열을 모든 소비자 화면에 전달한다. 미디어와 원본 메타데이터는 그대로 보존한다. PaperCard는 실제 영상이 없는 논문에 한해 explanationStyles에 정의된 세 스타일 중 현재 시안이 없는 슬롯을 점선으로 표시한다. ResizeObserver 기반 열 계산을 제거하고 CSS auto-fill 190px / mobile 2열을 사용하여 필터와 결과 수에 따른 폭 재분배를 방지한다.
+
+공란과 데모 시안은 I → G → M 순서의 슬롯 배열 하나로 렌더한다. 같은 스타일에 여러 시안이 있으면 그 슬롯 안에서 기존 순서를 유지한다. 실제 영상이 있는 기존 Flow Map 목록은 순서를 변경하지 않는다.
+
+`flippedPapers`는 페이지 기본 보기의 반대 상태를 뜻한다. 실제 shorts 모드는 `(view === "shorts") !== flippedPapers.includes(id)`로 결정한다. `switchView`의 papers/shorts 이동은 flip 상태를 초기화하며 검색·필터·정렬은 유지한다. 상세의 쇼츠 보기 action은 현재 view에 맞춰 원하는 face를 강제하고, Explore에서는 paper view로 이동한 뒤 해당 카드만 쇼츠로 연다.
+
+### Explore viewport / independent scrolling
+
+Explore app-body는 100dvh flex container이며 main은 min-height:0으로 남은 공간을 채운다. footer는 이 view에서 숨기고 header digest 진입은 유지한다. Desktop은 영상/액션/독립 info 패널, mobile은 영상 행+info 행이다. reel-info는 overflow-y:auto 및 overscroll-behavior:contain으로 스크롤 체이닝을 막는다. Explore main에 passive:false wheel listener를 등록하여 info/form/dialog/ctrl-wheel을 제외한 wheel로 쇼츠를 전환한다(700ms 제한). 새 쇼츠에서는 info scrollTop을 초기화하며 댓글 버튼은 info 패널만 스크롤한다. 기존 영상 위 swipe와 방향키, 명시적 이전/다음 버튼도 유지한다.

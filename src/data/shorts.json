@@ -27,210 +27,235 @@
       "딱 한 번이면",
       "된다고?"
     ],
-    "kicker": "ONE STEP?!",
-    "accent": "#c6ff00",
-    "style": "Visual intuition",
+    "kicker": "THE BIG IDEA",
+    "accent": "#ffcf70",
+    "style": "Intuition",
     "duration": 60,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-01.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "intuition",
+    "editorialFocus": "순간 속도 대신 평균 속도로 보는 한 번의 생성"
   },
   {
     "id": "demo-02",
     "paperId": "2505.13447",
     "creator": "latent_fox_17",
-    "title": "이 곡선 하나로 MeanFlow가 이해됩니다",
+    "title": "굽은 여정, 한 개의 평균 벡터",
     "hookLines": [
-      "이 곡선 하나로",
-      "MeanFlow가",
-      "이해됩니다"
+      "굽은 여정,",
+      "한 개의",
+      "평균 벡터"
     ],
-    "kicker": "MATH, VISUALIZED",
-    "accent": "#ffff00",
-    "style": "Mathematical",
+    "kicker": "SEE IT MOVE",
+    "accent": "#65e4d5",
+    "style": "Geometry",
     "duration": 75,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-02.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "geometry",
+    "editorialFocus": "곡선 위 이동과 구간 전체의 변위를 비교"
   },
   {
     "id": "demo-03",
     "paperId": "2505.13447",
     "creator": "paper_otter_08",
-    "title": "한 번에 생성? 그럼 뭘 포기했을까",
+    "title": "순간 속도와 평균 속도를 잇는 항등식",
     "hookLines": [
-      "한 번에 생성?",
-      "그럼 뭘",
-      "포기했을까"
+      "순간 속도와",
+      "평균 속도를",
+      "잇는 항등식"
     ],
-    "kicker": "WAIT A SECOND",
-    "accent": "#ff4777",
-    "style": "Critical Review",
+    "kicker": "UNDER THE EQUATIONS",
+    "accent": "#c5adff",
+    "style": "Mathematics",
     "duration": 45,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-03.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "mathematics",
+    "editorialFocus": "MeanFlow의 두 속도를 연결하는 학습 원리"
   },
   {
     "id": "demo-04",
     "paperId": "2512.02012",
     "creator": "gradient_moon_63",
-    "title": "MeanFlow는 여기서 한 번 더 바뀝니다",
+    "title": "학습 목표에 모델 자신이 들어 있다면",
     "hookLines": [
-      "MeanFlow는",
-      "여기서 한 번 더",
-      "바뀝니다"
+      "학습 목표에",
+      "모델 자신이",
+      "들어 있다면"
     ],
-    "kicker": "PLOT TWIST",
-    "accent": "#b994ff",
-    "style": "Quick summary",
+    "kicker": "UNDER THE EQUATIONS",
+    "accent": "#c5adff",
+    "style": "Mathematics",
     "duration": 60,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-04.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "mathematics",
+    "editorialFocus": "iMF가 순간 속도 회귀로 다시 쓰는 학습 목표"
   },
   {
     "id": "demo-05",
     "paperId": "2512.02012",
     "creator": "latent_fox_17",
-    "title": "가이던스가 그림을 바꾸는 진짜 이유",
+    "title": "한 번의 생성에도 방향을 조절할 여지는 있다",
     "hookLines": [
-      "가이던스가",
-      "그림을 바꾸는",
-      "진짜 이유"
+      "한 번의 생성에도",
+      "방향을 조절할",
+      "여지는 있다"
     ],
-    "kicker": "FOLLOW THE VECTOR",
-    "accent": "#ffff00",
-    "style": "Mathematical",
+    "kicker": "SEE IT MOVE",
+    "accent": "#65e4d5",
+    "style": "Geometry",
     "duration": 60,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-05.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "geometry",
+    "editorialFocus": "iMF의 유연한 guidance를 방향 변화로 설명"
   },
   {
     "id": "demo-06",
     "paperId": "2602.04770",
     "creator": "pixel_sparrow_29",
-    "title": "추론 대신 학습할 때 움직인다면?",
+    "title": "추론은 한 번. 움직임은 이미 학습에서.",
     "hookLines": [
-      "추론 대신",
-      "학습할 때",
-      "움직인다면?"
+      "추론은 한 번.",
+      "움직임은 이미",
+      "학습에서."
     ],
-    "kicker": "DRIFTING MODELS",
-    "accent": "#58c4dd",
-    "style": "Visual intuition",
+    "kicker": "THE BIG IDEA",
+    "accent": "#ffcf70",
+    "style": "Intuition",
     "duration": 75,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-06.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "intuition",
+    "editorialFocus": "추론의 반복 대신 학습 중 분포를 바꾸는 발상"
   },
   {
     "id": "demo-07",
     "paperId": "2602.04770",
     "creator": "noisy_panda_51",
-    "title": "노이즈에서 이미지까지, 중간은 어디로?",
+    "title": "점들이 움직이면 분포의 모양이 바뀝니다",
     "hookLines": [
-      "노이즈에서",
-      "이미지까지,",
-      "중간은 어디로?"
+      "점들이 움직이면",
+      "분포의 모양이",
+      "바뀝니다"
     ],
-    "kicker": "SKIP THE STEPS?",
-    "accent": "#ff4777",
-    "style": "Beginner-friendly",
+    "kicker": "SEE IT MOVE",
+    "accent": "#65e4d5",
+    "style": "Geometry",
     "duration": 45,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-07.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "geometry",
+    "editorialFocus": "Drifting field에 따른 표본과 분포의 변화"
   },
   {
     "id": "demo-08",
     "paperId": "2602.04770",
     "creator": "paper_otter_08",
-    "title": "Drifting, 좋은 결과만 보면 놓치는 것",
+    "title": "분포가 같아질 때 Drifting field는 멈춘다",
     "hookLines": [
-      "Drifting,",
-      "좋은 결과만",
-      "보면 놓치는 것"
+      "분포가 같아질 때",
+      "Drifting field는",
+      "멈춘다"
     ],
-    "kicker": "THE BIG QUESTION",
-    "accent": "#b994ff",
-    "style": "Critical Review",
+    "kicker": "UNDER THE EQUATIONS",
+    "accent": "#c5adff",
+    "style": "Mathematics",
     "duration": 60,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-08.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "mathematics",
+    "editorialFocus": "Drifting의 분포 일치와 평형 조건을 구분해 읽기"
   },
   {
     "id": "demo-09",
     "paperId": "2511.23342",
     "creator": "vector_cactus_34",
-    "title": "생성 경로를 쭉 펴버리면 어떻게 될까?",
+    "title": "한 번에 가려는데 경로가 너무 휘어 있다",
     "hookLines": [
-      "생성 경로를",
-      "쭉 펴버리면",
-      "어떻게 될까?"
+      "한 번에 가려는데",
+      "경로가 너무",
+      "휘어 있다"
     ],
-    "kicker": "STRAIGHT TO IT",
-    "accent": "#c6ff00",
-    "style": "Visual intuition",
+    "kicker": "SEE IT MOVE",
+    "accent": "#65e4d5",
+    "style": "Geometry",
     "duration": 60,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-09.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "geometry",
+    "editorialFocus": "Rectified MeanFlow의 경로 직선화와 곡률 병목"
   },
   {
     "id": "demo-10",
     "paperId": "2508.07102",
     "creator": "matrix_moth_76",
-    "title": "평균 속도, 그다음 차원은 어떤 모습일까",
+    "title": "평균 속도 다음은 평균 가속도. 성립 조건은?",
     "hookLines": [
-      "평균 속도,",
-      "그다음 차원은",
-      "어떤 모습일까"
+      "평균 속도 다음은",
+      "평균 가속도.",
+      "성립 조건은?"
     ],
-    "kicker": "BEYOND FIRST ORDER",
-    "accent": "#ffff00",
-    "style": "Mathematical",
+    "kicker": "UNDER THE EQUATIONS",
+    "accent": "#c5adff",
+    "style": "Mathematics",
     "duration": 75,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-10.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "mathematics",
+    "editorialFocus": "Second-Order MeanFlow의 일반화된 일관성 조건"
   },
   {
     "id": "demo-11",
     "paperId": "2603.12366",
     "creator": "gradient_moon_63",
-    "title": "점들을 옮겨서 분포를 만든다?",
+    "title": "멈췄다고 같은 분포일까? Sinkhorn의 답",
     "hookLines": [
-      "점들을 옮겨서",
-      "분포를 만든다?"
+      "멈췄다고",
+      "같은 분포일까?",
+      "Sinkhorn의 답"
     ],
-    "kicker": "CONNECT THE DOTS",
-    "accent": "#ff4777",
-    "style": "Quick summary",
+    "kicker": "UNDER THE EQUATIONS",
+    "accent": "#c5adff",
+    "style": "Mathematics",
     "duration": 45,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-11.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "mathematics",
+    "editorialFocus": "Sinkhorn divergence가 보완하는 평형의 식별성"
   },
   {
     "id": "demo-12",
     "paperId": "2210.02747",
     "creator": "pixel_sparrow_29",
-    "title": "노이즈가 그림이 되는 순간을 보세요",
+    "title": "노이즈에게 길을 알려주면 그림이 된다",
     "hookLines": [
-      "노이즈가",
-      "그림이 되는",
-      "순간을 보세요"
+      "노이즈에게",
+      "길을 알려주면",
+      "그림이 된다"
     ],
-    "kicker": "FLOW MATCHING",
-    "accent": "#b994ff",
-    "style": "Beginner-friendly",
+    "kicker": "THE BIG IDEA",
+    "accent": "#ffcf70",
+    "style": "Intuition",
     "duration": 60,
     "videoUrl": null,
     "thumbnailUrl": "thumbnails/demo-12.svg",
-    "demo": true
+    "demo": true,
+    "explanationStyle": "intuition",
+    "editorialFocus": "Flow Matching을 길 안내에 비유해 이해하기"
   },
   {
     "id": "drifting-openai-baseline",

@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import explanationStyles from "../data/explanationStyles.json";
 import {
   Bookmark,
   ArrowUpRight,
   ThumbsUp,
   ThumbsDown,
-  Sparkles,
+  Clock,
   Play,
   FolderPlus,
   FileText,
@@ -22,7 +22,6 @@ type Props = {
   reaction?: string;
   onSave: () => void;
   onReact: (r: string) => void;
-  onGenerate: () => void;
   onDetail: () => void;
   onCollect: () => void;
   onPlay: (s: Short) => void;
@@ -37,34 +36,26 @@ export default function PaperCard({
   reaction,
   onSave,
   onReact,
-  onGenerate,
   onDetail,
   onCollect,
   onPlay,
   onShowShorts,
 }: Props) {
-  const row = useRef<HTMLDivElement>(null);
-  const [columns, setColumns] = useState(1);
-  useEffect(() => {
-    if (!row.current) return;
-    const observer = new ResizeObserver(([entry]) => {
-      setColumns(
-        Math.max(
-          1,
-          Math.floor(
-            (entry.contentRect.width + 12) /
-              (window.innerWidth <= 760 ? 144 : 172),
-          ),
-        ),
-      );
-    });
-    observer.observe(row.current);
-    return () => observer.disconnect();
-  }, [mode]);
-  const emptySlots =
-    shorts.length === 0
-      ? columns
-      : (columns - (shorts.length % columns)) % columns;
+  const styleOrder = ["intuition", "geometry", "mathematics"] as const;
+  type Slot = { short?: Short; style?: keyof typeof explanationStyles };
+  const slots: Slot[] = shorts.some((s) => s.videoUrl)
+    ? shorts.map((short) => ({ short, style: undefined }))
+    : [
+        ...shorts
+          .filter((s) => !s.explanationStyle)
+          .map((short) => ({ short, style: undefined })),
+        ...styleOrder.flatMap<Slot>((style) => {
+          const matches = shorts.filter((s) => s.explanationStyle === style);
+          return matches.length
+            ? matches.map((short) => ({ short, style }))
+            : [{ short: undefined, style }];
+        }),
+      ];
   return (
     <article className="paper-card" data-paper-id={p.id} data-mode={mode}>
       <div className="paper-main card-face" key={mode}>
@@ -91,37 +82,30 @@ export default function PaperCard({
             </button>
           </>
         ) : (
-          <div
-            className="shorts-row"
-            ref={row}
-            style={{
-              gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-            }}
-          >
-            {shorts.map((s) => (
-              <button
-                key={s.id}
-                className="short-tile"
-                aria-label={`${s.title} — @${s.creator}`}
-                onClick={() => onPlay(s)}
-              >
-                <ShortCover short={s} />
-              </button>
-            ))}
-            {emptySlots > 0 && (
-              <button
-                className="create-tile"
-                style={{ gridColumn: `span ${emptySlots}` }}
-                onClick={onGenerate}
-              >
-                <Sparkles size={22} />
-                <strong>
-                  {shorts.length
-                    ? "Your perspective"
-                    : "Be the first to explain it"}
-                </strong>
-                <span>Create a short for this paper</span>
-              </button>
+          <div className="shorts-row">
+            {slots.map(({ short: s, style }) =>
+              s ? (
+                <button
+                  key={s.id}
+                  className="short-tile"
+                  aria-label={`${s.title} — @${s.creator}`}
+                  onClick={() => onPlay(s)}
+                >
+                  <ShortCover short={s} />
+                </button>
+              ) : style ? (
+                <div
+                  key={style}
+                  className="shorts-pending"
+                  data-style={style}
+                  aria-label={`${explanationStyles[style].label} — not produced yet`}
+                >
+                  <Clock size={22} />
+                  <strong>{explanationStyles[style].label}</strong>
+                  <span>{explanationStyles[style].description}</span>
+                  <small>아직 제작되지 않았어요</small>
+                </div>
+              ) : null,
             )}
           </div>
         )}
@@ -207,10 +191,6 @@ export default function PaperCard({
                 : "초록 보기"}
             </button>
           )}
-          <button className="generate-button" onClick={onGenerate}>
-            <Sparkles size={14} />
-            {mode === "papers" ? "Generate Short" : "Create Your Version"}
-          </button>
         </div>
       </footer>
     </article>

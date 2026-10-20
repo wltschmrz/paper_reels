@@ -79,3 +79,15 @@ Vite `base: './'` 및 asset resolver로 프로젝트 하위 경로를 지원한�
 ## GPT / Claude 백엔드 설정
 
 키 발급 위치, `backend/.env` 등록, API·worker 실행, Docker renderer, M1 검증 명령은 **[docs/BACKEND.md](docs/BACKEND.md)**에 정리했다. 실제 제공 영상은 `public/videos/flowmap_reel.mp4`, 원본 자료는 `reference/`에 보존했다. **[docs/VALIDATION.md](docs/VALIDATION.md)**에서 실제 확인한 구간과 아직 실행하지 못한 구간을 구분한다.
+
+## Email Digest Preview
+
+Footer의 **Email Digest Preview** 링크에서 독립 이메일 시연 화면을 연다.
+
+- 로컬: `http://localhost:5173/#/digest-preview`
+- GitHub Pages 배포 후: `https://wltschmrz.github.io/paper_reels/#/digest-preview`
+- 직접 접근·새로고침을 지원하는 hash 경로이며 서버 rewrite가 필요 없다.
+- 논문 메타데이터는 기존 catalogue를 재사용한다. 점수·추천 규모·발신자·날짜는 시연 데이터다.
+- Play the Digest / Watch Shorts는 연결된 실제 영상만 재생한다. 영상이 없으면 안내 modal을 표시한다.
+- 실제 이메일 발송, 구독·해지, 자동 추천은 구현하지 않는다. 관심사는 기존 브라우저 설정으로만 저장된다.
+- 방향 전환 전 MVP는 `legacy-mvp-before-digest-2026-10-20` tag (`7708aaf`)와 `.cache/backups/legacy-mvp-before-digest-2026-10-20.bundle`에 보존했다. bundle은 로컬 백업이며 git에 올리지 않는다.

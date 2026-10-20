@@ -1,4 +1,6 @@
 import type { Short } from "../types";
+import styles from "../data/explanationStyles.json";
+import { Lightbulb, MoveUpRight, Sigma } from "lucide-react";
 import { asset } from "../lib/assets";
 export default function ShortCover({
   short,
@@ -7,9 +9,20 @@ export default function ShortCover({
   short: Short;
   large?: boolean;
 }) {
+  const lens =
+    short.demo && !short.videoUrl && short.explanationStyle
+      ? styles[short.explanationStyle]
+      : null;
+  const Icon =
+    short.explanationStyle === "geometry"
+      ? MoveUpRight
+      : short.explanationStyle === "mathematics"
+        ? Sigma
+        : Lightbulb;
   return (
     <div
-      className={`short-cover ${large ? "large-cover" : ""}`}
+      className={`short-cover ${large ? "large-cover" : ""} ${lens ? "styled-demo" : ""}`}
+      data-explanation-style={lens ? short.explanationStyle : undefined}
       style={
         { "--cover-accent": short.accent || "#c6ff00" } as React.CSSProperties
       }
@@ -22,8 +35,15 @@ export default function ShortCover({
         />
       )}
       <div className="cover-top">
-        <span>{short.demo ? "DEMO" : "SHORT"}</span>
-        <span>{Math.round(short.duration)}s</span>
+        {lens ? (
+          <span className="cover-lens">
+            <Icon size={12} />
+            {lens.label}
+          </span>
+        ) : (
+          <span>{short.demo ? "DEMO" : "SHORT"}</span>
+        )}
+        <span>{lens ? "DEMO" : `${Math.round(short.duration)}s`}</span>
       </div>
       <div className="cover-hook">
         <span className="cover-kicker">{short.kicker || short.style}</span>
@@ -33,6 +53,7 @@ export default function ShortCover({
           ))}
         </strong>
       </div>
+      {lens && <div className="cover-lens-description">{lens.description}</div>}
       {!large && (
         <div className="cover-creator">
           <span className="cover-avatar">

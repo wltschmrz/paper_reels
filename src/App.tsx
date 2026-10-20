@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  Mail,
   BookOpen,
   Clapperboard,
   Compass,
@@ -7,12 +8,8 @@ import {
   Folder,
   SlidersHorizontal,
   Search,
-  Sparkles,
   ArrowUpRight,
-  Plus,
-  ArrowRight,
   Check,
-  Clock,
   X,
   Menu,
   Layers,
@@ -20,25 +17,27 @@ import {
 } from "lucide-react";
 import papersData from "./data/papers.json";
 import shortsData from "./data/shorts.json";
-import type { Paper, Short, Preset, Job } from "./types";
+import type { Paper, Short } from "./types";
 import { useLocalState } from "./hooks/useLocalState";
 import PaperCard, { asset } from "./components/PaperCard";
 import Modal from "./components/Modal";
-import Studio from "./components/Studio";
-import BackendJobs from "./components/BackendJobs";
 import { publishedShorts } from "./lib/backend";
 import Explore from "./components/Explore";
+import DigestPreviewPage from "./pages/DigestPreviewPage";
 const papers: Paper[] = papersData;
-const stages = [
-  "Reading the paper",
-  "Script & storyboard",
-  "Animation code",
-  "Narration & rendering",
-  "Validation & preview",
-];
-type View =
-  "papers" | "shorts" | "explore" | "saved" | "collections" | "studio";
+type View = "papers" | "shorts" | "explore" | "saved" | "collections";
 export default function App() {
+  const [digestOpen, setDigestOpen] = useState(
+    window.location.hash === "#/digest-preview",
+  );
+  useEffect(() => {
+    const sync = () => {
+      setDigestOpen(window.location.hash === "#/digest-preview");
+      setMenu(false);
+    };
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
   const [remoteShorts, setRemoteShorts] = useState<Short[]>([]);
   const refreshShorts = () =>
     publishedShorts()
@@ -62,61 +61,28 @@ export default function App() {
     "ss-collections",
     { "Reading list": [] },
   );
-  const [presets, setPresets] = useLocalState<Preset[]>("ss-presets", []);
-  const [jobs, setJobs] = useLocalState<Job[]>("ss-jobs", []);
   const [interests, setInterests] = useLocalState<string[]>("ss-interests", [
     "MeanFlow",
     "Drifting",
   ]);
   const [detail, setDetail] = useState<Paper | null>(null);
-  const [generate, setGenerate] = useState<Paper | null>(null);
   const [collect, setCollect] = useState<Paper | null>(null);
   const [newCollection, setNewCollection] = useState("");
   const [collectionFilter, setCollectionFilter] = useState("");
-  const [showJobs, setShowJobs] = useState(false);
   const [showInterests, setShowInterests] = useState(false);
   const [activeShort, setActiveShort] = useState<string>();
   const [toast, setToast] = useState("");
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    if (!jobs.some((j) => j.status === "running")) return;
-    const timer = setInterval(() => {
-      const t = Date.now();
-      setNow(t);
-      setJobs((old) =>
-        old.map((j) =>
-          j.status === "running" && t - j.createdAt >= 20000
-            ? { ...j, status: "ready" }
-            : j,
-        ),
-      );
-    }, 500);
-    return () => clearInterval(timer);
-  }, [jobs.some((j) => j.status === "running")]);
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(""), 3000);
     return () => clearTimeout(t);
   }, [toast]);
-  const shorts: Short[] = useMemo(
-    () => [
-      ...(shortsData as Short[]),
-      ...remoteShorts,
-      ...jobs
-        .filter((j) => j.status === "ready")
-        .map((j) => ({
-          id: j.id,
-          paperId: j.paperId,
-          creator: "you",
-          title: j.preset.name,
-          style: j.preset.approach,
-          duration: Number(j.preset.duration),
-          videoUrl: null,
-          thumbnailUrl: null,
-          demo: true,
-        })),
-    ],
-    [jobs, remoteShorts],
+  const hiddenShortIds = new Set([
+    "drifting-openai-baseline",
+    "drifting-anthropic-baseline",
+  ]);
+  const shorts: Short[] = [...(shortsData as Short[]), ...remoteShorts].filter(
+    (s) => !hiddenShortIds.has(s.id),
   );
   const topics = [
     "All topics",
@@ -155,43 +121,29 @@ export default function App() {
     interests,
   ]);
   const switchView = (v: View) => {
+    if (window.location.hash === "#/digest-preview") window.location.hash = "";
+    setDigestOpen(false);
     setView(v);
+    if (v === "papers" || v === "shorts") setFlippedPapers([]);
     setMenu(false);
     if (v !== "collections") setCollectionFilter("");
   };
   const showPaperShorts = (p: Paper, forceOpen = false) => {
-    setFlippedPapers((ids) =>
-      ids.includes(p.id)
-        ? forceOpen
-          ? ids
-          : ids.filter((id) => id !== p.id)
-        : [...ids, p.id],
-    );
-    setDetail(null);
     if (view === "explore") switchView("papers");
+    setFlippedPapers((ids) => {
+      // Flipped means the opposite of this view's default presentation.
+      const shouldFlip = forceOpen ? view !== "shorts" : !ids.includes(p.id);
+      return shouldFlip
+        ? Array.from(new Set([...ids, p.id]))
+        : ids.filter((id) => id !== p.id);
+    });
+    setDetail(null);
   };
   const toggleSave = (p: Paper) => {
     setSaved((old) =>
       old.includes(p.id) ? old.filter((id) => id !== p.id) : [...old, p.id],
     );
   };
-  const start = (preset: Preset) => {
-    if (!generate) return;
-    setJobs((old) => [
-      {
-        id: crypto.randomUUID(),
-        paperId: generate.id,
-        preset: { ...preset },
-        createdAt: Date.now(),
-        status: "running",
-      },
-      ...old,
-    ]);
-    setGenerate(null);
-    setShowJobs(true);
-  };
-  const savePreset = (p: Preset) =>
-    setPresets((old) => [...old.filter((x) => x.name !== p.name), { ...p }]);
   const goPlay = (s: Short) => {
     setActiveShort(s.id);
     switchView("explore");
@@ -248,31 +200,8 @@ export default function App() {
             <Folder size={18} />
             Collections
           </button>
-          <button
-            className={view === "studio" ? "nav-item active" : "nav-item"}
-            onClick={() => switchView("studio")}
-          >
-            <SlidersHorizontal size={18} />
-            Creator Studio
-          </button>
         </nav>
         <div className="sidebar-bottom">
-          <div className="sidebar-note">
-            <span className="tiny-stars">✦</span>
-            <strong>
-              One paper.
-              <br />
-              Multiple perspectives.
-            </strong>
-            <p>
-              Find the explanation
-              <br />
-              that clicks for you.
-            </p>
-            <button onClick={() => setGenerate(papers[0])}>
-              Create your first short <ArrowRight size={14} />
-            </button>
-          </div>
           <button
             className="user-profile"
             onClick={() => setShowInterests(true)}
@@ -286,7 +215,9 @@ export default function App() {
           </button>
         </div>
       </aside>
-      <div className="app-body">
+      <div
+        className={`app-body ${view === "explore" && !digestOpen ? "explore-workspace" : ""}`}
+      >
         <header className="topbar">
           <div className="breadcrumb">
             <button
@@ -299,12 +230,12 @@ export default function App() {
             <span>Workspace</span>
             <span>/</span>
             <strong>
-              {view === "saved"
-                ? "Saved papers"
-                : view === "collections"
-                  ? "Collections"
-                  : view === "studio"
-                    ? "Creator Studio"
+              {digestOpen
+                ? "Email Digest Preview"
+                : view === "saved"
+                  ? "Saved papers"
+                  : view === "collections"
+                    ? "Collections"
                     : nav.find((n) => n.id === view)?.label}
             </strong>
           </div>
@@ -313,14 +244,20 @@ export default function App() {
               <span />
               Research prototype
             </span>
-            <button
-              className="icon-button jobs-button"
-              aria-label="생성 작업 보기"
-              onClick={() => setShowJobs(true)}
+            <a
+              className={`secondary header-digest${digestOpen ? " active" : ""}`}
+              href="#/digest-preview"
+              aria-label="Email Digest Preview"
+              aria-current={digestOpen ? "page" : undefined}
+              title="Email Digest Preview"
+              onClick={() => {
+                setMenu(false);
+                window.scrollTo(0, 0);
+              }}
             >
-              <Clock size={19} />
-              {jobs.some((j) => j.status === "running") && <i />}
-            </button>
+              <Mail size={15} />
+              <span>Email Digest Preview</span>
+            </a>
             <button
               className="secondary header-interests"
               onClick={() => setShowInterests(true)}
@@ -330,101 +267,40 @@ export default function App() {
             </button>
           </div>
         </header>
-        <main className={view === "explore" ? "main explore-main" : "main"}>
-          {view === "explore" ? (
+        <main
+          className={
+            !digestOpen && view === "explore" ? "main explore-main" : "main"
+          }
+        >
+          {digestOpen ? (
+            <DigestPreviewPage
+              shorts={shorts}
+              onDiscover={() => switchView("papers")}
+              onPreferences={() => setShowInterests(true)}
+            />
+          ) : view === "explore" ? (
             <>
-              <div className="page-heading">
-                <div>
-                  <span className="eyebrow">FOLLOW YOUR CURIOSITY</span>
-                  <h1>
-                    Explore perspectives<span>.</span>
-                  </h1>
-                  <p>One short. A new idea. A paper worth reading.</p>
-                </div>
+              <div className="feed-tabs explore-tabs">
+                <button onClick={() => switchView("papers")}>
+                  <BookOpen size={16} /> Papers
+                </button>
+                <button onClick={() => switchView("shorts")}>
+                  <Clapperboard size={16} /> Paper Shorts
+                </button>
+                <button
+                  className="active"
+                  onClick={() => switchView("explore")}
+                >
+                  <Compass size={16} /> Explore
+                </button>
               </div>
               <Explore
                 key={activeShort}
                 shorts={shorts}
                 papers={papers}
                 initialId={activeShort}
-                onGenerate={setGenerate}
                 onDetail={setDetail}
               />
-            </>
-          ) : view === "studio" ? (
-            <>
-              <div className="page-heading">
-                <div>
-                  <span className="eyebrow">MAKE RESEARCH YOUR OWN</span>
-                  <h1>
-                    Creator Studio<span>.</span>
-                  </h1>
-                  <p>
-                    Shape how you explain. Save a perspective worth sharing.
-                  </p>
-                </div>
-                <button
-                  className="primary"
-                  onClick={() => setGenerate(papers[0])}
-                >
-                  <Plus size={16} />
-                  New short
-                </button>
-              </div>
-              <div className="studio-dashboard">
-                <section className="panel">
-                  <h2>Saved presets</h2>
-                  {presets.length ? (
-                    presets.map((p, i) => (
-                      <div className="preset-card" key={i}>
-                        <Sparkles />
-                        <div>
-                          <h3>{p.name}</h3>
-                          <p>
-                            {p.approach} · {p.language} · {p.duration}s
-                          </p>
-                        </div>
-                        <button
-                          className="icon-button"
-                          aria-label={`${p.name} 삭제`}
-                          onClick={() =>
-                            setPresets(presets.filter((_, n) => n !== i))
-                          }
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="empty-small">
-                      <SlidersHorizontal size={30} />
-                      <h3>Your style starts here</h3>
-                      <p>
-                        Generate Short에서 설명 방식을 설정하고 프리셋으로
-                        저장하세요.
-                      </p>
-                    </div>
-                  )}
-                </section>
-                <section className="panel">
-                  <h2>Your generation activity</h2>
-                  <p>
-                    {jobs.filter((j) => j.status === "ready").length} demo
-                    previews · {shorts.filter((s) => s.videoUrl).length}{" "}
-                    connected videos
-                  </p>
-                  <button
-                    className="secondary"
-                    onClick={() => setShowJobs(true)}
-                  >
-                    View generation jobs <ArrowRight size={15} />
-                  </button>
-                  <div className="notice">
-                    실제 생성 worker·API·결제는 아직 연결되지 않았습니다. 이
-                    데모는 설정과 비동기 작업 UX를 검증합니다.
-                  </div>
-                </section>
-              </div>
             </>
           ) : (
             <>
@@ -502,6 +378,9 @@ export default function App() {
                     <Clapperboard size={16} />
                     Paper Shorts
                   </button>
+                  <button onClick={() => switchView("explore")}>
+                    <Compass size={16} /> Explore
+                  </button>
                 </div>
                 <label className="search-box">
                   <Search size={16} />
@@ -564,11 +443,11 @@ export default function App() {
                         key={p.id}
                         paper={p}
                         mode={
-                          view === "shorts" || flippedPapers.includes(p.id)
+                          (view === "shorts") !== flippedPapers.includes(p.id)
                             ? "shorts"
                             : "papers"
                         }
-                        canFlip={view !== "shorts"}
+                        canFlip
                         shorts={shorts.filter((s) => s.paperId === p.id)}
                         saved={saved.includes(p.id)}
                         reaction={reactions[p.id]}
@@ -579,7 +458,6 @@ export default function App() {
                             [p.id]: reactions[p.id] === r ? "" : r,
                           })
                         }
-                        onGenerate={() => setGenerate(p)}
                         onDetail={() => setDetail(p)}
                         onCollect={() => setCollect(p)}
                         onPlay={goPlay}
@@ -641,41 +519,6 @@ export default function App() {
                       ))}
                     </div>
                   </section>
-                  <section className="rail-card how-card">
-                    <span className="eyebrow">FROM PAPER TO PERSPECTIVE</span>
-                    <h3>Research, in your words.</h3>
-                    {[
-                      [
-                        "01",
-                        "Find a paper",
-                        "Follow an idea that interests you.",
-                      ],
-                      [
-                        "02",
-                        "Make it your own",
-                        "Choose a style, focus, and audience.",
-                      ],
-                      [
-                        "03",
-                        "Share a perspective",
-                        "Help the next researcher get it.",
-                      ],
-                    ].map(([n, h, p]) => (
-                      <div className="how-step" key={n}>
-                        <span>{n}</span>
-                        <div>
-                          <strong>{h}</strong>
-                          <p>{p}</p>
-                        </div>
-                      </div>
-                    ))}
-                    <button
-                      className="text-button"
-                      onClick={() => switchView("studio")}
-                    >
-                      Visit Creator Studio <ArrowRight size={14} />
-                    </button>
-                  </section>
                   <p className="rail-footer">
                     ScholarShorts · A research prototype
                     <br />
@@ -688,6 +531,18 @@ export default function App() {
             </>
           )}
         </main>
+        <footer className="app-footer">
+          <span>ScholarShorts · A research prototype</span>
+          <a
+            href="#/digest-preview"
+            onClick={() => {
+              setMenu(false);
+              window.scrollTo(0, 0);
+            }}
+          >
+            Email Digest Preview
+          </a>
+        </footer>
       </div>
       {detail && (
         <Modal title="Paper details" onClose={() => setDetail(null)} wide>
@@ -710,16 +565,6 @@ export default function App() {
                 >
                   Original PDF <ArrowUpRight size={15} />
                 </a>
-                <button
-                  className="primary"
-                  onClick={() => {
-                    setGenerate(detail);
-                    setDetail(null);
-                  }}
-                >
-                  <Sparkles size={15} />
-                  Generate Short
-                </button>
                 <button
                   className="secondary"
                   onClick={() => showPaperShorts(detail, true)}
@@ -744,24 +589,6 @@ export default function App() {
               </a>
             )}
           </div>
-        </Modal>
-      )}
-      {generate && (
-        <Modal
-          title="Create your perspective"
-          onClose={() => setGenerate(null)}
-          wide
-        >
-          <Studio
-            paper={generate}
-            presets={presets}
-            onSave={savePreset}
-            onStart={start}
-            onServerStarted={() => {
-              setGenerate(null);
-              setShowJobs(true);
-            }}
-          />
         </Modal>
       )}
       {collect && (
@@ -815,82 +642,6 @@ export default function App() {
                 Create & save
               </button>
             </form>
-          </div>
-        </Modal>
-      )}
-      {showJobs && (
-        <Modal title="Generation activity" onClose={() => setShowJobs(false)}>
-          <div className="modal-content">
-            <BackendJobs onPublished={refreshShorts} />
-            <div className="notice">
-              Demo simulation · 실제 영상을 생성하거나 업로드하지 않습니다.
-            </div>
-            {!jobs.length && (
-              <div className="empty-small">
-                <Clock size={30} />
-                <h3>No jobs yet</h3>
-                <p>논문에서 Generate Short를 눌러 시작하세요.</p>
-              </div>
-            )}
-            {jobs.map((j) => {
-              const percent =
-                j.status === "ready"
-                  ? 100
-                  : Math.min(99, Math.max(0, (now - j.createdAt) / 200));
-              return (
-                <div className="job" key={j.id}>
-                  <span className="eyebrow">
-                    {j.status === "ready"
-                      ? "DEMO PREVIEW READY"
-                      : j.status === "cancelled"
-                        ? "CANCELLED"
-                        : "DEMO IN PROGRESS"}
-                  </span>
-                  <h3>{papers.find((p) => p.id === j.paperId)?.title}</h3>
-                  <p>
-                    {j.preset.name} · {j.preset.language} · {j.preset.duration}s
-                  </p>
-                  {j.status === "running" && (
-                    <>
-                      <progress max={100} value={percent} />
-                      <p>
-                        {stages[Math.min(4, Math.floor(percent / 20))]} ·{" "}
-                        {Math.floor(percent)}%
-                      </p>
-                      <button
-                        className="text-button"
-                        onClick={() =>
-                          setJobs(
-                            jobs.map((x) =>
-                              x.id === j.id ? { ...x, status: "cancelled" } : x,
-                            ),
-                          )
-                        }
-                      >
-                        Cancel job
-                      </button>
-                    </>
-                  )}
-                  {j.status === "ready" && (
-                    <>
-                      <p className="muted">
-                        설정 미리보기만 준비되었습니다. 영상 파일은 비어
-                        있습니다.
-                      </p>
-                      <button
-                        className="secondary"
-                        onClick={() => {
-                          setShowJobs(false);
-                          goPlay(shorts.find((s) => s.id === j.id)!);
-                        }}
-                      >
-                        View demo preview <ArrowRight size={15} />
-                      </button>
-                    </>
-                  )}
-                </div>
-              );
-            })}
           </div>
         </Modal>
       )}

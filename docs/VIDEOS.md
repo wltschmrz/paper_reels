@@ -30,3 +30,5 @@
 추가 실제 영상 (2026-10-18): Drifting 원문 `2602.04770v2`에 GPT‑5.4 mini / Claude Sonnet 5.5 baseline 2편을 연결했다. 각각 `public/videos/drifting-openai-baseline.mp4` (51.636초), `drifting-anthropic-baseline.mp4` (67.003초). 사용량·시간·근거 및 고정 템플릿 렌더러 한계는 [비교 보고서](experiments/drifting-baseline/README.md)에 있다.
 
 Flow Map v2 실제 API 영상 2편을 같은 `2610.20674`에 추가했다: `flowmap-v2-openai.mp4` 77.600초(GPT-5.4 · Edited v2), `flowmap-v2-anthropic.mp4` 80.033초(Claude Opus 5.5). 각 썸네일은 실제 출력 프레임이며 원본 샘플과 함께 재생된다. [검증·비용·수동 보완 기록](experiments/flowmap-v2/README.md).
+
+2026-10-20: 미제작 데모 12개의 썸네일을 Intuition / Geometry / Mathematics로 분류했다. 배지·아이콘·색상·설명 관점을 명시하며 후킹은 논문별 내용에 맞춘다. 실제 영상 5개와 해당 썸네일은 수정하지 않았다. generator는 알려진 demo=true & videoUrl=null 항목만 변경하며 모든 실제 영상 메타데이터·파일을 보존한다. `editorialFocus`는 제작 전 설명 계획이며 검증된 영상 transcript가 아니다.

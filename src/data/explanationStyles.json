@@ -1,0 +1,17 @@
+{
+  "intuition": {
+    "label": "Intuition",
+    "description": "비유와 핵심 아이디어",
+    "accent": "#ffcf70"
+  },
+  "geometry": {
+    "label": "Geometry",
+    "description": "곡선·벡터·공간의 움직임",
+    "accent": "#65e4d5"
+  },
+  "mathematics": {
+    "label": "Mathematics",
+    "description": "수식·가정·유도 과정",
+    "accent": "#c5adff"
+  }
+}

@@ -8,7 +8,6 @@ import {
   ThumbsUp,
   ThumbsDown,
   ArrowUpRight,
-  Sparkles,
 } from "lucide-react";
 import type { Short, Paper } from "../types";
 import ShortCover from "./ShortCover";
@@ -18,13 +17,11 @@ export default function Explore({
   shorts,
   papers,
   initialId,
-  onGenerate,
   onDetail,
 }: {
   shorts: Short[];
   papers: Paper[];
   initialId?: string;
-  onGenerate: (p: Paper) => void;
   onDetail: (p: Paper) => void;
 }) {
   const [index, setIndex] = useState(
@@ -48,6 +45,8 @@ export default function Explore({
     {},
   );
   const [draft, setDraft] = useState("");
+  const layout = useRef<HTMLDivElement>(null);
+  const info = useRef<HTMLElement>(null);
   const discussion = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const lastScroll = useRef(0);
@@ -61,7 +60,32 @@ export default function Explore({
   useEffect(() => {
     video.current?.load();
     setDraft("");
+    info.current?.scrollTo({ top: 0 });
   }, [short?.id]);
+  useEffect(() => {
+    const area = layout.current?.closest(".explore-main") ?? layout.current;
+    if (!area) return;
+    const wheel = (event: Event) => {
+      const e = event as WheelEvent;
+      if (
+        e.ctrlKey ||
+        (e.target as HTMLElement).closest(
+          ".reel-info, dialog, input, textarea, select",
+        )
+      )
+        return;
+      e.preventDefault();
+      if (Math.abs(e.deltaY) > 30 && Date.now() - lastScroll.current > 700) {
+        setIndex((i) =>
+          Math.min(shorts.length - 1, Math.max(0, i + (e.deltaY > 0 ? 1 : -1))),
+        );
+        setDraft("");
+        lastScroll.current = Date.now();
+      }
+    };
+    area.addEventListener("wheel", wheel, { passive: false });
+    return () => area.removeEventListener("wheel", wheel);
+  }, [shorts.length, Boolean(short && p)]);
   if (!short || !p)
     return (
       <div className="explore-empty">
@@ -75,15 +99,9 @@ export default function Explore({
           starts with a paper.
         </h2>
         <p>
-          아직 연결된 영상이 없습니다. 논문에서 데모를 만들거나
-          <br />
-          기존 샘플 영상을 연결하면 이곳에서 탐색할 수 있습니다.
+          아직 연결된 영상이 없습니다. 새로운 설명 영상은 서비스에서 준비해
+          제공합니다.
         </p>
-        <button className="primary" onClick={() => onGenerate(papers[0])}>
-          <Sparkles size={16} />
-          Create the first perspective
-        </button>
-        <span className="muted">Videos stay empty until you add your own.</span>
       </div>
     );
   const toggle = (values: string[], value: string) =>
@@ -91,7 +109,7 @@ export default function Explore({
       ? values.filter((v) => v !== value)
       : [...values, value];
   return (
-    <div className="explore-layout">
+    <div className="explore-layout" ref={layout}>
       <div
         className="reel-shell"
         tabIndex={0}
@@ -101,15 +119,6 @@ export default function Explore({
           if (e.key === "ArrowDown" || e.key === "ArrowUp") {
             e.preventDefault();
             navigate(e.key === "ArrowDown" ? 1 : -1);
-          }
-        }}
-        onWheel={(e) => {
-          if (
-            Math.abs(e.deltaY) > 30 &&
-            Date.now() - lastScroll.current > 700
-          ) {
-            navigate(e.deltaY > 0 ? 1 : -1);
-            lastScroll.current = Date.now();
           }
         }}
         onTouchStart={(e) => {
@@ -206,12 +215,18 @@ export default function Explore({
           <small>Save</small>
         </button>
         <button
-          onClick={() =>
-            discussion.current?.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            })
-          }
+          onClick={() => {
+            if (discussion.current && info.current) {
+              info.current.scrollTo({
+                top:
+                  info.current.scrollTop +
+                  discussion.current.getBoundingClientRect().top -
+                  info.current.getBoundingClientRect().top -
+                  16,
+                behavior: "smooth",
+              });
+            }
+          }}
         >
           <MessageCircle />
           <small>{(comments[short.id] || []).length} comments</small>
@@ -236,7 +251,12 @@ export default function Explore({
           </button>
         </div>
       </div>
-      <aside className="reel-info">
+      <aside
+        className="reel-info"
+        ref={info}
+        tabIndex={0}
+        aria-label="Behind the short"
+      >
         <span className="eyebrow">BEHIND THE SHORT</span>
         <h2>{p.title}</h2>
         <p>{p.abstract.slice(0, 350)}…</p>
@@ -277,10 +297,14 @@ export default function Explore({
           ))}
         </div>
         <p className="muted">피드백·팔로우·댓글은 이 브라우저에 저장됩니다.</p>
-        <button className="generate-button" onClick={() => onGenerate(p)}>
-          <Sparkles size={14} />
-          Create your version
-        </button>
+
+        {short.demo && !short.videoUrl && short.editorialFocus && (
+          <section className="explanation-focus">
+            <strong>{short.style} · 설명 관점</strong>
+            <p>{short.editorialFocus}</p>
+            <small>영상 제작 전 썸네일 시안입니다.</small>
+          </section>
+        )}
         <h3>Same paper, another perspective</h3>
         {shorts
           .filter((s) => s.paperId === p.id && s.id !== short.id)

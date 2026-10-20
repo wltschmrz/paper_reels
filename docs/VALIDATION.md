@@ -71,3 +71,30 @@
 - GPT 결과는 수동 편집과 독립적인 Sonnet 화면 재검토를 포함한다. 원본 품질과 동등함을 검증한 결과나 무개입 모델 벤치마크가 아니다.
 
 - 최종 데이터 테스트 3개, backend 테스트 20개, production build 통과. 브라우저 시나리오 8개 통과(새 계정명과 기존 baseline 계정명의 부분 일치 때문에 Drifting locator를 논문 카드로 한정한 뒤 해당 시나리오 재실행). 새 GPT/Claude 영상 모두 재생 시간이 실제로 증가하는지 확인했다.
+
+## 2026-10-20 Email Digest Preview
+
+- Legacy Git tag and local bundle verified at commit `7708aaf` before changes.
+- `npm test`: 3 passed. Production build passed.
+- Existing browser regression suite: 8 passed; new digest interaction test passed. Responsive digest test caught a 320px sender-date overflow, fixed by accounting for the left margin; both digest tests then passed at 320/390/768/1440px.
+- Checked screenshots at 390px and 1440px. Beige/cream/orange email styling remains scoped to digest components.
+- Served built assets beneath `/paper_reels/`: direct `#/digest-preview` entry, reload, 4 cards and actual video metadata loading succeeded without browser page errors.
+- No emails sent; no subscriptions changed; no model/API generation calls made. Recommended scores and totals are illustrative; papers use existing source-backed catalogue metadata.
+- Initial browser test attempt had connection-refused errors because the dev server was stopped; restarted Vite at 0.0.0.0:5173 before the successful checks above.
+
+## Demo style redesign
+
+- Backup: `.cache/backups/before-demo-styles-20261020-155804.tar.gz` includes tracked and non-ignored untracked project files before this edit (including earlier uncommitted UI changes).
+- All five real video manifest entries compared equal to the pre-edit snapshot; SHA-256 of all five MP4 and five thumbnails unchanged.
+- Desktop and 390px MeanFlow cards visually inspected: style badges, unique hooks, conceptual artwork and descriptive labels readable.
+- `npm test`: 3 passed. Production build passed. Existing browser regression suite also checks original/sample playback and digest interactions.
+
+## Fixed Explore workspace
+
+- Unit checks (3) and production build passed; prior 12 browser tests passed.
+- New wheel-isolation test passed: panel scroll changes scrollTop without changing the video, panel-bottom wheel does not leak, outside wheel changes the video and resets panel scroll, video stays in place.
+- 320/390/768/1440px viewport bounds checked; desktop and fresh mobile screenshots inspected. After mobile text adjustment, mobile and wheel-isolation tests passed again.
+
+## Release: consumer discovery and digest
+
+Explore video margins increased to 36px per side on desktop and 20px on mobile. Real video entries and all ten associated media files still match the pre-redesign snapshot. Pre-push credential-pattern scan found no matches in tracked/non-ignored project files; env/runtime/backups remain ignored.

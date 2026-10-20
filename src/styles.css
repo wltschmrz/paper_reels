@@ -2279,3 +2279,289 @@ form > .primary {
     animation: none;
   }
 }
+
+.shorts-pending {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 16px;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+.shorts-pending span {
+  font-size: 12px;
+}
+
+.header-digest {
+  white-space: nowrap;
+  font-size: 12px;
+  gap: 7px;
+}
+.header-digest.active {
+  color: var(--teal);
+  background: #eaf5f1;
+  border-color: #bcded5;
+}
+@media (max-width: 1100px) {
+  .topbar-right {
+    gap: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .header-digest {
+    padding: 8px;
+    min-width: 32px;
+  }
+  .header-digest span {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .topbar .breadcrumb > span,
+  .topbar .breadcrumb > strong {
+    display: none;
+  }
+}
+
+/* Only unrendered, classified demos use this treatment. Real covers are unchanged. */
+.styled-demo .cover-top {
+  gap: 4px;
+}
+.styled-demo .cover-top .cover-lens {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #101820;
+  background: var(--cover-accent);
+  border-color: transparent;
+  font-size: 9px;
+}
+.styled-demo .cover-hook strong {
+  font-size: clamp(16px, 1.45vw, 23px);
+}
+.styled-demo .cover-kicker {
+  background: none;
+  color: var(--cover-accent);
+  transform: none;
+  padding: 0;
+  font-size: 7px;
+  margin-bottom: 7px;
+}
+.cover-lens-description {
+  position: absolute;
+  bottom: 51px;
+  left: 11px;
+  right: 8px;
+  color: var(--cover-accent);
+  font-size: 9px;
+  font-weight: 600;
+}
+.styled-demo.large-cover .cover-hook strong {
+  font-size: 36px;
+}
+.styled-demo.large-cover .cover-lens-description {
+  bottom: 110px;
+  left: 25px;
+  font-size: 14px;
+}
+.explanation-focus {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 16px 0;
+}
+.explanation-focus p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+.explanation-focus small {
+  color: var(--muted);
+}
+@media (max-width: 760px) {
+  .styled-demo .cover-hook strong {
+    font-size: 18px;
+  }
+}
+
+/* Stable card widths: filtering never redistributes unused slots across covers. */
+html {
+  scrollbar-gutter: stable;
+}
+.shorts-row {
+  grid-template-columns: repeat(auto-fill, 190px);
+}
+.shorts-row .shorts-pending {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  min-width: 0;
+  padding: 18px 10px;
+  border: 1px dashed #bdceca;
+  background: #f7faf9;
+  border-radius: 10px;
+}
+.shorts-pending strong {
+  color: #45655e;
+  font-size: 14px;
+}
+.shorts-pending small {
+  color: var(--muted);
+  font-size: 10px;
+}
+@media (max-width: 760px) {
+  .shorts-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Explore is a viewport workspace; long paper context never moves the player. */
+.explore-workspace {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.explore-workspace > .topbar {
+  flex: 0 0 72px;
+}
+.explore-workspace > .app-footer {
+  display: none;
+}
+.explore-workspace .explore-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  gap: 16px;
+  overflow: hidden;
+}
+.explore-tabs {
+  flex: 0 0 auto;
+}
+.explore-main .explore-layout {
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1fr) 52px minmax(240px, 360px);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+}
+.explore-main .reel-shell {
+  height: calc(100% - 72px);
+  max-height: none;
+  width: auto;
+  max-width: 100%;
+  justify-self: center;
+  align-self: center;
+}
+.explore-main .reel-info {
+  grid-column: auto;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  padding: 20px;
+}
+.explore-main .reel-controls {
+  min-height: 0;
+  max-height: 100%;
+  gap: 8px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.explore-main .reel-controls button {
+  padding: 6px;
+}
+.explore-main .reel-pagination {
+  margin-top: 4px;
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .explore-main .explore-layout {
+    grid-template-columns: minmax(0, 1fr) 44px minmax(200px, 1fr);
+    gap: 10px;
+  }
+  .explore-main .reel-info {
+    padding: 14px;
+  }
+}
+@media (max-width: 760px) {
+  .explore-workspace .explore-main {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .explore-main .explore-layout {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 10px;
+  }
+  .explore-main .reel-info {
+    grid-column: 1 / -1;
+    padding: 14px;
+  }
+  .explore-main .reel-controls {
+    gap: 2px;
+  }
+  .explore-main .reel-controls button {
+    padding: 3px;
+    gap: 2px;
+  }
+  .explore-main .reel-controls svg {
+    width: 18px;
+    height: 18px;
+  }
+  .explore-main .reel-pagination {
+    gap: 2px;
+  }
+  .explore-main .reel-caption h3 {
+    font-size: 11px;
+  }
+  .explore-main .reel-caption {
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+  }
+}
+@media (max-height: 650px) {
+  .explore-main .reel-controls {
+    gap: 2px;
+  }
+  .explore-main .reel-controls button {
+    padding: 2px;
+    gap: 2px;
+  }
+  .explore-main .reel-controls small {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .explore-main .styled-demo.large-cover .cover-hook {
+    top: 46px;
+    left: 14px;
+    right: 10px;
+  }
+  .explore-main .styled-demo.large-cover .cover-hook strong {
+    font-size: 22px;
+  }
+  .explore-main .large-cover .cover-top {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    font-size: 8px;
+  }
+  .explore-main .styled-demo.large-cover .cover-lens-description {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .explore-main .reel-shell {
+    height: calc(100% - 40px);
+  }
+}

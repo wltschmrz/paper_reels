@@ -193,3 +193,44 @@ RQ3: creator identity, 설명 style, community feedback이 content selection과 
 ## 실제 Flow Map v2 비교 결과 보존
 
 2026-10-18: Windows Docker Desktop 파일 큐 bridge에서 네트워크 없는 컨테이너로 생성 코드를 실행해 GPT 편집 보완본(77.600초)과 Claude 검토본(80.033초)을 같은 Flow Map 논문에 연결했다. 원본 제공 영상(83.6초)은 그대로 유지한다. reference (2)의 비용 효율·영상 품질 개선을 모두 적용했지만, 두 새 영상은 검토·수동 보완을 포함하므로 무개입 모델 비교로 제시하지 않는다. 비용·경과 시간·원문 근거 보충·최종 소스와 검증 기록은 `docs/experiments/flowmap-v2/`에 보관한다. 실제 신규 facts 추출은 이번 비교에서 재실행하지 않았다.
+
+## 2026-10-20 방향 전환: 공급자 제작 + 개인화된 소비
+
+이 결정은 위의 creator-first 서비스 계획보다 우선한다. 기존 MVP는 legacy로 보존하고 단계적으로 전환한다.
+
+- 서비스 제공자가 논문별로 여러 설명 버전을 제작한다. 일반 사용자가 프롬프트를 작성하거나 생성 작업을 요청해야 하는 부담을 줄인다.
+- 사용자는 관심 분야와 선호하는 설명 스타일을 선택해 추천 영상을 받는다. Paper 1:N Short는 유지한다.
+- 기본 스타일: 직관적인 casual / 기하·시각적 설명(3Blue1Brown 참고) / 수학·수식 중심 formal. 목표 길이 1–3분, 한국어·영어 및 light/dark variation을 계획한다. 이 설정의 실제 영상 변형은 아직 구현하지 않았다.
+- 일별 이메일은 relevance score, 논문 제목, 저자와 원문·Shorts 진입을 간결한 목록으로 제공한다.
+- 현재 작업은 독립 Email Digest Preview만 추가한다. 기존 생성 UI, 피드, 백엔드와 모델은 그대로 둔다. 실제 이메일 발송·구독·인증·스케줄러·추천 학습은 범위 밖이다.
+- `#/digest-preview`: 기존 출처 있는 논문 4개, 예시 점수 96/93/88/87 및 수집 규모 68/1,995. 날짜 2026-10-20은 이메일 시연 날짜이며 논문 출판일과 별개다. 최신 논문 실시간 추천으로 오해하지 않도록 화면에 명시한다.
+- 제공된 발표 조사 보고서의 통계·서비스 비교·라이선스 주장과 연구 논문 요약은 이번 UI 작업에서 검증하지 않았다. 발표 자료에 확정 사실로 사용하기 전에 원출처 확인이 필요하다.
+- 후속 사용자 연구: AI 연구자 8–12명, 현실적인 baseline(직접 프롬프트 등)과 비교, 조건·논문 순서 counterbalancing, 사후 인터뷰. 시간·이해도·관련성·성공 결과 수와 적절한 표준 설문(NASA-TLX/SUS/CSI 중 목적에 맞게 선택), 주제 분석을 계획한다. 선택적 formative study는 5–6명 인터뷰/관찰이다. 연구 결과는 아직 없다.
+
+### 후속 수정: 일반 사용자 생성 진입 제거
+
+사용자 확인에 따라 Generate Short / Create Your Version / Your Perspective 타일, Creator Studio, 생성 작업 및 제작 유도 안내를 일반 사용자 화면에서 제거한다. 영상이 없는 논문은 비대화형 준비 안내를 표시한다. 기존 브라우저 생성 job/preset 데이터는 삭제하지 않되 소비자 피드에는 더 이상 합치지 않는다. 공급자용 backend 파이프라인과 legacy 구성 파일은 유지한다.
+
+- Email Digest Preview 진입은 상단 Research prototype과 Your interests 사이에도 제공한다. 모바일은 접근성 이름을 유지한 메일 아이콘으로 축약한다. 이메일 디자인은 기존 beige/orange 명세 대신 ScholarShorts white/teal/연한 mint 팔레트를 사용한다. 제목 날짜는 `20 Oct 2026`으로 표기한다.
+
+### 2026-10-20 데모 썸네일의 세 설명 관점
+
+- 실제 영상과 연결된 썸네일·manifest 5개는 그대로 보존한다. 변경 대상은 demo=true, videoUrl=null인 기존 12개뿐이다.
+- 분류: Intuition(비유·핵심 아이디어), Geometry(곡선·벡터·공간의 움직임), Mathematics(수식·가정·유도). 난이도 등급이 아닌 설명 관점이다.
+- 후킹을 스타일별 질문 템플릿으로 고정하지 않는다. 각 논문의 출처 있는 초록에서 특색을 뽑고 질문·주장·대비를 섞는다. 예: MeanFlow의 한 번 생성/평균 벡터/속도 항등식, iMF의 자기 의존 타깃/유연한 guidance, Drifting의 학습 중 이동/분포 변화/평형, Sinkhorn의 식별성.
+- 황금색/민트/보라색뿐 아니라 아이콘·스타일명·설명 부제를 표시한다. 썸네일은 개념도이며 원문 그림이나 완성 영상으로 표시하지 않는다.
+- 수정 직전 미커밋 변경을 포함한 프로젝트 파일은 `.cache/backups/before-demo-styles-20261020-155804.tar.gz`에 보관했다. ignored env/runtime 데이터는 제외했다. 실제 미디어 10개 SHA-256과 manifest 비교를 통과했다.
+
+### Drifting baseline 숨김 및 스타일 공란
+
+- Drifting의 직접 만든 두 baseline(`drifting-openai-baseline`, `drifting-anthropic-baseline`)은 소비자 피드/Explore/이메일에서 숨긴다. manifest와 MP4·썸네일 파일은 삭제·수정하지 않는다.
+- 공개된 실제 영상이 없는 논문에서 미제작 스타일 슬롯을 표시한다. 기존 데모 시안이 있는 스타일은 그 썸네일을 유지하고, 없는 스타일만 Intuition / Geometry / Mathematics 점선 카드로 채운다. 실제 영상이 있는 Flow Map 카드는 보존한다. 점선 카드는 생성 버튼이 아니다.
+- 필터 전환 시 카드 폭이 재분배되지 않도록 desktop grid는 190px, mobile은 반응형 2열로 구성한다. scrollbar gutter를 예약한다.
+
+스타일 슬롯의 최종 순서는 **Intuition → Geometry → Mathematics (I → G → M)**다. 빈칸도 원래 스타일 위치에 두고, 뒤로 몰아넣지 않는다. 이 정렬은 미제작 데모/공란에 적용하며 실제 Flow Map 영상의 순서는 유지한다.
+
+Paper Feed와 Paper Shorts 모두 개별 카드의 초록/쇼츠 양방향 전환을 지원한다. sidebar 또는 상단 feed tab에서 Paper Feed/Paper Shorts를 선택하면(같은 페이지 재선택 포함) 개별 뒤집힘을 초기화한다. 검색·주제·정렬은 유지하며 페이지 기본 보기로만 통일한다.
+
+Explore는 메인 상단 Papers / Paper Shorts 옆에서도 접근한다. Explore에서는 화면 높이를 고정하고 Behind the short를 독립 스크롤 패널로 제공한다. 설명 패널 안의 wheel은 본문만 스크롤하며 끝에서도 쇼츠를 넘기지 않는다. 패널 밖 Explore 영역의 wheel은 다음/이전 쇼츠로 전환한다. 모바일은 영상/액션 위, 독립 설명 패널 아래의 고정 화면 구성이다.
+
+Explore의 쇼츠 위아래 여백은 최종 desktop 각각 36px, mobile 각각 20px로 조정한다. 독립 설명 패널과 wheel 전환은 유지한다.
