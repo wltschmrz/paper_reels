@@ -234,3 +234,5 @@ Paper Feed와 Paper Shorts 모두 개별 카드의 초록/쇼츠 양방향 전�
 Explore는 메인 상단 Papers / Paper Shorts 옆에서도 접근한다. Explore에서는 화면 높이를 고정하고 Behind the short를 독립 스크롤 패널로 제공한다. 설명 패널 안의 wheel은 본문만 스크롤하며 끝에서도 쇼츠를 넘기지 않는다. 패널 밖 Explore 영역의 wheel은 다음/이전 쇼츠로 전환한다. 모바일은 영상/액션 위, 독립 설명 패널 아래의 고정 화면 구성이다.
 
 Explore의 쇼츠 위아래 여백은 최종 desktop 각각 36px, mobile 각각 20px로 조정한다. 독립 설명 패널과 wheel 전환은 유지한다.
+
+모바일에서 쇼츠 크기 확보를 위해 상단 Papers/Paper Shorts/Explore 탭을 숨기고 햄버거 내비게이션을 사용한다. Explore 영상 여백은 각각 8px로 줄이고, 영상/설명 패널 높이 비중은 65%/35%로 조정한다. Desktop은 그대로 유지한다.

@@ -2498,7 +2498,7 @@ html {
   }
   .explore-main .explore-layout {
     grid-template-columns: minmax(0, 1fr) 44px;
-    grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-rows: minmax(0, 13fr) minmax(0, 7fr);
     gap: 10px;
   }
   .explore-main .reel-info {
@@ -2562,6 +2562,12 @@ html {
 
 @media (max-width: 760px) {
   .explore-main .reel-shell {
-    height: calc(100% - 40px);
+    height: calc(100% - 16px);
+  }
+}
+
+@media (max-width: 760px) {
+  .feed-tabs {
+    display: none;
   }
 }

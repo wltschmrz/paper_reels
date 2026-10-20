@@ -551,6 +551,14 @@ test("Explore tabs and independent panel scrolling keep playback in the viewport
         ),
       )
       .toBe(true);
+    if (width <= 760) {
+      await expect(page.locator(".explore-tabs")).toBeHidden();
+      await expect(
+        page.getByRole("button", { name: "메뉴 열기" }),
+      ).toBeVisible();
+    } else {
+      await expect(page.locator(".explore-tabs")).toBeVisible();
+    }
     const bounds = await reel.boundingBox();
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(900);
     await page.screenshot({ path: `test-results/fixed-explore-${width}.png` });
