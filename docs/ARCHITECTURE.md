@@ -108,3 +108,6 @@ Explore app-body는 100dvh flex container이며 main은 min-height:0으로 남�
 ### Unified Explore frame
 
 reel-stage는 크기가 확정된 grid cell이자 size query container다. 자식 reel-shell은 stage의 가용 폭/높이(상하 여백 제외) 중 작은 쪽으로 9:16 크기를 결정하고 중앙 정렬한다. video와 demo placeholder 모두 absolute inset:0으로 동일한 프레임을 채워 원본 video intrinsic size가 grid에 영향을 주지 않는다. 공통 caption 스타일을 적용하고, Explore 상단 탭 JSX는 제거했다. feed 화면의 탭은 유지한다.
+
+### Explore TL;DR / paper questions
+`src/data/paperInsights.json`은 papers.json의 21편 abstract에 근거한 AI 작성 TL;DR, 예시 질문/답변, 출처와 정적 작성 표시를 보관한다. Explore 본문에는 긴 abstract 대신 TL;DR을 표시하고 기존 paper detail modal로 전문 초록을 연결한다. `PaperQuestions`는 `ss-paper-questions` localStorage를 paper ID로 묶어 같은 논문의 여러 쇼츠가 질문을 공유한다. 기존 ss-comments는 삭제하지 않는다. 사용자 질문에 예시 답변을 자동 연결하지 않으며, 실시간 답변·공개 저장이 없는 상태를 명시한다. 이후 서버의 논문 근거 검색/LLM 응답 API로 교체할 경계는 이 컴포넌트다. 평가는 기존대로 short ID별로 저장한다.

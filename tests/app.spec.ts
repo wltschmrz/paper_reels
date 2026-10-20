@@ -66,12 +66,12 @@ test("research discovery, persistence, evaluation and collections", async ({
   await expect(
     page.getByRole("button", { name: "Following", exact: true }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "0 comments" }).click();
+  await page.getByRole("button", { name: "Ask AI" }).click();
   await page
-    .getByLabel("Comment", { exact: true })
+    .getByLabel("Question", { exact: true })
     .fill("00:15 — 원문 식과 비교해 보기");
-  await page.getByRole("button", { name: "Post comment" }).click();
-  await expect(page.locator(".comment-box")).toContainText(
+  await page.getByRole("button", { name: "Save question" }).click();
+  await expect(page.locator(".paper-qa")).toContainText(
     "00:15 — 원문 식과 비교해 보기",
   );
   await page.screenshot({ path: "test-results/explore.png" });
@@ -98,7 +98,7 @@ test("mobile layout, sample explore, filtering and modal usability", async ({
     .getByRole("button", { name: "Explore NEW" })
     .click();
   await expect(page.locator("video")).toBeVisible();
-  await expect(page.locator(".comment-box")).toBeVisible();
+  await expect(page.locator(".paper-qa")).toBeVisible();
   await page
     .getByRole("button", { name: "Your interests", exact: true })
     .click();
@@ -124,7 +124,7 @@ test("mobile layout, sample explore, filtering and modal usability", async ({
   ).toBeTruthy();
 });
 
-test("seeded thumbnail opens discussion and persists independent feedback", async ({
+test("paper questions persist across perspectives with independent short feedback", async ({
   page,
 }) => {
   await page.goto("/");
@@ -148,15 +148,17 @@ test("seeded thumbnail opens discussion and persists independent feedback", asyn
     .getByRole("button", { name: "Good visualization", exact: true })
     .click();
   await page
-    .getByLabel("Comment", { exact: true })
+    .getByLabel("Question", { exact: true })
     .fill("썸네일의 흐름 그림이 궁금해요.");
-  await page.getByRole("button", { name: "Post comment", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Save question", exact: true })
+    .click();
   await page.getByRole("button", { name: "다음 Short" }).click();
-  await expect(page.locator(".comment-box")).not.toContainText(
+  await expect(page.locator(".paper-qa")).toContainText(
     "썸네일의 흐름 그림이 궁금해요.",
   );
   await page.getByRole("button", { name: "이전 Short" }).click();
-  await expect(page.locator(".comment-box")).toContainText(
+  await expect(page.locator(".paper-qa")).toContainText(
     "썸네일의 흐름 그림이 궁금해요.",
   );
   await expect(
@@ -168,7 +170,7 @@ test("seeded thumbnail opens discussion and persists independent feedback", asyn
     .getByRole("button", { name: "Explore NEW" })
     .click();
   await page.getByRole("button", { name: "다음 Short" }).click();
-  await expect(page.locator(".comment-box")).toContainText(
+  await expect(page.locator(".paper-qa")).toContainText(
     "썸네일의 흐름 그림이 궁금해요.",
   );
   await expect(
@@ -604,4 +606,58 @@ test("real videos and demo covers share exactly the same Explore frame", async (
       expect(loaded![key]).toBeCloseTo(original![key], 0);
     await page.screenshot({ path: `test-results/unified-video-${width}.png` });
   }
+});
+
+test("Explore shows concise insights, source links, honest Q&A and style badges in order", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .locator("nav")
+    .getByRole("button", { name: "Explore NEW" })
+    .click();
+  const panel = page.locator(".reel-info");
+  await expect(panel.locator(".paper-tldr")).toContainText("TL;DR");
+  await expect(
+    panel.getByRole("link", { name: "Open original PDF" }),
+  ).toHaveAttribute("href", "https://arxiv.org/pdf/2610.20674");
+  const order = await panel.evaluate((el) => {
+    const parts = [
+      el.querySelector(".paper-tldr"),
+      el.querySelector(".paper-source-links"),
+      el.querySelector(".paper-qa"),
+      el.querySelector(".related-short"),
+      el.querySelector(".feedback-options"),
+    ];
+    return parts.every(
+      (part, i) =>
+        part &&
+        (!i ||
+          !!(
+            parts[i - 1]!.compareDocumentPosition(part) &
+            Node.DOCUMENT_POSITION_FOLLOWING
+          )),
+    );
+  });
+  expect(order).toBeTruthy();
+  await panel.getByRole("button", { name: "Abstract details" }).click();
+  await expect(page.getByRole("dialog")).toContainText("Abstract");
+  await page.keyboard.press("Escape");
+  await panel.locator(".qa-example summary").click();
+  await expect(panel.locator(".qa-answer")).toContainText("AI 작성 예시 답변");
+  await panel
+    .getByLabel("Question", { exact: true })
+    .fill("이 논문의 안정성 조건은 무엇인가요?");
+  await panel.getByRole("button", { name: "Save question" }).click();
+  await expect(panel.locator(".qa-pending")).toContainText(
+    "질문만 저장되었습니다",
+  );
+  await page.getByRole("button", { name: "다음 Short" }).click();
+  await expect(panel.locator(".qa-thread")).not.toContainText(
+    "이 논문의 안정성 조건은 무엇인가요?",
+  );
+  await expect(panel.locator(".perspective-badge")).toHaveCount(2);
+  await expect(panel.locator(".perspective-badge").first()).toContainText(
+    "Geometry",
+  );
 });

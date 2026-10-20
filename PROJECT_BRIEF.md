@@ -240,3 +240,6 @@ Explore의 쇼츠 위아래 여백은 최종 desktop 각각 36px, mobile 각각 
 모바일 상단 탭 숨김은 Explore 화면에만 적용한다. Paper Feed/Paper Shorts에서는 상단 탭을 계속 표시한다.
 
 Explore에서는 PC/모바일 모두 상단 Papers/Paper Shorts/Explore 탭을 제거한다. 일반 피드 상단 탭과 sidebar 내비게이션은 유지한다. 실제 MP4와 데모 썸네일 모두 동일한 9:16 공통 프레임을 사용하고 caption과 설명 패널 위치를 통일한다. 원본 영상·썸네일 파일은 수정하지 않는다.
+
+### Explore 논문 이해 패널 (2026-10-20)
+제목 아래에는 21편의 실제 abstract에 근거해 AI가 작성한 한 문장 TL;DR을 제공한다. Abstract details / Open original PDF → 논문 질문 → 다른 perspective(스타일 배지) → 설명 평가 순서다. 질문은 의견 댓글이 아니라 논문 기반 AI Q&A를 지향한다. 현재 정적 MVP는 질문을 브라우저에 논문별로 저장하고, 출처가 있는 미리 작성한 AI 예시 답변만 제공한다. 실시간 LLM 응답·공개 공유는 미연결임을 표시한다.

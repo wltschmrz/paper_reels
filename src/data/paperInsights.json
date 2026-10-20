@@ -1,0 +1,170 @@
+{
+  "2610.20674": {
+    "tldr": "Flow Map 학습의 수렴을 분석하고, 유한 업데이트의 불안정을 줄이는 정규화·가중치 조건을 제시합니다.",
+    "sampleQuestion": "정규화가 왜 필요한가요?",
+    "sampleAnswer": "이 논문의 초록은 MeanFlow와 Lagrangian 손실의 유한 업데이트가 무한히 커질 수 있음을 지적합니다. 적응적 정규화는 업데이트를 유계로 만들고, 특정 가중치와 결합하면 해의 근방으로 수렴하는 보장을 제공합니다. 모든 설정에서 정확한 해로 수렴한다는 뜻은 아닙니다.",
+    "sourceUrl": "https://arxiv.org/abs/2610.20674",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2505.13447": {
+    "tldr": "순간 속도 대신 구간의 평균 속도를 학습해 사전학습이나 증류 없이 한 번의 평가로 이미지를 생성합니다.",
+    "sampleQuestion": "평균 속도가 기존 Flow Matching과 어떻게 다른가요?",
+    "sampleAnswer": "Flow Matching은 순간 속도를 모델링하지만 MeanFlow는 시간 구간의 평균 속도를 학습합니다. 두 속도를 잇는 항등식을 학습에 활용하여 한 번의 함수 평가로 생성하도록 설계합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2505.13447",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2512.02012": {
+    "tldr": "MeanFlow의 학습 목표를 순간 속도 회귀로 재구성하고, 추론 시 조절 가능한 guidance를 도입합니다.",
+    "sampleQuestion": "iMF에서는 무엇이 개선되었나요?",
+    "sampleAnswer": "평균 속도를 예측하는 네트워크로 순간 속도를 재매개화하여 학습 안정성을 개선합니다. 또 guidance를 명시적 조건으로 입력해 학습 때 고정하던 강도를 추론 시 조절할 수 있게 합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2512.02012",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2602.04770": {
+    "tldr": "추론 중 반복 이동 대신 학습 중 생성 분포를 이동시켜 한 번의 추론으로 샘플을 생성합니다.",
+    "sampleQuestion": "Drifting에서 실제로 움직이는 것은 무엇인가요?",
+    "sampleAnswer": "Drifting field가 표본의 이동 방향을 정하고, 학습 과정에서 신경망 최적화가 생성 분포를 변화시킵니다. 초록은 분포가 일치하면 이 장이 평형에 도달한다고 설명하며, 추론에서는 한 번의 생성기 호출을 사용합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2602.04770",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2511.23342": {
+    "tldr": "휘어진 생성 경로를 직선화해 평균 속도 추정과 MeanFlow 최적화의 어려움을 줄입니다.",
+    "sampleQuestion": "곡률이 학습을 어렵게 만드는 이유는 무엇인가요?",
+    "sampleAnswer": "초록은 크게 휘어진 경로가 잡음이 많은 손실 지형을 만들 수 있다고 설명합니다. Rectified MeanFlow는 사전학습 모델에서 얻은 결합으로 경로를 직선화하고, 남은 고곡률 쌍 일부를 제외하는 방식으로 이 병목을 줄입니다.",
+    "sourceUrl": "https://arxiv.org/abs/2511.23342",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2508.07102": {
+    "tldr": "평균 가속도를 도입한 2차 MeanFlow의 일관성 조건·표현력·계산 효율을 이론적으로 분석합니다.",
+    "sampleQuestion": "2차 MeanFlow는 속도에 무엇을 더하나요?",
+    "sampleAnswer": "평균 속도에 더해 평균 가속도장을 사용합니다. 이 논문은 일반화된 일관성 조건, 회로 복잡도에 따른 표현력, attention 근사의 효율 조건을 분석한 이론 연구이며, 초록만으로 실제 생성 품질 향상을 단정할 수는 없습니다.",
+    "sourceUrl": "https://arxiv.org/abs/2508.07102",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2607.27431": {
+    "tldr": "MeanFlow를 회전·이동의 Lie group 구조로 확장해 적은 단계로 단백질 골격을 생성합니다.",
+    "sampleQuestion": "단백질 생성에 일반 MeanFlow를 바로 쓰기 어려운 이유는 무엇인가요?",
+    "sampleAnswer": "단백질 프레임에는 유클리드 위치뿐 아니라 회전의 기하 구조가 포함됩니다. 이 방법은 회전과 이동의 평균 속도 항등식을 따로 유도하고, 적은 단계의 생성 성능을 높이지만 다양성에는 일부 비용이 따른다고 보고합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2607.27431",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2603.12366": {
+    "tldr": "Drifting을 Sinkhorn divergence의 흐름과 연결해 평형이 분포 일치를 의미하는 이론적 근거를 보완합니다.",
+    "sampleQuestion": "움직임이 멈추면 두 분포가 같다고 볼 수 있나요?",
+    "sampleAnswer": "이 논문은 기존 drifting의 식별성 공백을 다룹니다. Sinkhorn divergence의 definiteness를 활용하여 제시한 정식화에서 zero drift가 모델·목표 분포의 일치를 뜻함을 보이며, 양쪽 주변분포를 맞추는 Sinkhorn scaling이 핵심입니다.",
+    "sourceUrl": "https://arxiv.org/abs/2603.12366",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2605.10727": {
+    "tldr": "커널의 기울기로 Drifting 방향을 정의해 이론적 식별성을 확장하고 비유클리드·이산 데이터 생성에 적용합니다.",
+    "sampleQuestion": "왜 변위 대신 커널의 기울기를 사용하나요?",
+    "sampleAnswer": "커널 기울기는 일반 커널에서 drift를 평활화된 두 분포의 score 차이로 드러냅니다. 초록은 characteristic kernel에서의 식별성을 설명하고, 접벡터라는 성질을 이용해 다양체와 확률 단체의 이산 데이터로 확장합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2605.10727",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2605.17244": {
+    "tldr": "한 번 생성하는 Drifting의 효율을 유지하면서 필요할 때 여러 추론 단계로 결과를 개선하도록 연결합니다.",
+    "sampleQuestion": "한 단계 모델인데 여러 단계를 사용할 수도 있나요?",
+    "sampleAnswer": "Drift Flow Matching은 직접 수송 맵과 반복적 flow 생성을 연결합니다. 한 단계의 효율을 활용하면서 필요하면 추가 추론 단계로 결과를 다듬도록 하여 품질과 계산량을 조절하는 것이 목적입니다.",
+    "sourceUrl": "https://arxiv.org/abs/2605.17244",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2606.02521": {
+    "tldr": "보상 순위로 만든 특징 공간의 이동 방향을 이용해 미분 불가능한 보상으로도 한 단계 생성기를 선호도에 맞춥니다.",
+    "sampleQuestion": "보상 모델을 역전파하지 않고 어떻게 학습하나요?",
+    "sampleAnswer": "현재 생성기의 후보를 보상으로 순위화한 뒤 높은 점수와 낮은 점수의 샘플로 특징 공간의 업데이트 방향을 만듭니다. 보상은 순위에만 사용하므로 미분 불가능하거나 블랙박스인 보상도 사용할 수 있고, 추론은 한 번의 호출로 유지됩니다.",
+    "sourceUrl": "https://arxiv.org/abs/2606.02521",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2606.15553": {
+    "tldr": "복잡한 RAE 잠재 경로를 직접 따라가는 대신 drifting field로 증류해 고품질 한 단계 생성을 구현합니다.",
+    "sampleQuestion": "RAE의 증류를 어렵게 하는 것은 무엇인가요?",
+    "sampleAnswer": "논문은 비등방적인 잠재 공간이 복잡한 teacher 궤적을 만든다고 설명합니다. Drift-RAE는 drifting field를 이용한 직접 감독으로 이 문제에 접근하고, 추가 비용이 거의 없는 외삽 기반 guidance도 제안합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2606.15553",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2604.04528": {
+    "tldr": "오프라인 궤적 데이터와 비용 목표를 함께 반영하는 Drifting 생성기로 미지의 동역학에서 빠르게 계획합니다.",
+    "sampleQuestion": "데이터에 있는 행동을 그대로 따라 하는 것과 어떻게 다른가요?",
+    "sampleAnswer": "단순 분포 일치는 데이터의 행동 분포를 재현하지만 원하는 비용을 최소화하지는 않습니다. Drifting MPC는 데이터 prior와의 근접성 및 계획의 최적성을 절충하는 목표로 궤적 분포를 학습합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2604.04528",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2210.02747": {
+    "tldr": "조건부 확률 경로의 벡터장을 회귀해 시뮬레이션 없이 연속 정규화 흐름을 학습합니다.",
+    "sampleQuestion": "simulation-free라면 추론에도 적분이 필요 없나요?",
+    "sampleAnswer": "simulation-free는 여기서 학습 방식을 설명합니다. Flow Matching은 조건부 경로의 벡터장 회귀로 학습하며, 원 논문의 생성 단계는 수치 ODE solver를 사용합니다. 따라서 기본 Flow Matching 자체가 한 단계 생성이라는 뜻은 아닙니다.",
+    "sourceUrl": "https://arxiv.org/abs/2210.02747",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2209.03003": {
+    "tldr": "두 분포 사이의 이동 경로를 직선에 가깝게 학습해 적은 수의 적분 단계로 생성·변환을 수행합니다.",
+    "sampleQuestion": "경로를 곧게 만들면 왜 빨라지나요?",
+    "sampleAnswer": "직선 경로는 두 점 사이의 가장 짧은 경로이며 시간 이산화 오차 없이 모사할 수 있다는 관점입니다. 반복적인 rectification은 더 곧은 흐름을 만들어 추론 때 거친 시간 간격으로도 정확히 근사하도록 돕습니다.",
+    "sourceUrl": "https://arxiv.org/abs/2209.03003",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2303.01469": {
+    "tldr": "노이즈를 데이터로 직접 매핑하는 일관성 모델로 한 단계 생성과 선택적인 다단계 샘플링을 지원합니다.",
+    "sampleQuestion": "Consistency Model은 반드시 증류로 학습하나요?",
+    "sampleAnswer": "아닙니다. 사전학습 diffusion 모델에서 증류할 수도 있고 독립적인 생성 모델로 학습할 수도 있습니다. 설계상 한 단계 생성을 지원하면서도 품질과 계산량을 조절하기 위한 다단계 샘플링을 허용합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2303.01469",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2310.14189": {
+    "tldr": "teacher EMA·손실·노이즈 스케줄을 개선해 증류 없이 학습하는 Consistency Model의 생성 품질을 높입니다.",
+    "sampleQuestion": "증류 없이 학습할 때 무엇을 바꾸었나요?",
+    "sampleAnswer": "teacher consistency 모델에서 EMA를 제거하고, LPIPS 대신 Pseudo-Huber 손실을 사용합니다. 여기에 lognormal 노이즈 스케줄과 단계적으로 증가하는 이산화 단계 수 등을 결합해 직접 학습의 성능을 개선합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2310.14189",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2410.12557": {
+    "tldr": "원하는 스텝 크기를 조건으로 주는 단일 네트워크를 학습해 한 번 또는 여러 번의 생성 단계를 선택합니다.",
+    "sampleQuestion": "Shortcut Model은 단계 수를 어떻게 바꾸나요?",
+    "sampleAnswer": "현재 노이즈 수준뿐 아니라 원하는 스텝 크기를 네트워크에 입력합니다. 이 조건을 통해 생성 과정에서 얼마나 앞서 이동할지를 학습하며, 하나의 네트워크와 학습 단계로 여러 추론 예산을 지원합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2410.12557",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2503.07565": {
+    "tldr": "사전학습·증류 없이 단일 단계 학습으로 한 번 또는 적은 단계의 생성을 지원하는 모멘트 매칭 방법입니다.",
+    "sampleQuestion": "IMM은 기존 증류와 어떻게 다른가요?",
+    "sampleAnswer": "IMM은 사전학습 초기화나 두 네트워크의 최적화를 요구하지 않는 단일 단계 학습을 제안합니다. 초록은 분포 수준의 수렴과 다양한 하이퍼파라미터에서의 안정성을 강조하며 한 단계 또는 적은 단계의 샘플링을 목표로 합니다.",
+    "sourceUrl": "https://arxiv.org/abs/2503.07565",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2010.02502": {
+    "tldr": "DDPM과 같은 학습 목표를 유지하면서 비마르코프 역과정을 이용해 더 적은 단계로 샘플링합니다.",
+    "sampleQuestion": "DDIM을 쓰려면 학습 목표를 다시 바꿔야 하나요?",
+    "sampleAnswer": "DDIM은 DDPM과 동일한 학습 절차·목표를 갖는 비마르코프 확산 과정 계열을 구성합니다. 역과정을 더 빠르게 샘플링해 계산량과 품질을 조절하며, 잠재 공간에서 의미 있는 보간도 보여줍니다.",
+    "sourceUrl": "https://arxiv.org/abs/2010.02502",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  },
+  "2006.11239": {
+    "tldr": "노이즈를 점진적으로 제거하는 확산 확률 모델을 학습해 고품질 이미지를 생성합니다.",
+    "sampleQuestion": "DDPM은 어떤 목표로 학습하나요?",
+    "sampleAnswer": "확산 확률 모델과 denoising score matching의 연결에서 얻은 가중 변분 경계를 사용합니다. 노이즈 제거를 학습하는 방식으로 고품질 이미지 합성을 보이며, 한 번에 생성하는 방법을 제안한 논문은 아닙니다.",
+    "sourceUrl": "https://arxiv.org/abs/2006.11239",
+    "sourceSection": "Abstract",
+    "authorship": "AI-authored static summary and example; not a live response"
+  }
+}

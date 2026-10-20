@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 import type { Short, Paper } from "../types";
 import ShortCover from "./ShortCover";
+import PaperQuestions from "./PaperQuestions";
+import insights from "../data/paperInsights.json";
+import explanationStyles from "../data/explanationStyles.json";
 import { asset } from "./PaperCard";
 import { useLocalState } from "../hooks/useLocalState";
 export default function Explore({
@@ -36,15 +39,10 @@ export default function Explore({
   );
   const [saved, setSaved] = useLocalState<string[]>("ss-saved-shorts", []);
   const [following, setFollowing] = useLocalState<string[]>("ss-following", []);
-  const [comments, setComments] = useLocalState<Record<string, string[]>>(
-    "ss-comments",
-    {},
-  );
   const [feedback, setFeedback] = useLocalState<Record<string, string>>(
     "ss-feedback",
     {},
   );
-  const [draft, setDraft] = useState("");
   const layout = useRef<HTMLDivElement>(null);
   const info = useRef<HTMLElement>(null);
   const discussion = useRef<HTMLElement>(null);
@@ -55,11 +53,9 @@ export default function Explore({
   const p = papers.find((p) => p.id === short?.paperId);
   const navigate = (delta: number) => {
     setIndex((i) => Math.min(shorts.length - 1, Math.max(0, i + delta)));
-    setDraft("");
   };
   useEffect(() => {
     video.current?.load();
-    setDraft("");
     info.current?.scrollTo({ top: 0 });
   }, [short?.id]);
   useEffect(() => {
@@ -79,7 +75,6 @@ export default function Explore({
         setIndex((i) =>
           Math.min(shorts.length - 1, Math.max(0, i + (e.deltaY > 0 ? 1 : -1))),
         );
-        setDraft("");
         lastScroll.current = Date.now();
       }
     };
@@ -233,7 +228,7 @@ export default function Explore({
           }}
         >
           <MessageCircle />
-          <small>{(comments[short.id] || []).length} comments</small>
+          <small>Ask AI</small>
         </button>
         <div className="reel-pagination">
           <button
@@ -263,18 +258,49 @@ export default function Explore({
       >
         <span className="eyebrow">BEHIND THE SHORT</span>
         <h2>{p.title}</h2>
-        <p>{p.abstract.slice(0, 350)}…</p>
-        <button className="secondary" onClick={() => onDetail(p)}>
-          Paper details <ArrowUpRight size={15} />
-        </button>
-        <a
-          className="text-button"
-          target="_blank"
-          rel="noreferrer"
-          href={p.pdfUrl}
-        >
-          Open original PDF <ArrowUpRight size={14} />
-        </a>
+        <div className="paper-tldr">
+          <span>TL;DR</span>
+          <p>
+            {insights[p.id as keyof typeof insights]?.tldr ||
+              "요약을 준비 중입니다. 원문 초록을 확인해 주세요."}
+          </p>
+        </div>
+        <div className="paper-source-links">
+          <button className="secondary" onClick={() => onDetail(p)}>
+            Abstract details <ArrowUpRight size={14} />
+          </button>
+          <a
+            className="secondary"
+            target="_blank"
+            rel="noreferrer"
+            href={p.pdfUrl}
+          >
+            Open original PDF <ArrowUpRight size={14} />
+          </a>
+        </div>
+        <section className="paper-qa" ref={discussion}>
+          <PaperQuestions key={p.id} paperId={p.id} />
+        </section>
+        <h3>Same paper, another perspective</h3>
+        {shorts
+          .filter((s) => s.paperId === p.id && s.id !== short.id)
+          .map((s) => (
+            <button
+              className="related-short"
+              key={s.id}
+              onClick={() => setIndex(shorts.findIndex((x) => x.id === s.id))}
+            >
+              <Play size={14} />
+              <span className="related-short-title">{s.title}</span>
+              <span
+                className={`perspective-badge ${s.explanationStyle || "recorded"}`}
+              >
+                {s.explanationStyle
+                  ? explanationStyles[s.explanationStyle].label
+                  : s.style}
+              </span>
+            </button>
+          ))}
         <hr />
         <h3>How was this explanation?</h3>
         <div className="feedback-options">
@@ -300,71 +326,7 @@ export default function Explore({
             </button>
           ))}
         </div>
-        <p className="muted">피드백·팔로우·댓글은 이 브라우저에 저장됩니다.</p>
-
-        {short.demo && !short.videoUrl && short.editorialFocus && (
-          <section className="explanation-focus">
-            <strong>{short.style} · 설명 관점</strong>
-            <p>{short.editorialFocus}</p>
-            <small>영상 제작 전 썸네일 시안입니다.</small>
-          </section>
-        )}
-        <h3>Same paper, another perspective</h3>
-        {shorts
-          .filter((s) => s.paperId === p.id && s.id !== short.id)
-          .map((s) => (
-            <button
-              className="related-short"
-              key={s.id}
-              onClick={() => setIndex(shorts.findIndex((x) => x.id === s.id))}
-            >
-              <Play size={14} />
-              {s.title}
-            </button>
-          ))}
-        <section className="comment-box" ref={discussion}>
-          <h3>
-            Discussion{" "}
-            <span className="muted">
-              {(comments[short.id] || []).length} comments
-            </span>
-          </h3>
-          {!(comments[short.id] || []).length && (
-            <p className="discussion-empty">
-              첫 의견을 남겨보세요. 현재는 영상 없는 샘플 콘텐츠입니다.
-            </p>
-          )}
-          {(comments[short.id] || []).map((c, i) => (
-            <p key={i}>
-              <strong className="comment-author">@you</strong>
-              {c}
-            </p>
-          ))}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!draft.trim()) return;
-              setComments({
-                ...comments,
-                [short.id]: [...(comments[short.id] || []), draft.trim()],
-              });
-              setDraft("");
-            }}
-          >
-            <label>
-              Comment
-              <textarea
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                placeholder="원문의 근거나 타임스탬프를 함께 남겨주세요"
-                maxLength={2000}
-              />
-            </label>
-            <button className="primary" disabled={!draft.trim()}>
-              Post comment
-            </button>
-          </form>
-        </section>
+        <p className="muted">평가는 이 브라우저에 저장됩니다.</p>
       </aside>
     </div>
   );

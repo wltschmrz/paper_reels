@@ -102,3 +102,11 @@ Explore video margins increased to 36px per side on desktop and 20px on mobile. 
 ## Unified Explore media frame
 
 Removed Explore tabs at all widths; paper-feed tabs remain. Actual MP4 and demo art share a container-sized 9:16 frame and common caption placement. A missing explicit width on the flex main initially caused size-contained video columns to collapse to zero; assigning main width:100% fixes this. Regression coverage checks positive frame dimensions and identical x/y/width/height before/after real→demo→loaded-real transitions at 390/768/1440/1920/2560px. Original media and metadata remain unchanged.
+
+## Explore TL;DR and paper Q&A
+
+- All 21 source-backed papers have a concise AI-authored TL;DR and explicitly static, abstract-grounded example question/answer with original source links.
+- `npm test`: 4 passed; `npm run build`: passed; `npm run test:e2e`: 15 passed.
+- Browser checks cover requested panel order, abstract modal, original PDF URL, style badges, question persistence across perspectives/reload, isolation between papers and independent per-short evaluations.
+- Custom questions display a pending/unconnected notice; no live LLM responses or public sharing are claimed. No API calls or costs incurred.
+- Desktop screenshot inspected; responsive and wide-screen frame regression tests passed. All original real-media entries and ten assets unchanged.

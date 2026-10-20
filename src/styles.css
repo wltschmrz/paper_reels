@@ -2626,3 +2626,143 @@ html {
     padding: 10px 12px;
   }
 }
+.paper-tldr {
+  background: #eef7f4;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 14px 0;
+}
+.paper-tldr > span {
+  color: var(--teal);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.5px;
+}
+.reel-info .paper-tldr p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #35524c;
+  line-height: 1.7;
+}
+.paper-source-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+.paper-source-links .secondary {
+  padding: 10px 6px;
+  font-size: 10px;
+  justify-content: center;
+  gap: 3px;
+}
+.paper-source-links svg {
+  flex-shrink: 0;
+}
+.paper-qa {
+  border-top: 1px solid var(--border);
+  margin-top: 22px;
+  padding-top: 4px;
+}
+.paper-qa h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reel-info .qa-intro {
+  color: #566e66;
+}
+.reel-info .qa-demo-note {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.paper-qa textarea {
+  min-height: 80px;
+}
+.paper-qa form > button {
+  margin-top: 10px;
+}
+.qa-thread {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+.qa-question {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.qa-question p {
+  white-space: pre-wrap;
+}
+.qa-pending {
+  display: flex;
+  gap: 5px;
+  color: #73867e;
+  font-size: 10px;
+}
+.qa-example {
+  margin: 16px 0 22px;
+  font-size: 11px;
+}
+.qa-example summary {
+  cursor: pointer;
+  color: var(--teal);
+  padding: 10px 0;
+}
+.qa-answer {
+  padding: 12px;
+  background: #eef7f4;
+  border-radius: 9px;
+}
+.qa-answer > strong {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--teal);
+}
+.qa-answer > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--teal);
+}
+.qa-answer > small {
+  display: block;
+  color: #73867e;
+  font-size: 10px;
+  margin-top: 9px;
+}
+.reel-info .related-short {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 0;
+}
+.related-short-title {
+  flex: 1;
+  min-width: 90px;
+}
+.perspective-badge {
+  font-size: 9px;
+  line-height: 1.5;
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: #edf1f3;
+  color: #53636c;
+  max-width: 100%;
+}
+.perspective-badge.intuition {
+  background: #fff2d7;
+  color: #7d560d;
+}
+.perspective-badge.geometry {
+  background: #dff7f1;
+  color: #11675c;
+}
+.perspective-badge.mathematics {
+  background: #f0e9ff;
+  color: #654195;
+}
