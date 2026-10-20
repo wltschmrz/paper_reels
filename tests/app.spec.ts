@@ -643,14 +643,13 @@ test("Explore shows concise insights, source links, honest Q&A and style badges 
   await panel.getByRole("button", { name: "Abstract details" }).click();
   await expect(page.getByRole("dialog")).toContainText("Abstract");
   await page.keyboard.press("Escape");
-  await panel.locator(".qa-example summary").click();
-  await expect(panel.locator(".qa-answer")).toContainText("AI 작성 예시 답변");
+  await expect(panel.locator(".qa-answer")).toContainText("ScholarShorts AI");
   await panel
     .getByLabel("Question", { exact: true })
     .fill("이 논문의 안정성 조건은 무엇인가요?");
   await panel.getByRole("button", { name: "Save question" }).click();
   await expect(panel.locator(".qa-pending")).toContainText(
-    "질문만 저장되었습니다",
+    "Saved · AI replies coming soon",
   );
   await page.getByRole("button", { name: "다음 Short" }).click();
   await expect(panel.locator(".qa-thread")).not.toContainText(
@@ -660,4 +659,44 @@ test("Explore shows concise insights, source links, honest Q&A and style badges 
   await expect(panel.locator(".perspective-badge").first()).toContainText(
     "Geometry",
   );
+});
+
+test("English discussion replaces legacy questions and uses genre badges", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.evaluate(() =>
+    localStorage.setItem(
+      "ss-paper-questions",
+      JSON.stringify({
+        "2610.20674": [{ id: "old", text: "old test question" }],
+      }),
+    ),
+  );
+  await page
+    .locator("nav")
+    .getByRole("button", { name: "Explore NEW" })
+    .click();
+  await expect(page.locator(".paper-qa")).not.toContainText(
+    "old test question",
+  );
+  await expect(page.locator(".qa-example")).toContainText(
+    "Q. Why does normalization matter?",
+  );
+  await expect(page.locator(".qa-example")).toContainText("ScholarShorts AI");
+  await expect(page.locator(".qa-example")).toContainText("Researcher1349");
+  await expect(page.locator(".qa-example")).not.toContainText("Source:");
+  await expect(page.locator(".qa-demo-note")).toHaveCount(0);
+  expect(
+    await page.evaluate(() => localStorage.getItem("ss-paper-questions")),
+  ).toBeNull();
+  await expect(page.locator(".perspective-badge")).toHaveText([
+    "Mathematics",
+    "Geometry",
+  ]);
+  await expect(page.locator(".perspectives-divider")).toHaveCount(1);
+  await expect(page.locator(".paper-tldr")).toContainText(
+    "Explains why stop-gradient",
+  );
+  await page.screenshot({ path: "test-results/discussion-english.png" });
 });

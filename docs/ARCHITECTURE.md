@@ -111,3 +111,7 @@ reel-stage는 크기가 확정된 grid cell이자 size query container다. 자�
 
 ### Explore TL;DR / paper questions
 `src/data/paperInsights.json`은 papers.json의 21편 abstract에 근거한 AI 작성 TL;DR, 예시 질문/답변, 출처와 정적 작성 표시를 보관한다. Explore 본문에는 긴 abstract 대신 TL;DR을 표시하고 기존 paper detail modal로 전문 초록을 연결한다. `PaperQuestions`는 `ss-paper-questions` localStorage를 paper ID로 묶어 같은 논문의 여러 쇼츠가 질문을 공유한다. 기존 ss-comments는 삭제하지 않는다. 사용자 질문에 예시 답변을 자동 연결하지 않으며, 실시간 답변·공개 저장이 없는 상태를 명시한다. 이후 서버의 논문 근거 검색/LLM 응답 API로 교체할 경계는 이 컴포넌트다. 평가는 기존대로 short ID별로 저장한다.
+
+Q&A 영문 정리: `ss-paper-questions-v2`로 전환하고 Explore 진입 시 기존 `ss-paper-questions` 테스트 데이터를 제거한다. 정적 예시는 접힌 details 대신 기본 대화로 렌더하며 작은 Example 라벨과 원문 출처를 유지한다. 영상 manifest는 변경하지 않고 Explore의 recordedStyles에서 기존 대본을 기준으로 원본/Claude=Geometry, GPT=Mathematics를 표시한다. TL;DR과 모든 예시 질문/답변을 영어로 제공한다.
+
+최신 Q&A 표시: 질문은 `Researcher1349` 등의 seeded 사용자명과 `Q.` 기호를 사용한다. UI에서 Source: Abstract 및 긴 예시 안내를 제거했다. 요약/답변은 초록만이 아닌 본문의 해당 방법·정리·조건을 재검토했으며, sourceSection/sourcePages/sourcePdfUrl/sourcePdfSha256를 데이터에 보존한다. 검토 범위와 주요 수정은 `docs/PAPER_INSIGHTS_REVIEW.md`에 기록했다. 공개 사용자나 실시간 API 답변이 아니라 제품 시연용 정적 대화다.

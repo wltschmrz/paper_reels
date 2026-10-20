@@ -50,7 +50,7 @@ test("real Flow Map video is attached only to its original paper", () => {
   assert.ok(s.videoUrl.endsWith("flowmap_reel.mp4"));
 });
 
-test("every paper has an abstract-grounded TLDR and explicitly static Q&A example", () => {
+test("every paper has an body-grounded TLDR and explicitly static Q&A example", () => {
   const insights = JSON.parse(
     readFileSync(new URL("../src/data/paperInsights.json", import.meta.url)),
   );
@@ -62,7 +62,10 @@ test("every paper has an abstract-grounded TLDR and explicitly static Q&A exampl
     const insight = insights[p.id];
     assert.ok(insight.tldr.length > 20 && insight.tldr.length < 250);
     assert.equal(insight.sourceUrl, p.url);
-    assert.equal(insight.sourceSection, "Abstract");
+    assert.ok(insight.sourceSection.startsWith("§"));
+    assert.ok(insight.sourcePages.length > 0);
+    assert.match(insight.sourcePdfSha256, /^[a-f0-9]{64}$/);
+    assert.equal(insight.sourcePdfUrl, p.pdfUrl);
     assert.match(insight.authorship, /not a live response/);
     assert.ok(insight.sampleQuestion && insight.sampleAnswer);
   }

@@ -110,3 +110,11 @@ Removed Explore tabs at all widths; paper-feed tabs remain. Actual MP4 and demo 
 - Browser checks cover requested panel order, abstract modal, original PDF URL, style badges, question persistence across perspectives/reload, isolation between papers and independent per-short evaluations.
 - Custom questions display a pending/unconnected notice; no live LLM responses or public sharing are claimed. No API calls or costs incurred.
 - Desktop screenshot inspected; responsive and wide-screen frame regression tests passed. All original real-media entries and ten assets unchanged.
+
+## English discussion and body-grounded insights
+
+- Rechecked all 21 TL;DRs and seeded answers against the original cached PDFs' supporting body sections; recorded section/page references and PDF hashes in paperInsights.json. See PAPER_INSIGHTS_REVIEW.md for scope and important corrections.
+- Removed verbose prototype/source captions; conversation shows a seeded Researcher handle, Q. prefix and AI answer. Legacy test questions are cleared on Explore entry, while new questions persist in v2 storage.
+- Genre badges use explanation style rather than model names; added discussion/perspectives divider and rating-note spacing.
+- `npm test`: 4 passed. Production build passed. `npm run test:e2e`: 16 passed, including migration, English text, genre labels and wide/mobile frame checks.
+- Desktop conversation screenshot reviewed. Original five video records and all ten video/thumbnail assets still match the protected snapshot.

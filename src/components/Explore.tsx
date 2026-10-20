@@ -16,6 +16,11 @@ import insights from "../data/paperInsights.json";
 import explanationStyles from "../data/explanationStyles.json";
 import { asset } from "./PaperCard";
 import { useLocalState } from "../hooks/useLocalState";
+const recordedStyles: Record<string, keyof typeof explanationStyles> = {
+  "flowmap-reference": "geometry",
+  "flowmap-v2-openai": "mathematics",
+  "flowmap-v2-anthropic": "geometry",
+};
 export default function Explore({
   shorts,
   papers,
@@ -281,6 +286,7 @@ export default function Explore({
         <section className="paper-qa" ref={discussion}>
           <PaperQuestions key={p.id} paperId={p.id} />
         </section>
+        <hr className="perspectives-divider" />
         <h3>Same paper, another perspective</h3>
         {shorts
           .filter((s) => s.paperId === p.id && s.id !== short.id)
@@ -293,11 +299,13 @@ export default function Explore({
               <Play size={14} />
               <span className="related-short-title">{s.title}</span>
               <span
-                className={`perspective-badge ${s.explanationStyle || "recorded"}`}
+                className={`perspective-badge ${s.explanationStyle || recordedStyles[s.id] || "intuition"}`}
               >
-                {s.explanationStyle
-                  ? explanationStyles[s.explanationStyle].label
-                  : s.style}
+                {
+                  explanationStyles[
+                    s.explanationStyle || recordedStyles[s.id] || "intuition"
+                  ].label
+                }
               </span>
             </button>
           ))}
@@ -326,7 +334,9 @@ export default function Explore({
             </button>
           ))}
         </div>
-        <p className="muted">평가는 이 브라우저에 저장됩니다.</p>
+        <p className="muted feedback-storage-note">
+          Ratings are saved in this browser.
+        </p>
       </aside>
     </div>
   );

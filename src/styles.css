@@ -2766,3 +2766,23 @@ html {
   background: #f0e9ff;
   color: #654195;
 }
+
+.qa-example-label {
+  margin-left: 6px;
+  font-size: 9px;
+  font-weight: 400;
+  color: #73867e;
+}
+.qa-example .qa-answer {
+  margin-top: 8px;
+}
+.paper-qa .qa-thread:not(:empty) {
+  margin-bottom: 16px;
+}
+.reel-info .perspectives-divider {
+  margin-top: 26px;
+  margin-bottom: 22px;
+}
+.reel-info .feedback-storage-note {
+  margin-top: 24px;
+}
