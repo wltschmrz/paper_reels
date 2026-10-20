@@ -2431,6 +2431,8 @@ html {
   display: none;
 }
 .explore-workspace .explore-main {
+  width: 100%;
+  max-width: 1120px;
   flex: 1;
   min-height: 0;
   display: flex;
@@ -2569,5 +2571,58 @@ html {
 @media (max-width: 760px) {
   .explore-workspace .feed-tabs {
     display: none;
+  }
+}
+
+/* Both file-backed video and demo art fill an identical, content-independent stage. */
+.explore-main .reel-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+  --reel-space: 72px;
+}
+.explore-main .reel-stage .reel-shell {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(100cqw, calc((100cqh - var(--reel-space)) * 9 / 16));
+  height: auto;
+  aspect-ratio: 9 / 16;
+  max-width: none;
+  max-height: none;
+  background: #101820;
+}
+.explore-main .reel-shell > video,
+.explore-main .reel-shell > .reel-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: contain;
+}
+.explore-main .reel-shell .reel-caption {
+  bottom: 42px;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(transparent, #112a25e8 30%);
+}
+.explore-main .reel-caption h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+@media (max-width: 760px) {
+  .explore-main .reel-stage {
+    --reel-space: 16px;
+  }
+  .explore-main .reel-shell .reel-caption {
+    padding: 10px 12px;
   }
 }

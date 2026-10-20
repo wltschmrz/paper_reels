@@ -110,72 +110,76 @@ export default function Explore({
       : [...values, value];
   return (
     <div className="explore-layout" ref={layout}>
-      <div
-        className="reel-shell"
-        tabIndex={0}
-        aria-label="Short 탐색: 위아래 방향키로 이동"
-        onKeyDown={(e) => {
-          if ((e.target as HTMLElement).tagName === "TEXTAREA") return;
-          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-            e.preventDefault();
-            navigate(e.key === "ArrowDown" ? 1 : -1);
-          }
-        }}
-        onTouchStart={(e) => {
-          touchY.current = e.touches[0].clientY;
-        }}
-        onTouchEnd={(e) => {
-          const d = touchY.current - e.changedTouches[0].clientY;
-          if (Math.abs(d) > 60) navigate(d > 0 ? 1 : -1);
-        }}
-      >
-        {short.videoUrl ? (
-          <video
-            ref={video}
-            controls
-            playsInline
-            preload="metadata"
-            poster={short.thumbnailUrl ? asset(short.thumbnailUrl) : undefined}
-            src={asset(short.videoUrl)}
-            onError={(e) => {
-              const error =
-                e.currentTarget.parentElement?.querySelector(".video-error");
-              error?.classList.remove("hidden");
-            }}
-          />
-        ) : (
-          <div
-            className={`reel-placeholder ${short.thumbnailUrl ? "has-thumbnail" : ""}`}
-          >
-            {short.thumbnailUrl && <ShortCover short={short} large />}
-            <div className="demo-playback-note">
-              <div className="orbital">
-                <Play size={38} />
+      <div className="reel-stage">
+        <div
+          className="reel-shell"
+          tabIndex={0}
+          aria-label="Short 탐색: 위아래 방향키로 이동"
+          onKeyDown={(e) => {
+            if ((e.target as HTMLElement).tagName === "TEXTAREA") return;
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+              e.preventDefault();
+              navigate(e.key === "ArrowDown" ? 1 : -1);
+            }
+          }}
+          onTouchStart={(e) => {
+            touchY.current = e.touches[0].clientY;
+          }}
+          onTouchEnd={(e) => {
+            const d = touchY.current - e.changedTouches[0].clientY;
+            if (Math.abs(d) > 60) navigate(d > 0 ? 1 : -1);
+          }}
+        >
+          {short.videoUrl ? (
+            <video
+              ref={video}
+              controls
+              playsInline
+              preload="metadata"
+              poster={
+                short.thumbnailUrl ? asset(short.thumbnailUrl) : undefined
+              }
+              src={asset(short.videoUrl)}
+              onError={(e) => {
+                const error =
+                  e.currentTarget.parentElement?.querySelector(".video-error");
+                error?.classList.remove("hidden");
+              }}
+            />
+          ) : (
+            <div
+              className={`reel-placeholder ${short.thumbnailUrl ? "has-thumbnail" : ""}`}
+            >
+              {short.thumbnailUrl && <ShortCover short={short} large />}
+              <div className="demo-playback-note">
+                <div className="orbital">
+                  <Play size={38} />
+                </div>
+                <span className="eyebrow">DEMO PREVIEW · NO VIDEO</span>
+                <h2>{short.title}</h2>
+                <p>영상 파일이 아직 연결되지 않았습니다.</p>
+                <span>
+                  {short.style} · {short.duration}s
+                </span>
               </div>
-              <span className="eyebrow">DEMO PREVIEW · NO VIDEO</span>
-              <h2>{short.title}</h2>
-              <p>영상 파일이 아직 연결되지 않았습니다.</p>
-              <span>
-                {short.style} · {short.duration}s
-              </span>
             </div>
+          )}
+          <p className="video-error hidden">
+            영상을 불러올 수 없습니다. 등록된 URL을 확인해 주세요.
+          </p>
+          <div className="reel-caption">
+            <span className="topic">{p.topics[0]}</span>
+            <h3>{p.title}</h3>
+            <span>
+              @{short.creator}
+              {short.demo && short.creator !== "you" ? " · 가상 사용자" : ""}
+            </span>
+            <button
+              onClick={() => setFollowing(toggle(following, short.creator))}
+            >
+              {following.includes(short.creator) ? "Following" : "Follow"}
+            </button>
           </div>
-        )}
-        <p className="video-error hidden">
-          영상을 불러올 수 없습니다. 등록된 URL을 확인해 주세요.
-        </p>
-        <div className="reel-caption">
-          <span className="topic">{p.topics[0]}</span>
-          <h3>{p.title}</h3>
-          <span>
-            @{short.creator}
-            {short.demo && short.creator !== "you" ? " · 가상 사용자" : ""}
-          </span>
-          <button
-            onClick={() => setFollowing(toggle(following, short.creator))}
-          >
-            {following.includes(short.creator) ? "Following" : "Follow"}
-          </button>
         </div>
       </div>
       <div className="reel-controls">

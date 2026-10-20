@@ -238,3 +238,5 @@ Explore의 쇼츠 위아래 여백은 최종 desktop 각각 36px, mobile 각각 
 모바일에서 쇼츠 크기 확보를 위해 상단 Papers/Paper Shorts/Explore 탭을 숨기고 햄버거 내비게이션을 사용한다. Explore 영상 여백은 각각 8px로 줄이고, 영상/설명 패널 높이 비중은 65%/35%로 조정한다. Desktop은 그대로 유지한다.
 
 모바일 상단 탭 숨김은 Explore 화면에만 적용한다. Paper Feed/Paper Shorts에서는 상단 탭을 계속 표시한다.
+
+Explore에서는 PC/모바일 모두 상단 Papers/Paper Shorts/Explore 탭을 제거한다. 일반 피드 상단 탭과 sidebar 내비게이션은 유지한다. 실제 MP4와 데모 썸네일 모두 동일한 9:16 공통 프레임을 사용하고 caption과 설명 패널 위치를 통일한다. 원본 영상·썸네일 파일은 수정하지 않는다.

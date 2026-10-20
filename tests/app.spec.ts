@@ -556,17 +556,52 @@ test("Explore tabs and independent panel scrolling keep playback in the viewport
       await expect(
         page.getByRole("button", { name: "메뉴 열기" }),
       ).toBeVisible();
-    } else {
-      await expect(page.locator(".explore-tabs")).toBeVisible();
     }
+    await expect(page.locator(".explore-tabs")).toHaveCount(0);
     const bounds = await reel.boundingBox();
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(900);
     await page.screenshot({ path: `test-results/fixed-explore-${width}.png` });
   }
   await page
-    .locator(".explore-tabs")
+    .locator("nav")
     .getByRole("button", { name: "Paper Shorts", exact: true })
     .click();
   await expect(page.locator(".paper-card")).toHaveCount(21);
   await expect(page.locator(".explore-workspace")).toHaveCount(0);
+});
+
+test("real videos and demo covers share exactly the same Explore frame", async ({
+  page,
+}) => {
+  for (const width of [390, 768, 1440, 1920, 2560]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    if (width <= 760)
+      await page.getByRole("button", { name: "메뉴 열기" }).click();
+    await page
+      .locator("nav")
+      .getByRole("button", { name: "Explore NEW" })
+      .click();
+    await expect(page.locator(".explore-tabs")).toHaveCount(0);
+    const original = await page.locator(".reel-shell").boundingBox();
+    expect(original!.width).toBeGreaterThan(80);
+    expect(original!.height).toBeGreaterThan(140);
+    expect(original!.width / original!.height).toBeCloseTo(9 / 16, 2);
+    await page.getByRole("button", { name: "다음 Short" }).click();
+    await expect(page.locator(".reel-placeholder")).toBeVisible();
+    const demo = await page.locator(".reel-shell").boundingBox();
+    for (const key of ["x", "y", "width", "height"] as const)
+      expect(demo![key]).toBeCloseTo(original![key], 0);
+    await page.screenshot({ path: `test-results/unified-demo-${width}.png` });
+    await page.getByRole("button", { name: "이전 Short" }).click();
+    await expect
+      .poll(() =>
+        page.locator("video").evaluate((v: HTMLVideoElement) => v.readyState),
+      )
+      .toBeGreaterThanOrEqual(1);
+    const loaded = await page.locator(".reel-shell").boundingBox();
+    for (const key of ["x", "y", "width", "height"] as const)
+      expect(loaded![key]).toBeCloseTo(original![key], 0);
+    await page.screenshot({ path: `test-results/unified-video-${width}.png` });
+  }
 });

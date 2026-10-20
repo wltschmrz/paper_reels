@@ -98,3 +98,7 @@
 ## Release: consumer discovery and digest
 
 Explore video margins increased to 36px per side on desktop and 20px on mobile. Real video entries and all ten associated media files still match the pre-redesign snapshot. Pre-push credential-pattern scan found no matches in tracked/non-ignored project files; env/runtime/backups remain ignored.
+
+## Unified Explore media frame
+
+Removed Explore tabs at all widths; paper-feed tabs remain. Actual MP4 and demo art share a container-sized 9:16 frame and common caption placement. A missing explicit width on the flex main initially caused size-contained video columns to collapse to zero; assigning main width:100% fixes this. Regression coverage checks positive frame dimensions and identical x/y/width/height before/after real→demo→loaded-real transitions at 390/768/1440/1920/2560px. Original media and metadata remain unchanged.

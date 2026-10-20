@@ -104,3 +104,7 @@ App에서 정적+remote manifest를 합친 후 Drifting baseline 두 ID를 제�
 ### Explore viewport / independent scrolling
 
 Explore app-body는 100dvh flex container이며 main은 min-height:0으로 남은 공간을 채운다. footer는 이 view에서 숨기고 header digest 진입은 유지한다. Desktop은 영상/액션/독립 info 패널, mobile은 영상 행+info 행이다. reel-info는 overflow-y:auto 및 overscroll-behavior:contain으로 스크롤 체이닝을 막는다. Explore main에 passive:false wheel listener를 등록하여 info/form/dialog/ctrl-wheel을 제외한 wheel로 쇼츠를 전환한다(700ms 제한). 새 쇼츠에서는 info scrollTop을 초기화하며 댓글 버튼은 info 패널만 스크롤한다. 기존 영상 위 swipe와 방향키, 명시적 이전/다음 버튼도 유지한다.
+
+### Unified Explore frame
+
+reel-stage는 크기가 확정된 grid cell이자 size query container다. 자식 reel-shell은 stage의 가용 폭/높이(상하 여백 제외) 중 작은 쪽으로 9:16 크기를 결정하고 중앙 정렬한다. video와 demo placeholder 모두 absolute inset:0으로 동일한 프레임을 채워 원본 video intrinsic size가 grid에 영향을 주지 않는다. 공통 caption 스타일을 적용하고, Explore 상단 탭 JSX는 제거했다. feed 화면의 탭은 유지한다.

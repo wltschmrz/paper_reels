@@ -280,20 +280,6 @@ export default function App() {
             />
           ) : view === "explore" ? (
             <>
-              <div className="feed-tabs explore-tabs">
-                <button onClick={() => switchView("papers")}>
-                  <BookOpen size={16} /> Papers
-                </button>
-                <button onClick={() => switchView("shorts")}>
-                  <Clapperboard size={16} /> Paper Shorts
-                </button>
-                <button
-                  className="active"
-                  onClick={() => switchView("explore")}
-                >
-                  <Compass size={16} /> Explore
-                </button>
-              </div>
               <Explore
                 key={activeShort}
                 shorts={shorts}
