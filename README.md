@@ -1,5 +1,7 @@
 # ScholarShorts
 
+[http://localhost:5173/#/](https://wltschmrz.github.io/paper_reels/)
+
 **One paper, multiple perspectives.** 실제 논문 21편으로 체험하는 논문 탐색 + 개인화된 Shorts 제작 프로토타입.
 
 제품 의도와 브레인스토밍 정리: [PROJECT_BRIEF.md](PROJECT_BRIEF.md). 구조 및 후속 backend 계획: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
